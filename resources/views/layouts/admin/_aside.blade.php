@@ -14,20 +14,12 @@
 
         <li><a class="app-menu__item {{ request()->is('*home*') ? 'active' : '' }}" href="{{ route('admin.home') }}"><i class="app-menu__icon fa fa-home"></i> <span class="app-menu__label">@lang('site.home')</span></a></li>
 
-        {{--roles--}}
-        @if (auth()->user()->hasPermission('read_roles'))
-            <li><a class="app-menu__item {{ request()->is('*roles*') ? 'active' : '' }}" href="{{ route('admin.roles.index') }}"><i class="app-menu__icon fa fa-lock"></i> <span class="app-menu__label">@lang('roles.roles')</span></a></li>
+        {{--stages--}}
+        @if (auth()->user()->hasPermission('read_stages'))
+            <li><a class="app-menu__item {{ request()->is('*stages*') ? 'active' : '' }}" href="{{ route('admin.stages.index') }}"><i class="app-menu__icon fa fa-list"></i> <span class="app-menu__label">@lang('stages.stages')</span></a></li>
         @endif
 
-        {{--admins--}}
-        @if (auth()->user()->hasPermission('read_admins'))
-            <li><a class="app-menu__item {{ request()->is('*admins*') ? 'active' : '' }}" href="{{ route('admin.admins.index') }}"><i class="app-menu__icon fa fa-users"></i> <span class="app-menu__label">@lang('admins.admins')</span></a></li>
-        @endif
-        {{--owners--}}
-        @if (auth()->user()->hasPermission('read_owners'))
-            <li><a class="app-menu__item {{ request()->is('*owners*') ? 'active' : '' }}"
-                   href="{{ route('admin.owners.index') }}"><i class="app-menu__icon fa fa-users"></i> <span class="app-menu__label">@lang('owners.owners')</span></a></li>
-        @endif
+
         {{--users--}}
         @if (auth()->user()->hasPermission('read_users'))
             <li><a class="app-menu__item {{ request()->is('*users*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('users.users')</span></a></li>

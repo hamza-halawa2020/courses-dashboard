@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\Models\Coupon;
+use App\Models\Stage;
 use App\Models\User;
 use Yajra\DataTables\DataTables;
 
@@ -45,6 +46,7 @@ class UserController extends Controller
 
     public function create()
     {
+        $stages = Stage::all();
         return view('admin.users.create');
 
     }// end of create

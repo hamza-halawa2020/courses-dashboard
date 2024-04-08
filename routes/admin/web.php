@@ -14,20 +14,13 @@ Route::middleware([
             Route::get('/home/top_statistics', 'HomeController@topStatistics')->name('home.top_statistics');
             Route::get('/home', 'HomeController@index')->name('home');
 
-            //role routes
-            Route::get('/roles/data', 'RoleController@data')->name('roles.data');
-            Route::delete('/roles/bulk_delete', 'RoleController@bulkDelete')->name('roles.bulk_delete');
-            Route::resource('roles', 'RoleController');
 
-            //admin routes
-            Route::get('/admins/data', 'AdminController@data')->name('admins.data');
-            Route::delete('/admins/bulk_delete', 'AdminController@bulkDelete')->name('admins.bulk_delete');
-            Route::resource('admins', 'AdminController');
+            //stage routes
+            Route::get('/stages/data', 'StagesController@data')->name('stages.data');
+            Route::delete('/stages/bulk_delete', 'StagesController@bulkDelete')->name('stages.bulk_delete');
+            Route::resource('stages', 'StagesController');
 
-            //owner routes
-            Route::get('/owners/data', 'OwnerController@data')->name('owners.data');
-            Route::delete('/owners/bulk_delete', 'OwnerController@bulkDelete')->name('owners.bulk_delete');
-            Route::resource('owners', 'OwnerController');
+
 
             //user routes
             Route::get('/users/data', 'UserController@data')->name('users.data');

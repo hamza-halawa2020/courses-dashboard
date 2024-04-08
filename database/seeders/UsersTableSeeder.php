@@ -19,7 +19,8 @@ class UsersTableSeeder extends Seeder
             'email' => 'super_admin@app.com',
             'password' => bcrypt('password'),
             'type' => 'super_admin',
-            'phone' => '01151997479'
+            'phone' => '01151997479',
+            'stage_id'=>1,
         ]);
 
         $user->attachRole('super_admin');

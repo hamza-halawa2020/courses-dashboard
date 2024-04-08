@@ -48,7 +48,7 @@
 
                             <div class="d-flex justify-content-between mb-1">
                                 <h5 class="mb-3 "><span class="fa fa-male "></span> @lang('owners.owners')</h5>
-                                <a href="{{ route('admin.owners.index') }}">@lang('site.show_all')</a>
+                                <a href="">@lang('site.show_all')</a>
                             </div>
 
                             <div class="loader loader-sm"></div>

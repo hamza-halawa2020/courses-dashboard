@@ -22,6 +22,7 @@ return [
             'posts' => 'c,r,u,d',
             'banners' => 'c,r,u,d',
             'settings' => 'c,r,u,d',
+            'stages' => 'c,r,u,d',
         ],
         'admin' => [],
         'user' => [],
