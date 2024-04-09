@@ -65,10 +65,14 @@
                                             </label>
                                         </div>
                                     </th>
-                                    <th>@lang('users.image')</th>
                                     <th>@lang('users.name')</th>
-
-                                    <th>@lang('site.created_at')</th>
+                                    <th>@lang('users.phone')</th>
+                                    <th>@lang('users.balance')</th>
+                                    <th>@lang('users.stage_withal')</th>
+                                    <th>@lang('users.gender')</th>
+                                    <th>@lang('users.parent_name')</th>
+                                    <th>@lang('users.parent_phone')</th>
+                                    {{--<th>@lang('site.created_at')</th>--}}
                                     <th>@lang('site.action')</th>
                                 </tr>
                                 </thead>
@@ -83,6 +87,85 @@
             </div><!-- end of tile -->
 
         </div><!-- end of col -->
+
+        {{--<!-- add_modal_Grade -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">
+                            {{ trans('Grades_trans.add_Grade') }}
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- add_form -->
+                        <form action="{{ route('admin.users.test') }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col">
+                                    <label for="Name" class="mr-sm-2">{{ trans('Grades_trans.stage_name_ar') }}
+                                        :</label>
+                                    <input id="Name" type="text" name="Name" class="form-control">
+                                </div>
+                                <div class="col">
+                                    <label for="Name_en" class="mr-sm-2">{{ trans('Grades_trans.stage_name_en') }}
+                                        :</label>
+                                    <input type="text" class="form-control" name="Name_en">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">{{ trans('Grades_trans.Notes') }}
+                                    :</label>
+                                <textarea class="form-control" name="Notes" id="exampleFormControlTextarea1"
+                                          rows="3"></textarea>
+                            </div>
+                            <br><br>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">{{ trans('Grades_trans.Close') }}</button>
+                        <button type="submit" class="btn btn-success">{{ trans('Grades_trans.submit') }}</button>
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>--}}
+
+        <div class="modal fade" id="editBalance" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true" >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title"
+                            id="exampleModalLabel">
+                            {{ trans('Grades_trans.edit_Grade') }}
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-delete" tabIndex="-1">
+
+            <form method="POST" action="{{--{{ route('court.destroy', $court->id) }}--}}">
+
+            </form>
+
+        </div>
+
 
     </div><!-- end of row -->
 
@@ -104,9 +187,15 @@
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-                {data: 'image', name: 'image',searchable: false,sortable:false},
                 {data: 'name', name: 'name'},
-                {data: 'created_at', name: 'created_at', searchable: false},
+                {data: 'phone', name: 'phone'},
+                {data: 'balance', name: 'balance'},
+
+                {data: 'stage', name: 'stage', searchable: false, sortable: false},
+                {data: 'gender', name: 'gender'},
+                {data: 'parent_name', name: 'parent_name'},
+                {data: 'parent_phone', name: 'parent_phone'},
+                //{data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
             order: [[2, 'desc']],

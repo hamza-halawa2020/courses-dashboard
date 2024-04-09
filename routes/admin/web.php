@@ -25,7 +25,10 @@ Route::middleware([
             //user routes
             Route::get('/users/data', 'UserController@data')->name('users.data');
             Route::delete('/users/bulk_delete', 'UserController@bulkDelete')->name('users.bulk_delete');
+            Route::post('/users/test', 'UserController@test')->name('users.test');
+
             Route::resource('users', 'UserController');
+            //Route::resource('users', 'UserController')->name('test');
 
             //setting routes
             Route::get('/settings/general', 'SettingController@general')->name('settings.general');

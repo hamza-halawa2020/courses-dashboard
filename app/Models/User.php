@@ -13,7 +13,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, Notifiable, LaratrustUserTrait;
 
-    protected $fillable = ['name', 'email', 'password', 'type', 'image','phone',];
+    protected $fillable = ['name', 'email', 'password', 'type', 'image', 'phone', 'stage_id', 'balance', 'gender',
+        'parent_name','parent_phone','status'];
 
     protected $appends = ['image_path'];
 
@@ -59,28 +60,39 @@ class User extends Authenticatable
     {
         return $query->when($type, function ($q) use ($type) {
 
-            return $q->where('type',$type);
+            return $q->where('type', $type);
         });
 
     }// end of scopeWhenType
 
     //rel
-    public function favouriteCoupons(){
+    public function favouriteCoupons()
+    {
 
-        return $this->belongsToMany(Coupon::class,'user_favourite_coupon','user_id','coupon_id');
-
-    }
-    public function favouriteApartments(){
-
-        return $this->belongsToMany(Apartment::class,'user_favourite_apartment','user_id','apartment_id');
+        return $this->belongsToMany(Coupon::class, 'user_favourite_coupon', 'user_id', 'coupon_id');
 
     }
 
-    public function apartments(){
+    public function favouriteApartments()
+    {
+
+        return $this->belongsToMany(Apartment::class, 'user_favourite_apartment', 'user_id', 'apartment_id');
+
+    }
+
+    public function apartments()
+    {
         return $this->hasMany(Apartment::class);
     }
-    public function posts(){
+
+    public function posts()
+    {
         return $this->hasMany(Post::class);
+    }
+
+    public function stage()
+    {
+        return $this->belongsTo(Stage::class);
     }
 
     //fun
@@ -89,8 +101,6 @@ class User extends Authenticatable
         return $this->image != null;
 
     }// end of hasImage
-
-
 
 
 }//end of model

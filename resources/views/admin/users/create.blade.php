@@ -24,39 +24,84 @@
 
                     @include('admin.partials._errors')
 
-                    {{--name--}}
-                    <div class="form-group">
-                        <label>@lang('users.name')<span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control" value="{{ old('name') }}" required autofocus>
-                    </div>
-                    {{--phone--}}
-                    <div class="form-group">
-                        <label>@lang('users.phone')<span class="text-danger">*</span></label>
-                        <input type="tel" name="phone" class="form-control" value="{{ old('phone') }}" required>
-                    </div>
+                    <div class="row">
 
-                    {{--email--}}
-                    <div class="form-group">
-                        <label>@lang('users.email')<span class="text-danger">*</span></label>
-                        <input type="email" name="email" class="form-control" value="{{ old('email') }}">
-                    </div>
-                    {{--password--}}
-                    <div class="form-group">
-                        <label>@lang('users.password')<span class="text-danger">*</span></label>
-                        <input type="password" name="password" class="form-control" value="{{ old('password') }}" required>
-                    </div>
+                        <div class="col-md-6">'
+                            {{--name--}}
+                            <div class="form-group">
+                                <label>@lang('users.student_name')<span class="text-danger">*</span></label>
+                                <input type="text" name="name" class="form-control" value="{{ old('name') }}"  autofocus>
+                            </div>
+                            {{--phone--}}
+                            <div class="form-group">
+                                <label>@lang('users.phone')<span class="text-danger">*</span></label>
+                                <input type="tel" name="phone" class="form-control" value="{{ old('phone') }}" >
+                            </div>
 
-                    {{--password_confirmation--}}
-                    <div class="form-group">
-                        <label>@lang('users.password_confirmation')<span class="text-danger">*</span></label>
-                        <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
-                    </div>
+                            <div class="form-group">
+                                <label>@lang('users.student_gender')<span class="text-danger">*</span></label>
+                                <select name="gender" class="form-control">
+                                    <option value="">@lang('users.select_gender')</option>
+                                    <option value="male">@lang('users.male')</option>
+                                    <option value="female">@lang('users.female')</option>
+                                </select>
+                            </div>
 
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
+                            {{--email--}}
+                            <div class="form-group">
+                                <label>@lang('users.email')</label>
+                                <input type="email" name="email" class="form-control" value="{{ old('email') }}">
+                            </div>
+                            {{--password--}}
+                            <div class="form-group">
+                                <label>@lang('users.password')<span class="text-danger">*</span></label>
+                                <input type="password" name="password" class="form-control" value="{{ old('password') }}" required>
+                            </div>
+
+                            {{--password_confirmation--}}
+                            <div class="form-group">
+                                <label>@lang('users.password_confirmation')<span class="text-danger">*</span></label>
+                                <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">'
+                            {{--stage--}}
+                            <div class="form-group">
+                                <label>@lang('stages.stage_withal')<span class="text-danger">*</span></label>
+                                <select name="stage_id" class="form-control" required >
+                                    <option value="">@lang('users.select_stage')</option>
+                                    @foreach($stages as $stage)
+                                        <option value="{{$stage->id}}">{{$stage->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{--parent name--}}
+                            <div class="form-group">
+                                <label>@lang('users.parent_name')<span class="text-danger">*</span></label>
+                                <input type="text" name="parent_name" class="form-control" value="{{ old('parent_name') }}"  >
+                            </div>
+                            {{--parent phone--}}
+                            <div class="form-group">
+                                <label>@lang('users.parent_phone')<span class="text-danger">*</span></label>
+                                <input type="tel" name="parent_phone" class="form-control" value="{{ old('parent_phone') }}" >
+                            </div>
+
+                            {{--balance--}}
+                            <div class="form-group">
+                                <label>@lang('users.balance')<span class="text-danger">*</span></label>
+                                <input type="number" name="balance" class="form-control" value="0" >
+                            </div>
+
+                        </div>
                     </div>
 
                 </form><!-- end of form -->
+
 
             </div><!-- end of tile -->
 

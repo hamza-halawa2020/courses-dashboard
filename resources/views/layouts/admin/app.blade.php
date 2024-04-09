@@ -191,7 +191,7 @@
                                 $('.datatable').DataTable().ajax.reload();
 
                                 new Noty({
-                                    layout: 'topRight',
+                                    layout: 'topLeft',
                                     type: 'alert',
                                     text: response,
                                     killer: true,

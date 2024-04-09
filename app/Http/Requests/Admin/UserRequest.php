@@ -24,11 +24,18 @@ class UserRequest extends FormRequest
     public function rules()
     {
         $rules = [
+            // student attribute
             'name' => 'required',
-            'email' => 'nullable|unique:users,email|email',
             'phone' => 'required|unique:users,phone|max:11|min:11',
+            'email' => 'nullable|unique:users,email|email',
             'password' => 'required|confirmed',
             'type' => 'required',
+            'gender'=>'required',
+            'stage_id'=>'required',
+            'balance'=>'',
+            // parent attribute
+            'parent_name'=>'',
+            'parent_phone'=>'unique:users,parent_phone'
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
@@ -37,7 +44,10 @@ class UserRequest extends FormRequest
 
             $rules['email'] = 'nullable|email|unique:users,email,' . $user->id;
             $rules['phone'] = 'required|max:11|min:11|unique:users,phone,' . $user->id;
+            $rules['parent_phone'] = 'max:11|min:11|unique:users,parent_phone,' . $user->id;
             $rules['password'] = '';
+            $rules['parent_name'] = '';
+
 
         }//end of if
 

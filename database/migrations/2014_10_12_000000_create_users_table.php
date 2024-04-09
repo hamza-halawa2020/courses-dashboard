@@ -23,6 +23,11 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->integer('balance')->default(0);
+            $table->string('parent_phone')->unique()->nullable();
+            $table->string('parent_name')->nullable();
+            $table->enum('status', ['0', '1'])->default('0');
+            $table->string('device_id')->nullable();
             $table->bigInteger('stage_id')->unsigned();
             $table->foreign('stage_id')->references('id')->on('stages');
             $table->rememberToken();

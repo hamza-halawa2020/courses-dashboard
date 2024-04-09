@@ -38,6 +38,17 @@ class UserController extends Controller
             ->editColumn('created_at', function (User $user) {
                 return $user->created_at->format('Y-m-d');
             })
+            ->editColumn('gender', function (User $user) {
+                if($user->gender=='male'){
+                    return 'ذكر';
+                }else{
+                    return  'انثي';
+                }
+            })
+            ->editColumn('stage', function (User $user) {
+                $name = $user->stage->name;
+                return view('admin.users.data_table.stage', compact('name'));
+            })
             ->addColumn('actions', 'admin.users.data_table.actions')
             ->rawColumns(['record_select', 'actions'])
             ->toJson();
@@ -47,16 +58,32 @@ class UserController extends Controller
     public function create()
     {
         $stages = Stage::all();
-        return view('admin.users.create');
+        return view('admin.users.create',compact('stages'));
 
     }// end of create
 
+
+    public function test()
+    {
+       return 'test';
+
+    }// end of create
     public function store(UserRequest $request)
     {
         $requestData = $request->validated();
-        $requestData['password'] = bcrypt($request->password);
-
-        User::create($requestData);
+        User::create([
+            'name' =>$request->name,
+            'email' =>$request->email,
+            'phone' =>$request->phone,
+            'type' =>'user',
+            'gender' =>$request->gender,
+            'password' =>bcrypt($request->password),
+            'balance' =>$request->balance,
+            'parent_phone' =>$request->parent_phone,
+            'parent_name' =>$request->parent_name,
+            'status' =>'1',
+            'stage_id'=>$request->stage_id,
+        ]);
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.users.index');
@@ -65,13 +92,24 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('admin.users.edit', compact('user'));
+        $stages = Stage::all();
+        return view('admin.users.edit', compact('user','stages'));
 
     }// end of edit
 
     public function update(UserRequest $request, User $user)
     {
-        $user->update($request->validated());
+        //return $request;
+       $user->update([
+            'name' =>$request->name,
+            'email' =>$request->email,
+            'phone' =>$request->phone,
+            'type' =>'user',
+            'gender' =>$request->gender,
+            'parent_phone' =>$request->parent_phone,
+            'parent_name' =>$request->parent_name,
+            'stage_id'=>$request->stage_id,
+        ]);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.users.index');
