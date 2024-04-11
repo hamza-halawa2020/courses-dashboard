@@ -65,6 +65,9 @@ class StagesController extends Controller
 
     public function update(StageRequest $request, Stage $stage)
     {
+
+
+        return $request;
         $stage->update($request->validated());
 
         session()->flash('success', __('site.updated_successfully'));

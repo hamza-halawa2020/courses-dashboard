@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
+use App\Http\Requests\Admin\GetUserStatusRequest;
 use App\Models\Coupon;
 use App\Models\Stage;
 use App\Models\User;
 use Yajra\DataTables\DataTables;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -15,7 +17,7 @@ class UserController extends Controller
     {
         $this->middleware('permission:read_users')->only(['index']);
         $this->middleware('permission:create_users')->only(['create', 'store']);
-        $this->middleware('permission:update_users')->only(['edit', 'update']);
+        $this->middleware('permission:update_users')->only(['edit', 'update','sss']);
         $this->middleware('permission:delete_users')->only(['delete', 'bulk_delete']);
 
     }// end of __construct
@@ -38,6 +40,14 @@ class UserController extends Controller
             ->editColumn('created_at', function (User $user) {
                 return $user->created_at->format('Y-m-d');
             })
+            ->editColumn('status', function (User $user) {
+                if($user->status=='0'){
+                    return '<h5><span class="badge badge-danger">غير نشط</span></h5>';
+                }else{
+                    return '<h5><span class="badge badge-success">نشط</span></h5>';
+
+                }
+            })
             ->editColumn('gender', function (User $user) {
                 if($user->gender=='male'){
                     return 'ذكر';
@@ -49,8 +59,11 @@ class UserController extends Controller
                 $name = $user->stage->name;
                 return view('admin.users.data_table.stage', compact('name'));
             })
+            ->editColumn('edit', function ($row) {
+              return ' <a href="javascript:void(0)" class="btn btn-warning btn-sm editUser" data-id="'.$row->id.'" ><i class="fa fa-edit"  ></i></a>';
+            })
             ->addColumn('actions', 'admin.users.data_table.actions')
-            ->rawColumns(['record_select', 'actions'])
+            ->rawColumns(['record_select', 'actions','edit','status'])
             ->toJson();
 
     }// end of data
@@ -63,10 +76,20 @@ class UserController extends Controller
     }// end of create
 
 
-    public function test()
+    public function editUserStatus($id)
     {
-       return 'test';
+       $user= User::find($id);
 
+       if(!$user){
+           abort(404);
+       }
+        return $user;
+    }// end of create
+
+
+    public function sss(UserRequest $request)
+    {
+        return $request;
     }// end of create
     public function store(UserRequest $request)
     {
@@ -97,22 +120,23 @@ class UserController extends Controller
 
     }// end of edit
 
-    public function update(UserRequest $request, User $user)
+    public function update(GetUserStatusRequest $request, User $user)
     {
-        //return $request;
-       $user->update([
-            'name' =>$request->name,
-            'email' =>$request->email,
-            'phone' =>$request->phone,
-            'type' =>'user',
-            'gender' =>$request->gender,
-            'parent_phone' =>$request->parent_phone,
-            'parent_name' =>$request->parent_name,
-            'stage_id'=>$request->stage_id,
-        ]);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return redirect()->route('admin.users.index');
+
+        $currentUser = User::find($request->userIds);
+        if($request->statusValue==0){
+            $currentUser->update([
+                'status' =>'1',
+            ]);
+        }else{
+            $currentUser->update([
+                'status' =>'0',
+            ]);
+
+        }
+       return 'تم تغيير حالة الطالب بنجاح';
+
 
     }// end of update
 

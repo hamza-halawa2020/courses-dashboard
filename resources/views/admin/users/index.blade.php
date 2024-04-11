@@ -11,7 +11,7 @@
         <li class="breadcrumb-item">@lang('users.users')</li>
     </ul>
 
-    <div class="row">
+    <div class="row" id="booody" >
 
         <div class="col-md-12">
 
@@ -22,15 +22,18 @@
                     <div class="col-md-12">
 
                         @if (auth()->user()->hasPermission('read_users'))
-                            <a href="{{ route('admin.users.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a>
+                            <a href="{{ route('admin.users.create') }}" class="btn btn-primary"><i
+                                    class="fa fa-plus"></i> @lang('site.create')</a>
                         @endif
 
                         @if (auth()->user()->hasPermission('delete_users'))
-                            <form method="post" action="{{ route('admin.users.bulk_delete') }}" style="display: inline-block;">
+                            <form method="post" action="{{ route('admin.users.bulk_delete') }}"
+                                  style="display: inline-block;">
                                 @csrf
                                 @method('delete')
                                 <input type="hidden" name="record_ids" id="record-ids">
-                                <button type="submit" class="btn btn-danger" id="bulk-delete" disabled="true"><i class="fa fa-trash"></i> @lang('site.bulk_delete')</button>
+                                <button type="submit" class="btn btn-danger" id="bulk-delete" disabled="true"><i
+                                        class="fa fa-trash"></i> @lang('site.bulk_delete')</button>
                             </form><!-- end of form -->
                         @endif
 
@@ -42,7 +45,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" id="data-table-search" class="form-control" autofocus placeholder="@lang('site.search')">
+                            <input type="text" id="data-table-search" class="form-control" autofocus
+                                   placeholder="@lang('site.search')">
                         </div>
                     </div>
 
@@ -72,6 +76,7 @@
                                     <th>@lang('users.gender')</th>
                                     <th>@lang('users.parent_name')</th>
                                     <th>@lang('users.parent_phone')</th>
+                                    <th>@lang('users.status')</th>
                                     {{--<th>@lang('site.created_at')</th>--}}
                                     <th>@lang('site.action')</th>
                                 </tr>
@@ -88,85 +93,65 @@
 
         </div><!-- end of col -->
 
-        {{--<!-- add_modal_Grade -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">
-                            {{ trans('Grades_trans.add_Grade') }}
-                        </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- add_form -->
-                        <form action="{{ route('admin.users.test') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col">
-                                    <label for="Name" class="mr-sm-2">{{ trans('Grades_trans.stage_name_ar') }}
-                                        :</label>
-                                    <input id="Name" type="text" name="Name" class="form-control">
-                                </div>
-                                <div class="col">
-                                    <label for="Name_en" class="mr-sm-2">{{ trans('Grades_trans.stage_name_en') }}
-                                        :</label>
-                                    <input type="text" class="form-control" name="Name_en">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">{{ trans('Grades_trans.Notes') }}
-                                    :</label>
-                                <textarea class="form-control" name="Notes" id="exampleFormControlTextarea1"
-                                          rows="3"></textarea>
-                            </div>
-                            <br><br>
 
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                                data-dismiss="modal">{{ trans('Grades_trans.Close') }}</button>
-                        <button type="submit" class="btn btn-success">{{ trans('Grades_trans.submit') }}</button>
-                    </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>--}}
-
-        <div class="modal fade" id="editBalance" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabel" aria-hidden="true" >
+        <div class="modal fade" id="editStatus" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title"
                             id="exampleModalLabel">
-                            {{ trans('Grades_trans.edit_Grade') }}
+                            تعديل حالة الطالب
                         </h5>
-                        <button type="button" class="close" data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+
                     </div>
                     <div class="modal-body">
+
+                        {{--<form method="post" action="#">
+                        @csrf
+                        @method('put')
+                            <div class="form-group">
+                                <input type="hidden" name="id" value="" id="id" >
+                                <label>@lang('users.status')<span class="text-danger">*</span></label>
+                                <input type="text" name="status" class="form-control" value="" id="userStatus" disabled >
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" id="statusButton" class="btn btn-primary"><i class="fa fa-edit"></i>@lang('site.change')</button>
+                            </div>
+                        </form><!-- end of form -->
+
+--}}
+
+                        <form method="post" action="{{ route('admin.users.update',1) }}">
+                            @csrf
+                            @method('put')
+
+                            @include('admin.partials._errors')
+
+                            {{--name--}}
+                            <div class="form-group">
+
+                                <label>@lang('stages.name') <span class="text-danger">*</span></label>
+                                <input type="hidden" name="userIds" id="userIds" value="">
+                                <input type="hidden" name="statusValue" id="statusValue" value="">
+                                <input type="text" name="status" class="form-control" value="'5'" id="userStatus" disabled >
+
+                            </div>
+
+                            {{--Button--}}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.change')</button>
+                            </div>
+
+                        </form><!-- end of form -->
+
 
 
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal-delete" tabIndex="-1">
-
-            <form method="POST" action="{{--{{ route('court.destroy', $court->id) }}--}}">
-
-            </form>
-
-        </div>
-
-
     </div><!-- end of row -->
 
 @endsection
@@ -195,8 +180,9 @@
                 {data: 'gender', name: 'gender'},
                 {data: 'parent_name', name: 'parent_name'},
                 {data: 'parent_phone', name: 'parent_phone'},
+                {data: 'status', name: 'status'},
                 //{data: 'created_at', name: 'created_at', searchable: false},
-                {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
+                {data: 'edit', name: 'edit', searchable: false, sortable: false, width: '10%'},
             ],
             order: [[2, 'desc']],
             drawCallback: function (settings) {
@@ -209,7 +195,57 @@
 
         $('#data-table-search').keyup(function () {
             usersTable.search(this.value).draw();
-        })
+        });
+        //edit button
+        $(document).on('click','.editUser',function () {
+            var id = $(this).data('id');
+
+            $.ajax({
+                url:'{{ url('admin/users','')}}' + '/' + id +'/'+ 'status',
+
+                method:'GET',
+                success:function(response){
+                    $('#editStatus').modal('show');
+                    //$('#userStatus').val(response.status);
+                    $('#userIds').val(response.id);
+                    $('#statusValue').val(response.status);
+                    if (response.status==1){
+                        $('#userStatus').val('نشط');
+
+                    }else {
+                        $('#userStatus').val('غير نشط');
+                    }
+                },
+                error:function(response){
+                    console.log(response);
+
+                }
+
+            });
+
+        });
+
+        /*$(document).on('click','#statusButton',function () {
+
+            //var id = $(this).data('id');
+
+            $.ajax({
+                url:'{{ url('admin/users/sss')}}',
+                method:'POST',
+                success:function(response){
+                    console.log(1111);
+                },
+                error:function(response){
+                    console.log(response);
+
+                }
+
+            });
+
+        });*/
+
+
+
     </script>
 
 @endpush
