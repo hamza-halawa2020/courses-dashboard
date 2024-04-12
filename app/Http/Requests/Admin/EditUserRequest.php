@@ -30,6 +30,8 @@ class EditUserRequest extends FormRequest
             'statusValue' => '',
             'password' => '',
             'userIDPassword' => '',
+            'balance'=>'',
+            'userIDBalance' => '',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
@@ -41,6 +43,8 @@ class EditUserRequest extends FormRequest
             $rules['statusValue'] = '';
             $rules['password'] = '';
             $rules['userIDPassword'] = '';
+            $rules['balance']='';
+            $rules['userIDBalance'] = '';
 
 
         }//end of if

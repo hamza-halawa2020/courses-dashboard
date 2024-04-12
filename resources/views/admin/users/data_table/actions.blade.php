@@ -13,5 +13,7 @@
 
 <a href="javascript:void(0)" class="btn btn-info btn-sm editUserStatus" data-id="{{$id}}" ><i class="fa fa-edit"  ></i></a>
 <a href="javascript:void(0)" class="btn btn-secondary btn-sm editUserPassword" data-id="{{$id}}" ><i class="fa fa-key"  ></i></a>
+<a href="javascript:void(0)" class="btn btn-success btn-sm editUserBalance" data-id="{{$id}}" ><i class="fa fa-money"  ></i></a>
+<a href="javascript:void(0)" class="btn btn-success btn-sm editUserDevice" data-id="{{$id}}" ><i class="fa fa-mobile"  ></i></a>
 
 

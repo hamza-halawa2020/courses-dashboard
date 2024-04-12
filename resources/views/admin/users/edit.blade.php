@@ -29,6 +29,7 @@
                         <div class="col-md-6">'
                             {{--name--}}
                             <div class="form-group">
+                                <input type="hidden" name="method" value="edit">
                                 <label>@lang('users.student_name')<span class="text-danger">*</span></label>
                                 <input type="text" name="name" class="form-control"
                                        value="{{ old('name', $user->name) }}" autofocus>

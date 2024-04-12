@@ -120,7 +120,7 @@
                             {{--name--}}
                             <div class="form-group">
                                 <label>@lang('users.status') <span class="text-danger"></span></label>
-
+                                <label id="userNameStatus" > <span class="text-danger"></span></label>
                                 <input type="hidden" name="statusValue" id="statusValue" value="">
                                 <input type="text" name="status" class="form-control" value="" id="userStatus" disabled >
 
@@ -160,7 +160,7 @@
                             @include('admin.partials._errors')
                             <input type="hidden" name="method" value="password">
                             <input type="hidden" name="userIDPassword" id="userIDPassword" value="">
-
+                            <label id="userNamePassword" > <span class="text-danger"></span></label>
 
                             {{--password--}}
                             <div class="form-group">
@@ -178,6 +178,48 @@
                             {{--Button--}}
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary" id="submitUserPassword" disabled ><i class="fa fa-plus"></i>@lang('site.change')</button>
+                            </div>
+
+                        </form><!-- end of form -->
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{--edit user balance--}}
+        <div class="modal fade" id="editBalance" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title"
+                            id="exampleModalLabel">
+                            اضافة رصيد
+                        </h5>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <form method="post" action="{{ route('admin.users.update',1) }}">
+                            @csrf
+                            @method('put')
+
+                            @include('admin.partials._errors')
+                            <input type="hidden" name="method" value="balance">
+                            <input type="hidden" name="userIDBalance" id="userIDBalance" value="">
+
+                            <label id="userNameBalance" > <span class="text-danger"></span></label>
+                            {{--balance--}}
+                            <div class="form-group">
+                                <label>@lang('users.balance')<span class="text-danger">*</span></label>
+                                <input type="number" name="balance" id="balanceValue" class="form-control" value="0" >
+                            </div>
+                            {{--Button--}}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.add')</button>
                             </div>
 
                         </form><!-- end of form -->
@@ -245,6 +287,7 @@
                 success:function(response){
 
                     $('#editStatus').modal('show');
+                    $('#userNameStatus').html(response.name);
                     $('#userIDStatus').val(response.id);
                     $('#statusValue').val(response.status);
                     if (response.status==1){
@@ -272,6 +315,7 @@
                 method:'GET',
                 success:function(response){
                     $('#editPassword').modal('show');
+                    $('#userNamePassword').html(response.name);
                     $('#password').val('');
                     $('#confirm_password').val('');
                     $('#message').html('');
@@ -285,14 +329,40 @@
             });
 
         });
+        //edit  balance
+        $(document).on('click','.editUserBalance',function () {
+            var id = $(this).data('id');
+
+            $.ajax({
+                url:'{{ url('admin/users','')}}' + '/' + id +'/'+ 'status',
+
+                method:'GET',
+                success:function(response){
+                    $('#balanceValue').val('');
+                    $('#editBalance').modal('show');
+                    $('#userIDBalance').val(response.id);
+                    $('#userNameBalance').html(response.name);
+                },
+                error:function(response){
+                    console.log(response);
+
+                }
+
+            });
+
+        });
+
+
+
+
 
         $('#password, #confirm_password').on('keyup', function () {
             if ($('#password').val() == $('#confirm_password').val()) {
-                $('#message').html('Matching').css('color', 'green');
+                $('#message').html('متطابقة').css('color', 'green');
                 $("#submitUserPassword").removeAttr('disabled');
 
             } else
-                $('#message').html('Not Matching').css('color', 'red');
+                $('#message').html('غير متطابقة').css('color', 'red');
         });
 
 

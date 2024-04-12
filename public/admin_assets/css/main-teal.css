@@ -267,6 +267,8 @@ select {
   text-transform: none;
 }
 
+.button1 {background-color: #04AA6D;}
+
 select {
   word-wrap: normal;
 }

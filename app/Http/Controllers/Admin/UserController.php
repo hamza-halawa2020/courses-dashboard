@@ -154,6 +154,33 @@ class UserController extends Controller
             } else return 'لقد حدث حضأ ما !!!';
 
 
+        } else if ($request->method == 'edit') {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'type' => 'user',
+                'gender' => $request->gender,
+                'parent_phone' => $request->parent_phone,
+                'parent_name' => $request->parent_name,
+                'stage_id' => $request->stage_id,
+            ]);
+
+            session()->flash('success', __('site.updated_successfully'));
+            return redirect()->route('admin.users.index');
+        } else if ($request->method == 'balance') {
+            $currentUser = User::find($request->userIDBalance);
+            if ($currentUser) {
+                $currentUser->update([
+                    'balance' => $currentUser->balance + $request->balance,
+                ]);
+                // code for add balance recored
+
+                return 'تم اضافة الرصيد بنجاح';
+
+            } else return 'لقد حدث حضأ ما !!!';
+
+
         }
 
 
