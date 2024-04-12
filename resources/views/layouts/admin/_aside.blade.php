@@ -25,48 +25,6 @@
             <li><a class="app-menu__item {{ request()->is('*users*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('users.users')</span></a></li>
         @endif
 
-        {{--places--}}
-        @if (auth()->user()->hasPermission('read_places'))
-            <li><a class="app-menu__item {{ request()->is('*places*') ? 'active' : '' }}" href="{{ route('admin.places.index') }}"><i class="app-menu__icon fa fa-list"></i> <span class="app-menu__label">@lang('places.places')</span></a></li>
-        @endif
-        {{--apartments--}}
-        @if (auth()->user()->hasPermission('read_apartments'))
-
-
-            <li class="treeview {{ request()->is('*apartments*') ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-building-o"></i><span class="app-menu__label">@lang('apartments.apartments')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-
-                <ul class="treeview-menu">
-
-                    <li><a class="treeview-item" href="{{ route('admin.apartments.index') }}"><i class="icon fa fa-globe">
-                            </i>   @lang('site.all')    @lang('apartments.apartments')</a></li>
-
-                    <li><a class="treeview-item" href="{{ route('admin.apartments.index',['approved_state' =>1]) }}"><i class="icon fa fa-check">
-                            </i>   @lang('apartments.approved')    @lang('apartments.apartments')</a></li>
-
-                    <li><a class="treeview-item" href="{{ route('admin.apartments.index',['approved_state' =>2]) }}"><i class="icon fa fa-times">
-                            </i>   @lang('apartments.unapproved')    @lang('apartments.apartments')</a></li>
-
-                    <li><a class="treeview-item" href="{{ route('admin.apartments.index',['approved_state' =>3]) }}"><i class="icon fa fa-clock-o">
-                            </i>   @lang('apartments.waiting')    @lang('apartments.apartments')</a></li>
-
-                    <li><a class="treeview-item" href="{{ route('admin.apartments.index',['state' =>1]) }}"><i class="icon fa fa-check">
-                            </i>   @lang('apartments.available')    @lang('apartments.apartments')</a></li>
-
-                    <li><a class="treeview-item" href="{{ route('admin.apartments.index',['state' =>2]) }}"><i class="icon fa fa-times">
-                            </i>   @lang('apartments.unavailable')    @lang('apartments.apartments')</a></li>
-                </ul>
-            </li>
-        @endif
-
-        {{--posts--}}
-        @if (auth()->user()->hasPermission('read_posts'))
-            <li><a class="app-menu__item {{ request()->is('*posts*') ? 'active' : '' }}" href="{{ route('admin.posts.index') }}"><i class="app-menu__icon fa fa-list"></i> <span class="app-menu__label">@lang('posts.posts')</span></a></li>
-        @endif
-
-        {{--banners--}}
-        @if (auth()->user()->hasPermission('read_banners'))
-            <li><a class="app-menu__item {{ request()->is('*banners*') ? 'active' : '' }}" href="{{ route('admin.banners.index') }}"><i class="app-menu__icon fa fa-list"></i> <span class="app-menu__label">@lang('banners.banners')</span></a></li>
-        @endif
 
 
         {{--settings--}}

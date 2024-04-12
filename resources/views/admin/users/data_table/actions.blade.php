@@ -11,5 +11,7 @@
 
 @endif
 
-<button type="button" class="button x-small" data-toggle="modal" data-target="#editBalance"> <i class="fa fa-money" aria-hidden="true"></i> </button>
-<a class="btn btn-danger" role="button" data-toggle="modal" data-target="#modal-delete-{{ $id }}">Delete </a>
+<a href="javascript:void(0)" class="btn btn-info btn-sm editUserStatus" data-id="{{$id}}" ><i class="fa fa-edit"  ></i></a>
+<a href="javascript:void(0)" class="btn btn-secondary btn-sm editUserPassword" data-id="{{$id}}" ><i class="fa fa-key"  ></i></a>
+
+

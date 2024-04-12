@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GetUserStatusRequest extends FormRequest
+class EditUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,18 +24,23 @@ class GetUserStatusRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'status' => 'required',
-            'userIds'=>'required',
-            'statusValue'=>'required'
+            'method' => '',
+            'status' => '',
+            'userIDStatus' => '',
+            'statusValue' => '',
+            'password' => '',
+            'userIDPassword' => '',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
             $user = $this->route()->parameter('user');
+            $rules['method'] = '';
             $rules['status'] = '';
-            $rules['userIds'] = '';
+            $rules['userIDStatus'] = '';
             $rules['statusValue'] = '';
-
+            $rules['password'] = '';
+            $rules['userIDPassword'] = '';
 
 
         }//end of if

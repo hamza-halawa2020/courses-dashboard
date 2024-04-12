@@ -93,6 +93,7 @@
 
         </div><!-- end of col -->
 
+        {{--edit user status--}}
 
         <div class="modal fade" id="editStatus" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -107,41 +108,76 @@
                     </div>
                     <div class="modal-body">
 
-                        {{--<form method="post" action="#">
-                        @csrf
-                        @method('put')
+                        <form method="post" action="{{ route('admin.users.update',1) }}">
+                            @csrf
+                            @method('put')
+
+                            @include('admin.partials._errors')
+                            <input type="hidden" name="method" value="status">
+                            <input type="hidden" name="userIDStatus" id="userIDStatus" value="">
+
+
+                            {{--name--}}
                             <div class="form-group">
-                                <input type="hidden" name="id" value="" id="id" >
-                                <label>@lang('users.status')<span class="text-danger">*</span></label>
+                                <label>@lang('users.status') <span class="text-danger"></span></label>
+
+                                <input type="hidden" name="statusValue" id="statusValue" value="">
                                 <input type="text" name="status" class="form-control" value="" id="userStatus" disabled >
+
+                            </div>
+                            {{--Button--}}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.change')</button>
                             </div>
 
-                            <div class="form-group">
-                                <button type="submit" id="statusButton" class="btn btn-primary"><i class="fa fa-edit"></i>@lang('site.change')</button>
-                            </div>
                         </form><!-- end of form -->
 
---}}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{--edit user password--}}
+        <div class="modal fade" id="editPassword" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title"
+                            id="exampleModalLabel">
+                            اعادة تعيين كلمة السر
+                        </h5>
+
+                    </div>
+                    <div class="modal-body">
 
                         <form method="post" action="{{ route('admin.users.update',1) }}">
                             @csrf
                             @method('put')
 
                             @include('admin.partials._errors')
+                            <input type="hidden" name="method" value="password">
+                            <input type="hidden" name="userIDPassword" id="userIDPassword" value="">
 
-                            {{--name--}}
+
+                            {{--password--}}
                             <div class="form-group">
-
-                                <label>@lang('stages.name') <span class="text-danger">*</span></label>
-                                <input type="hidden" name="userIds" id="userIds" value="">
-                                <input type="hidden" name="statusValue" id="statusValue" value="">
-                                <input type="text" name="status" class="form-control" value="'5'" id="userStatus" disabled >
-
+                                <label>@lang('users.password')<span class="text-danger">*</span></label>
+                                <input type="password" name="password" id="password" class="form-control" value="">
                             </div>
+
+                            {{--password_confirmation--}}
+                            <div class="form-group">
+                                <label>@lang('users.password_confirmation')<span class="text-danger">*</span></label>
+                                <input type="password" name="password_confirmation"  id="confirm_password" class="form-control"  >
+                            </div>
+                            <label  id='message'  ><span class="text-danger"></span></label>
 
                             {{--Button--}}
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.change')</button>
+                                <button type="submit" class="btn btn-primary" id="submitUserPassword" disabled ><i class="fa fa-plus"></i>@lang('site.change')</button>
                             </div>
 
                         </form><!-- end of form -->
@@ -182,7 +218,9 @@
                 {data: 'parent_phone', name: 'parent_phone'},
                 {data: 'status', name: 'status'},
                 //{data: 'created_at', name: 'created_at', searchable: false},
-                {data: 'edit', name: 'edit', searchable: false, sortable: false, width: '10%'},
+                //{data: 'edit', name: 'edit', searchable: false, sortable: false, width: '10%'},
+                {data: 'actions', name: 'edit', searchable: false, sortable: false, width: '20%'},
+
             ],
             order: [[2, 'desc']],
             drawCallback: function (settings) {
@@ -196,8 +234,8 @@
         $('#data-table-search').keyup(function () {
             usersTable.search(this.value).draw();
         });
-        //edit button
-        $(document).on('click','.editUser',function () {
+        //edit status
+        $(document).on('click','.editUserStatus',function () {
             var id = $(this).data('id');
 
             $.ajax({
@@ -205,9 +243,9 @@
 
                 method:'GET',
                 success:function(response){
+
                     $('#editStatus').modal('show');
-                    //$('#userStatus').val(response.status);
-                    $('#userIds').val(response.id);
+                    $('#userIDStatus').val(response.id);
                     $('#statusValue').val(response.status);
                     if (response.status==1){
                         $('#userStatus').val('نشط');
@@ -224,16 +262,20 @@
             });
 
         });
-
-        /*$(document).on('click','#statusButton',function () {
-
-            //var id = $(this).data('id');
+        //edit password
+        $(document).on('click','.editUserPassword',function () {
+            var id = $(this).data('id');
 
             $.ajax({
-                url:'{{ url('admin/users/sss')}}',
-                method:'POST',
+                url:'{{ url('admin/users','')}}' + '/' + id +'/'+ 'status',
+
+                method:'GET',
                 success:function(response){
-                    console.log(1111);
+                    $('#editPassword').modal('show');
+                    $('#password').val('');
+                    $('#confirm_password').val('');
+                    $('#message').html('');
+                    $('#userIDPassword').val(response.id);
                 },
                 error:function(response){
                     console.log(response);
@@ -242,7 +284,17 @@
 
             });
 
-        });*/
+        });
+
+        $('#password, #confirm_password').on('keyup', function () {
+            if ($('#password').val() == $('#confirm_password').val()) {
+                $('#message').html('Matching').css('color', 'green');
+                $("#submitUserPassword").removeAttr('disabled');
+
+            } else
+                $('#message').html('Not Matching').css('color', 'red');
+        });
+
 
 
 
