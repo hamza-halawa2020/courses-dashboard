@@ -28,6 +28,8 @@ class CreateUsersTable extends Migration
             $table->string('parent_name')->nullable();
             $table->enum('status', ['0', '1'])->default('0');
             $table->string('device_id')->nullable();
+            $table->bigInteger('place_id')->unsigned();
+            $table->foreign('place_id')->references('id')->on('places');
             $table->bigInteger('stage_id')->unsigned();
             $table->foreign('stage_id')->references('id')->on('stages');
             $table->rememberToken();

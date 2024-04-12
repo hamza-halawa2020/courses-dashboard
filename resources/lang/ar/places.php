@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'places' => 'Places',
-    'place' => 'Place',
-    'name' => 'Name',
-    'location' => 'Location',
+    'places' => 'السنترز',
+    'place' => 'السنتر',
+    'name' => 'الاسم',
+    'location' => 'المكان',
     'related_apartments'=>'Related apartments',
     'apartments_count'=>'Apartments count',
 ];

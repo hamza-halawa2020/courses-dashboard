@@ -73,6 +73,7 @@
                                     <th>@lang('users.phone')</th>
                                     <th>@lang('users.balance')</th>
                                     <th>@lang('users.stage_withal')</th>
+                                    <th>@lang('users.place')</th>
                                     <th>@lang('users.gender')</th>
                                     <th>@lang('users.parent_name')</th>
                                     <th>@lang('users.parent_phone')</th>
@@ -292,8 +293,8 @@
                 {data: 'name', name: 'name'},
                 {data: 'phone', name: 'phone'},
                 {data: 'balance', name: 'balance'},
-
                 {data: 'stage', name: 'stage', searchable: false, sortable: false},
+                {data: 'place', name: 'place', searchable: false, sortable: false},
                 {data: 'gender', name: 'gender'},
                 {data: 'parent_name', name: 'parent_name'},
                 {data: 'parent_phone', name: 'parent_phone'},
@@ -303,7 +304,7 @@
                 {data: 'actions', name: 'edit', searchable: false, sortable: false, width: '20%'},
 
             ],
-            order: [[2, 'desc']],
+            order: [[1, 'desc']],
             drawCallback: function (settings) {
                 $('.record__select').prop('checked', false);
                 $('#record__select-all').prop('checked', false);

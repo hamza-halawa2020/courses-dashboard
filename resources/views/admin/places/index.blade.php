@@ -66,8 +66,8 @@
                                         </div>
                                     </th>
                                     <th>@lang('places.name')</th>
-                                    <th>@lang('places.apartments_count')</th>
-                                    <th>@lang('places.related_apartments')</th>
+                                    {{--<th>@lang('places.apartments_count')</th>
+                                    <th>@lang('places.related_apartments')</th>--}}
                                     <th>@lang('site.created_at')</th>
                                     @if(auth()->user()->hasPermission('update_places')||auth()->user()->hasPermission('delete_places'))
                                         <th>@lang('site.action')</th>
@@ -109,12 +109,12 @@
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                 {data: 'name', name: 'name'},
-                {data: 'apartments_count', name: 'apartments_count',searchable: false},
-                {data: 'related_apartments', name: 'related_apartments',searchable: false,sortable:false},
+                /*{data: 'apartments_count', name: 'apartments_count',searchable: false},
+                {data: 'related_apartments', name: 'related_apartments',searchable: false,sortable:false},*/
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
-            order: [[3, 'desc']],
+            order: [[1, 'desc']],
             drawCallback: function (settings) {
                 $('.record__select').prop('checked', false);
                 $('#record__select-all').prop('checked', false);

@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
             'type' => 'super_admin',
             'phone' => '01151997479',
             'stage_id'=>1,
+            'place_id'=>1,
             'parent_phone'=>'01151955479',
             'parent_name'=>'mmmm'
         ]);

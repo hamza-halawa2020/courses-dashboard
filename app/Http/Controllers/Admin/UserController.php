@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\Http\Requests\Admin\EditUserRequest;
 use App\Models\Coupon;
+use App\Models\Place;
 use App\Models\Stage;
 use App\Models\User;
 use Yajra\DataTables\DataTables;
@@ -59,6 +60,10 @@ class UserController extends Controller
                 $name = $user->stage->name;
                 return view('admin.users.data_table.stage', compact('name'));
             })
+            ->editColumn('place', function (User $user) {
+                $name = $user->place->name;
+                return view('admin.users.data_table.place', compact('name'));
+            })
             ->editColumn('edit', function ($row) {
                 return ' <a href="javascript:void(0)" class="btn btn-warning btn-sm editUser" data-id="' . $row->id . '" ><i class="fa fa-edit"  ></i></a>';
             })
@@ -71,7 +76,8 @@ class UserController extends Controller
     public function create()
     {
         $stages = Stage::all();
-        return view('admin.users.create', compact('stages'));
+        $places = Place::all();
+        return view('admin.users.create', compact('stages','places'));
 
     }// end of create
 
@@ -94,6 +100,8 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
+
+        //return $request;
         $requestData = $request->validated();
         User::create([
             'name' => $request->name,
@@ -107,6 +115,7 @@ class UserController extends Controller
             'parent_name' => $request->parent_name,
             'status' => '1',
             'stage_id' => $request->stage_id,
+            'place_id' => $request->place_id,
         ]);
 
         session()->flash('success', __('site.added_successfully'));
@@ -117,7 +126,10 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $stages = Stage::all();
-        return view('admin.users.edit', compact('user', 'stages'));
+        $places = Place::all();
+        return view('admin.users.edit', compact('user', 'stages','places'));
+
+
 
     }// end of edit
 
@@ -167,6 +179,7 @@ class UserController extends Controller
                 'parent_phone' => $request->parent_phone,
                 'parent_name' => $request->parent_name,
                 'stage_id' => $request->stage_id,
+                'place_id' => $request->place_id,
             ]);
 
             session()->flash('success', __('site.updated_successfully'));

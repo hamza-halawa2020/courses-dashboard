@@ -14,6 +14,12 @@
 
         <li><a class="app-menu__item {{ request()->is('*home*') ? 'active' : '' }}" href="{{ route('admin.home') }}"><i class="app-menu__icon fa fa-home"></i> <span class="app-menu__label">@lang('site.home')</span></a></li>
 
+        {{--places--}}
+        @if (auth()->user()->hasPermission('read_places'))
+            <li><a class="app-menu__item {{ request()->is('*places*') ? 'active' : '' }}" href="{{ route('admin.places.index') }}"><i class="app-menu__icon fa fa-list"></i> <span class="app-menu__label">@lang('places.places')</span></a></li>
+        @endif
+
+
         {{--stages--}}
         @if (auth()->user()->hasPermission('read_stages'))
             <li><a class="app-menu__item {{ request()->is('*stages*') ? 'active' : '' }}" href="{{ route('admin.stages.index') }}"><i class="app-menu__icon fa fa-list"></i> <span class="app-menu__label">@lang('stages.stages')</span></a></li>

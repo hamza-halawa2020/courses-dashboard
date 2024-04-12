@@ -32,6 +32,7 @@ class UserRequest extends FormRequest
             'type' => 'required',
             'gender'=>'required',
             'stage_id'=>'required',
+            'place_id'=>'required',
             'balance'=>'',
             // parent attribute
             'parent_name'=>'',

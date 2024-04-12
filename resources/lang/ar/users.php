@@ -21,6 +21,8 @@ return [
     'incorrect_old_password' => 'كلوة السر الفديمة خطأ',
     'balance'=>'الرصيد',
     'select_stage'=>'اختر مرحلة',
+    'select_place'=>'اختر السنتر',
+    'place'=>'السنتر',
     'student_gender'=>'الجنس',
     'gender'=>'النوع',
     'select_gender'=>'اختر النوع',

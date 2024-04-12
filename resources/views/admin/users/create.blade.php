@@ -80,6 +80,18 @@
                                 </select>
                             </div>
 
+
+                            {{--place--}}
+                            <div class="form-group">
+                                <label>@lang('places.place')<span class="text-danger">*</span></label>
+                                <select name="place_id" class="form-control" required >
+                                    <option value="">@lang('users.select_place')</option>
+                                    @foreach($places as $place)
+                                        <option value="{{$place->id}}">{{$place->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             {{--parent name--}}
                             <div class="form-group">
                                 <label>@lang('users.parent_name')<span class="text-danger">*</span></label>
