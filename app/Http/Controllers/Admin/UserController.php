@@ -142,7 +142,8 @@ class UserController extends Controller
 
             } else return 'لقد حدث حضأ ما !!!';
 
-        } else if ($request->method == 'password') {
+        } else if ($request->method == 'password')
+        {
             $currentUser = User::find($request->userIDPassword);
             if ($currentUser) {
                 $currentUser->update([
@@ -154,7 +155,9 @@ class UserController extends Controller
             } else return 'لقد حدث حضأ ما !!!';
 
 
-        } else if ($request->method == 'edit') {
+        }
+        else if ($request->method == 'edit')
+        {
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -168,7 +171,9 @@ class UserController extends Controller
 
             session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('admin.users.index');
-        } else if ($request->method == 'balance') {
+        }
+        else if ($request->method == 'balance')
+        {
             $currentUser = User::find($request->userIDBalance);
             if ($currentUser) {
                 $currentUser->update([
@@ -177,6 +182,20 @@ class UserController extends Controller
                 // code for add balance recored
 
                 return 'تم اضافة الرصيد بنجاح';
+
+            } else return 'لقد حدث حضأ ما !!!';
+
+
+        }
+        else if ($request->method == 'device')
+        {
+            $currentUser = User::find($request->userIDDevice);
+            if ($currentUser) {
+                $currentUser->update([
+                    'device_id' =>null,
+                ]);
+
+                return 'تم اعادة تعيين الهاتف بنجاح';
 
             } else return 'لقد حدث حضأ ما !!!';
 

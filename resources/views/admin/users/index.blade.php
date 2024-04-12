@@ -230,6 +230,45 @@
                 </div>
             </div>
         </div>
+
+
+        {{--edit user device--}}
+        <div class="modal fade" id="editDevice" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title"
+                            id="exampleModalLabel">
+                            اعادة تعيين الهاتف
+                        </h5>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <form method="post" action="{{ route('admin.users.update',1) }}">
+                            @csrf
+                            @method('put')
+
+                            @include('admin.partials._errors')
+                            <input type="hidden" name="method" value="device">
+                            <input type="hidden" name="userIDDevice" id="userIDDevice" value="">
+
+                            <label id="userNameDevice" > <span class="text-danger"></span></label>
+
+                            {{--Button--}}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-minus"></i>@lang('site.reset')</button>
+                            </div>
+
+                        </form><!-- end of form -->
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div><!-- end of row -->
 
 @endsection
@@ -342,6 +381,28 @@
                     $('#editBalance').modal('show');
                     $('#userIDBalance').val(response.id);
                     $('#userNameBalance').html(response.name);
+                },
+                error:function(response){
+                    console.log(response);
+
+                }
+
+            });
+
+        });
+        //edit device
+            $(document).on('click','.editUserDevice',function () {
+            var id = $(this).data('id');
+
+            $.ajax({
+                url:'{{ url('admin/users','')}}' + '/' + id +'/'+ 'status',
+
+                method:'GET',
+                success:function(response){
+                   // $('#balanceValue').val('');
+                    $('#editDevice').modal('show');
+                    $('#userIDDevice').val(response.id);
+                    $('#userNameDevice').html(response.name);
                 },
                 error:function(response){
                     console.log(response);

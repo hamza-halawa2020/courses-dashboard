@@ -14,7 +14,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, Notifiable, LaratrustUserTrait;
 
     protected $fillable = ['name', 'email', 'password', 'type', 'image', 'phone', 'stage_id', 'balance', 'gender',
-        'parent_name','parent_phone','status'];
+        'parent_name','parent_phone','status','device_id'];
 
     protected $appends = ['image_path'];
 
