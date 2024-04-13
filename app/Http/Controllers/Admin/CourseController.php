@@ -1,0 +1,128 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CourseRequest;
+use App\Models\Course;
+use App\Models\Stage;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+
+class CourseController extends Controller
+
+
+{
+    public function __construct()
+    {
+        $this->middleware('permission:read_courses')->only(['index']);
+        $this->middleware('permission:create_courses')->only(['create', 'store']);
+        $this->middleware('permission:update_courses')->only(['edit', 'update']);
+        $this->middleware('permission:delete_courses')->only(['delete', 'bulk_delete']);
+
+    }// end of __construct
+
+    public function index()
+    {
+        return view('admin.courses.index');
+
+    }// end of index
+
+
+    public function show(Course $course)
+    {
+        return $course;
+        //$course->delete();
+    }// end of show
+
+    public function data()
+    {
+        $courses = Course::all();
+
+        return DataTables::of($courses)
+            ->addColumn('record_select', 'admin.courses.data_table.record_select')
+            //->addColumn('related_apartments', 'admin.courses.data_table.related_apartments')
+            ->editColumn('created_at', function (Course $course) {
+                return $course->created_at->format('Y-m-d');
+            })->editColumn('stage', function ( Course $course) {
+                $name = $course->stage->name;
+                return view('admin.users.data_table.stage', compact('name'));
+            })
+            ->addColumn('actions', 'admin.courses.data_table.actions')
+            ->rawColumns(['record_select','actions','related_apartments'])
+            ->toJson();
+
+    }// end of data
+
+    public function create()
+    {
+        $stages = Stage::all();
+        return view('admin.courses.create',compact('stages'));
+
+    }// end of create
+
+    public function store(CourseRequest $request)
+    {
+        Course::create($request->only(['tittle','stage_id']));
+        session()->flash('success', __('site.added_successfully'));
+        return redirect()->route('admin.courses.index');
+
+    }// end of store
+
+    public function edit(Course $course)
+    {
+        $stages = Stage::all();
+        return view('admin.courses.edit', compact('course','stages'));
+
+    }// end of edit
+
+    public function update(CourseRequest $request, Course $course)
+    {
+
+
+        //return $request;
+        $course->update($request->validated());
+
+        session()->flash('success', __('site.updated_successfully'));
+        return redirect()->route('admin.courses.index');
+
+    }// end of update
+
+    public function destroy(Course $course)
+    {
+        //$id = $course->id;
+        $user = User::where('id', $course->id)->count();
+        if ($user>0){
+            session()->flash('error', __('site.can_not_course'));
+            return response(__('site.can_not_course'));
+        }
+        else{
+            $this->delete($course);
+            session()->flash('success', __('site.deleted_successfully'));
+            return response(__('site.deleted_successfully'));
+
+        }
+
+    }// end of destroy
+
+    public function bulkDelete()
+    {
+        foreach (json_decode(request()->record_ids) as $recordId) {
+
+            $course = Course::FindOrFail($recordId);
+            $this->delete($course);
+
+        }//end of for each
+
+        session()->flash('success', __('site.deleted_successfully'));
+        return response(__('site.deleted_successfully'));
+
+    }// end of bulkDelete
+
+    private function delete(Course $course)
+    {
+        $course->delete();
+    }// end of delete
+}
+

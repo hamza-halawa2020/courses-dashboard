@@ -31,6 +31,11 @@
             <li><a class="app-menu__item {{ request()->is('*users*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('users.users')</span></a></li>
         @endif
 
+        {{--courses--}}
+        @if (auth()->user()->hasPermission('read_courses'))
+            <li><a class="app-menu__item {{ request()->is('*courses*') ? 'active' : '' }}" href="{{ route('admin.courses.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('courses.courses')</span></a></li>
+        @endif
+
 
 
         {{--settings--}}

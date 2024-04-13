@@ -23,6 +23,7 @@ return [
             'banners' => 'c,r,u,d',
             'settings' => 'c,r,u,d',
             'stages' => 'c,r,u,d',
+            'courses' => 'c,r,u,d',
         ],
         'admin' => [],
         'user' => [],

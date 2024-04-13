@@ -23,10 +23,11 @@ class UsersTableSeeder extends Seeder
             'stage_id'=>1,
             'place_id'=>1,
             'parent_phone'=>'01151955479',
-            'parent_name'=>'mmmm'
+            'parent_name'=>'mmm'
         ]);
 
         $user->attachRole('super_admin');
+
 
     }//end of run
 

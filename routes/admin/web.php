@@ -14,7 +14,10 @@ Route::middleware([
             Route::get('/home/top_statistics', 'HomeController@topStatistics')->name('home.top_statistics');
             Route::get('/home', 'HomeController@index')->name('home');
 
-
+             //place routes
+             Route::get('/places/data', 'PlaceController@data')->name('places.data');
+             Route::delete('/places/bulk_delete', 'PlaceController@bulkDelete')->name('places.bulk_delete');
+             Route::resource('places', 'PlaceController');
             //stage routes
             Route::get('/stages/data', 'StagesController@data')->name('stages.data');
             Route::delete('/stages/bulk_delete', 'StagesController@bulkDelete')->name('stages.bulk_delete');
@@ -28,9 +31,14 @@ Route::middleware([
             Route::get('/users/{id}/status', 'UserController@editUserStatus')->name('users.status');
             //Route::delete('/users/bulk_delete', 'UserController@bulkDelete')->name('users.bulk_delete');
             Route::post('/users/sss','UserController@sss')->name('users.sss');
-
             Route::resource('users', 'UserController');
             //Route::resource('users', 'UserController')->name('test');
+
+
+           //course routes
+           Route::get('/courses/data', 'CourseController@data')->name('courses.data');
+           Route::delete('/courses/bulk_delete', 'CourseController@bulkDelete')->name('courses.bulk_delete');
+           Route::resource('courses', 'CourseController');
 
             //setting routes
             Route::get('/settings/general', 'SettingController@general')->name('settings.general');
@@ -47,10 +55,7 @@ Route::middleware([
 
             });
 
-            //place routes
-            Route::get('/places/data', 'PlaceController@data')->name('places.data');
-            Route::delete('/places/bulk_delete', 'PlaceController@bulkDelete')->name('places.bulk_delete');
-            Route::resource('places', 'PlaceController');
+
 
             // apartments routes
             Route::get('/apartments/data', 'ApartmentController@data')->name('apartments.data');
