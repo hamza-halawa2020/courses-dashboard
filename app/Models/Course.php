@@ -14,4 +14,7 @@ class Course extends Model
     {
         return $this->belongsTo(Stage::class);
     }
+    public function chapters(){
+        return $this->hasMany(Chapter::class);
+    }
 }

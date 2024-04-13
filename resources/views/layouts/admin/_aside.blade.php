@@ -35,7 +35,10 @@
         @if (auth()->user()->hasPermission('read_courses'))
             <li><a class="app-menu__item {{ request()->is('*courses*') ? 'active' : '' }}" href="{{ route('admin.courses.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('courses.courses')</span></a></li>
         @endif
-
+        {{--chapters--}}{{--
+        @if (auth()->user()->hasPermission('read_chapters'))
+            <li><a class="app-menu__item {{ request()->is('*chapters*') ? 'active' : '' }}" href="{{ route('admin.chapters.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('chapters.chapters')</span></a></li>
+        @endif--}}
 
 
         {{--settings--}}

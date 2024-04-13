@@ -40,6 +40,11 @@ Route::middleware([
            Route::delete('/courses/bulk_delete', 'CourseController@bulkDelete')->name('courses.bulk_delete');
            Route::resource('courses', 'CourseController');
 
+
+            //chapter routes
+            Route::get('/chapters/data', 'ChapterController@data')->name('chapters.data');
+            Route::delete('/chapters/bulk_delete', 'ChapterController@bulkDelete')->name('chapters.bulk_delete');
+            Route::resource('chapters', 'ChapterController');
             //setting routes
             Route::get('/settings/general', 'SettingController@general')->name('settings.general');
             Route::resource('settings', 'SettingController')->only(['store']);

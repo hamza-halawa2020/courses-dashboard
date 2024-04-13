@@ -24,6 +24,8 @@ return [
             'settings' => 'c,r,u,d',
             'stages' => 'c,r,u,d',
             'courses' => 'c,r,u,d',
+            'chapters'=> 'c,r,u,d',
+            'lectures'=> 'c,r,u,d',
         ],
         'admin' => [],
         'user' => [],

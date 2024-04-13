@@ -1,7 +1,4 @@
-<form action="{{ route('admin.courses.show', $id) }}" class="my-1 my-xl-0" style="display: inline-block;">
-
-    <button type="submit" class="btn btn-info btn-sm "><i class="fa fa-euro"></i> @lang('site.show')</button>
-</form>
+<a href="{{ route('admin.chapters.index', ['course_id' => $id]) }}" class="btn btn-primary btn-sm">@lang('site.show'){{'   '}}{{'   '}}@lang('chapters.chapters')</a>
 
 
 @if (auth()->user()->hasPermission('update_courses'))
