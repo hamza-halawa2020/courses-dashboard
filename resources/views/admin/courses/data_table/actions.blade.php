@@ -1,6 +1,6 @@
 <a href="{{ route('admin.chapters.index', ['course_id' => $id]) }}" class="btn btn-primary btn-sm">@lang('site.show'){{'   '}}{{'   '}}@lang('chapters.chapters')</a>
 
-
+{{--test the new branch --}}
 @if (auth()->user()->hasPermission('update_courses'))
     <a href="{{ route('admin.courses.edit', $id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
 @endif
