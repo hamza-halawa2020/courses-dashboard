@@ -12,50 +12,77 @@
 
     <ul class="app-menu">
 
-        <li><a class="app-menu__item {{ request()->is('*home*') ? 'active' : '' }}" href="{{ route('admin.home') }}"><i class="app-menu__icon fa fa-home"></i> <span class="app-menu__label">@lang('site.home')</span></a></li>
+        <li><a class="app-menu__item {{ request()->is('*home*') ? 'active' : '' }}" href="{{ route('admin.home') }}"><i
+                    class="app-menu__icon fa fa-home"></i> <span class="app-menu__label">@lang('site.home')</span></a>
+        </li>
 
         {{--places--}}
         @if (auth()->user()->hasPermission('read_places'))
-            <li><a class="app-menu__item {{ request()->is('*places*') ? 'active' : '' }}" href="{{ route('admin.places.index') }}"><i class="app-menu__icon fa fa-list"></i> <span class="app-menu__label">@lang('places.places')</span></a></li>
+            <li><a class="app-menu__item {{ request()->is('*places*') ? 'active' : '' }}"
+                   href="{{ route('admin.places.index') }}"><i class="app-menu__icon fa fa-list"></i> <span
+                        class="app-menu__label">@lang('places.places')</span></a></li>
         @endif
 
 
         {{--stages--}}
         @if (auth()->user()->hasPermission('read_stages'))
-            <li><a class="app-menu__item {{ request()->is('*stages*') ? 'active' : '' }}" href="{{ route('admin.stages.index') }}"><i class="app-menu__icon fa fa-list"></i> <span class="app-menu__label">@lang('stages.stages')</span></a></li>
+            <li><a class="app-menu__item {{ request()->is('*stages*') ? 'active' : '' }}"
+                   href="{{ route('admin.stages.index') }}"><i class="app-menu__icon fa fa-list"></i> <span
+                        class="app-menu__label">@lang('stages.stages')</span></a></li>
         @endif
 
 
         {{--users--}}
         @if (auth()->user()->hasPermission('read_users'))
-            <li><a class="app-menu__item {{ request()->is('*users*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('users.users')</span></a></li>
+            <li><a class="app-menu__item {{ request()->is('*users*') ? 'active' : '' }}"
+                   href="{{ route('admin.users.index') }}"><i class="app-menu__icon fa fa-user"></i> <span
+                        class="app-menu__label">@lang('users.users')</span></a></li>
         @endif
 
         {{--courses--}}
         @if (auth()->user()->hasPermission('read_courses'))
-            <li><a class="app-menu__item {{ request()->is('*courses*') ? 'active' : '' }}" href="{{ route('admin.courses.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('courses.courses')</span></a></li>
+            <li><a class="app-menu__item {{ request()->is('*courses*') ? 'active' : '' }}"
+                   href="{{ route('admin.courses.index') }}"><i class="app-menu__icon fa fa-user"></i> <span
+                        class="app-menu__label">@lang('courses.courses')</span></a></li>
         @endif
         {{--chapters--}}{{--
         @if (auth()->user()->hasPermission('read_chapters'))
             <li><a class="app-menu__item {{ request()->is('*chapters*') ? 'active' : '' }}" href="{{ route('admin.chapters.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('chapters.chapters')</span></a></li>
         @endif--}}
-
+        {{--lectures--}}
+        @if (auth()->user()->hasPermission('read_lectures'))
+            <li><a class="app-menu__item {{ request()->is('*lectures*') ? 'active' : '' }}"
+                   href="{{ route('admin.lectures.index') }}"><i class="app-menu__icon fa fa-user"></i> <span
+                        class="app-menu__label">@lang('lectures.lectures')</span></a></li>
+        @endif
 
         {{--settings--}}
         @if (auth()->user()->hasPermission('read_settings'))
-            <li class="treeview {{ request()->is('*settings*') ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">@lang('settings.settings')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <li class="treeview {{ request()->is('*settings*') ? 'is-expanded' : '' }}"><a class="app-menu__item"
+                                                                                           href="#"
+                                                                                           data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-cogs"></i><span
+                        class="app-menu__label">@lang('settings.settings')</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
 
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="{{ route('admin.settings.general') }}"><i class="icon fa fa-circle-o"></i>@lang('settings.general')</a></li>
+                    <li><a class="treeview-item" href="{{ route('admin.settings.general') }}"><i
+                                class="icon fa fa-circle-o"></i>@lang('settings.general')</a></li>
                 </ul>
             </li>
         @endif
 
         {{--profile--}}
-        <li class="treeview {{ request()->is('*profile*') || request()->is('*password*')  ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-circle"></i><span class="app-menu__label">@lang('users.profile')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview {{ request()->is('*profile*') || request()->is('*password*')  ? 'is-expanded' : '' }}"><a
+                class="app-menu__item" href="#" data-toggle="treeview"><i
+                    class="app-menu__icon fa fa-user-circle"></i><span
+                    class="app-menu__label">@lang('users.profile')</span><i
+                    class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="{{ route('admin.profile.edit') }}"><i class="icon fa fa-circle-o"></i>@lang('users.edit_profile')</a></li>
-                <li><a class="treeview-item" href="{{ route('admin.profile.password.edit') }}"><i class="icon fa fa-circle-o"></i>@lang('users.change_password')</a></li>
+                <li><a class="treeview-item" href="{{ route('admin.profile.edit') }}"><i
+                            class="icon fa fa-circle-o"></i>@lang('users.edit_profile')</a></li>
+                <li><a class="treeview-item" href="{{ route('admin.profile.password.edit') }}"><i
+                            class="icon fa fa-circle-o"></i>@lang('users.change_password')</a></li>
             </ul>
         </li>
 
