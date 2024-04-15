@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CourseRequest;
+use App\Models\Chapter;
 use App\Models\Course;
 use App\Models\Stage;
 use App\Models\User;
@@ -30,6 +31,8 @@ class CourseController extends Controller
     }// end of index
 
 
+
+
     public function show(Course $course)
     {
         return $course;
@@ -52,7 +55,6 @@ class CourseController extends Controller
             ->addColumn('actions', 'admin.courses.data_table.actions')
             ->rawColumns(['record_select','actions','related_apartments'])
             ->toJson();
-
     }// end of data
 
     public function create()
@@ -91,7 +93,21 @@ class CourseController extends Controller
 
     public function destroy(Course $course)
     {
-        //$id = $course->id;
+
+        //return $course->id;
+
+        $chapters = Chapter::where('course_id', $course->id)->count();
+        if($chapters==0){
+            $course = Course::FindOrFail($course->id);
+            $this->delete($course);
+            session()->flash('success', __('site.deleted_successfully'));
+            return response(__('site.deleted_successfully'));
+        }
+
+        session()->flash('error', __('site.can_not_course'));
+        return response(__('site.can_not_course'));
+
+        /*//$id = $course->id;
         $user = User::where('id', $course->id)->count();
         if ($user>0){
             session()->flash('error', __('site.can_not_course'));
@@ -102,7 +118,7 @@ class CourseController extends Controller
             session()->flash('success', __('site.deleted_successfully'));
             return response(__('site.deleted_successfully'));
 
-        }
+        }*/
 
     }// end of destroy
 
@@ -110,8 +126,15 @@ class CourseController extends Controller
     {
         foreach (json_decode(request()->record_ids) as $recordId) {
 
-            $course = Course::FindOrFail($recordId);
-            $this->delete($course);
+
+            $chapters = Chapter::where('course_id', $recordId)->count();
+            if($chapters==0){
+                $course = Course::FindOrFail($recordId);
+                $this->delete($course);
+            }else {
+                session()->flash('error', __('site.can_not_course'));
+                return response(__('site.can_not_course'));
+            }
 
         }//end of for each
 
@@ -124,5 +147,16 @@ class CourseController extends Controller
     {
         $course->delete();
     }// end of delete
+
+
+    public function getCourse($id)
+    {
+        $course = Course::find($id);
+
+        if (!$course) {
+            abort(404);
+        }
+        return $course;
+    }// end of create
 }
 

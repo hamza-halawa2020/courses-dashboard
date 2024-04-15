@@ -39,7 +39,7 @@ Route::middleware([
            Route::get('/courses/data', 'CourseController@data')->name('courses.data');
            Route::delete('/courses/bulk_delete', 'CourseController@bulkDelete')->name('courses.bulk_delete');
            Route::resource('courses', 'CourseController');
-
+            Route::get('/courses/{id}/get_course', 'CourseController@getCourse')->name('users.get_course');
 
             //chapter routes
             Route::get('/chapters/data', 'ChapterController@data')->name('chapters.data');

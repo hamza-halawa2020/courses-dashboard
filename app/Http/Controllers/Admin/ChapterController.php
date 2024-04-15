@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ChapterRequest;
 use App\Models\Chapter;
+use App\Models\Course;
 use App\Models\Stage;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,9 +25,13 @@ class ChapterController extends Controller
 
     }// end of __construct
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.chapters.index');
+       // return $request->course;
+        //return Course::find($request->course);
+        //return $request->course_id;
+        $currentCourse=  Course::find($request->course_id);
+        return view('admin.chapters.index',compact('currentCourse'));
 
     }// end of index
 
@@ -56,22 +61,26 @@ class ChapterController extends Controller
 
     }// end of data
 
-    public function create()
+    public function create(Request $request)
     {
+       // return $request;
+        $currentCourse=  Course::find($request->course_id);
         $stages = Stage::all();
-        return view('admin.chapters.create',compact('stages'));
+        return view('admin.chapters.create',compact('stages','currentCourse'));
 
     }// end of create
 
     public function store(ChapterRequest $request)
     {
+         //return $request;
+
         Chapter::create([
             'tittle'=>$request->tittle,
             'price'=>$request->price,
-            'course_id'=>1,
+            'course_id'=>$request->course_id,
         ]);
         session()->flash('success', __('site.added_successfully'));
-        return redirect()->route('admin.chapters.index');
+        return redirect()->route('admin.chapters.index',['course_id' =>$request->course_id]);
 
     }// end of store
 
@@ -90,7 +99,7 @@ class ChapterController extends Controller
         $chapter->update($request->validated());
 
         session()->flash('success', __('site.updated_successfully'));
-        return redirect()->route('admin.chapters.index');
+        return redirect()->route('admin.chapters.index',['course_id' =>$request->course_id]);
 
     }// end of update
 

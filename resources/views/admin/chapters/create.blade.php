@@ -38,6 +38,8 @@
 
                         <div class="form-group">
                             <label>@lang('chapters.price')<span class="text-danger">*</span></label>
+                            <input type="hidden" name="course_id"  value="{{$currentCourse->id}}">
+
                             <input type="number" name="price" class="form-control" min="0"
                                    value="{{ old('price') }}" required>
                         </div>

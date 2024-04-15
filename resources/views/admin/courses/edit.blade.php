@@ -24,6 +24,17 @@
 
                     @include('admin.partials._errors')
                     <div class="col-md-6">
+                        {{--name--}}
+                        <div class="form-group">
+                            <label>@lang('courses.tittle') <span class="text-danger">*</span></label>
+                            <input type="text" name="tittle" class="form-control" value="{{ old('tittle', $course->tittle) }}" required>
+                        </div>
+                    </div><!-- end of col -->
+
+
+                    <div class="col-md-6">
+
+
                         {{--stage--}}
                         <div class="form-group">
                             <label>@lang('stages.stage_withal')<span class="text-danger">*</span></label>
@@ -33,15 +44,6 @@
                                     <option value="{{$stage->id}}">{{$stage->name}}</option>
                                 @endforeach
                             </select>
-                        </div>
-                    </div><!-- end of col -->
-
-
-                    <div class="col-md-6">
-                        {{--name--}}
-                        <div class="form-group">
-                            <label>@lang('courses.tittle') <span class="text-danger">*</span></label>
-                            <input type="text" name="tittle" class="form-control" value="{{ old('tittle', $course->tittle) }}" required>
                         </div>
                         {{--Button--}}
                         <div class="form-group">

@@ -19,6 +19,7 @@ return [
     'updated_successfully' => 'تم التعديل بنجاح',
     'can_not_delete' => 'You cannot delete this record because there are related apartments',
     'can_not_stage' => 'لا يمكنك حذف المرحلة هذه لانه يوجد طلاب بها',
+    'can_not_course' => 'لا يمكنك حذف الكورس هذا لانه يوجد شابترز بها',
     'deleted_successfully' => 'تم الحذف بنجاح',
     'confirm_delete' => 'هل انت متأكد من  الحذف',
     'yes' => 'نعم',

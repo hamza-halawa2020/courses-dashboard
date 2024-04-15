@@ -89,6 +89,52 @@
 
         </div><!-- end of col -->
 
+        {{--show chapter modal--}}
+
+        <div class="modal fade" id="showChaptersModal" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title"
+                            id="exampleModalLabel">
+                            تعديل حالة الطالب
+                        </h5>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <form method="post" action="{{ route('admin.users.update',1) }}">
+                            @csrf
+                            @method('put')
+
+                            @include('admin.partials._errors')
+                            <input type="hidden" name="method" value="status">
+                            <input type="hidden" name="userIDStatus" id="userIDStatus" value="">
+
+
+                            {{--name--}}
+                            <div class="form-group">
+                                <label>@lang('users.status') <span class="text-danger"></span></label>
+                                <label id="userNameStatus" > <span class="text-danger"></span></label>
+                                <input type="hidden" name="statusValue" id="statusValue" value="">
+                                <input type="text" name="status" class="form-control" value="" id="userStatus" disabled >
+
+                            </div>
+                            {{--Button--}}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.change')</button>
+                            </div>
+
+                        </form><!-- end of form -->
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div><!-- end of row -->
 
 @endsection
@@ -101,9 +147,9 @@
             dom: "tiplr",
             serverSide: true,
             processing: true,
-            /*"language": {
+            "language": {
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
-            },*/
+            },
             ajax: {
                 url: '{{ route('admin.courses.data') }}',
             },
@@ -128,6 +174,14 @@
         $('#data-table-search').keyup(function () {
             coursesTable.search(this.value).draw();
         })
+
+
+
+
+
+
+
+
     </script>
 
 @endpush
