@@ -1,5 +1,7 @@
 <?php
 
+//use SimpleSoftwareIO\QrCode\QrCodeServiceProvider;
+
 return [
 
     /*
@@ -162,6 +164,10 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        //SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        Milon\Barcode\BarcodeServiceProvider::class,
+
+
 
         /*
          * Package Service Providers...
@@ -175,6 +181,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        //SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class
 
     ],
 
@@ -228,6 +235,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        //'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
+        //'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
 
 
     ],

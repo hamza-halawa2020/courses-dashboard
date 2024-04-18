@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
         "mcamara/laravel-localization": "^1.6",
+        "milon/barcode": "^8.0",
         "santigarcor/laratrust": "^6.3",
         "yajra/laravel-datatables-oracle": "^9.13"
     },

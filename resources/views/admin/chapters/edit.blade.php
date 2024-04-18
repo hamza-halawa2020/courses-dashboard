@@ -31,7 +31,6 @@
                         </div>
                     </div><!-- end of col -->
 
-
                     <div class="col-md-6">
 
                         <div class="form-group">
@@ -41,19 +40,12 @@
                                    value="{{ old('price',$chapter->price)}}" required>
                         </div>
 
-
                         {{--Button--}}
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.update')</button>
                         </div>
 
-
-
                     </div><!-- end of col -->
-
-
-
-
 
 
                 </form><!-- end of form -->

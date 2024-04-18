@@ -51,6 +51,12 @@ Route::middleware([
             Route::resource('lectures', 'LectureController');
 
 
+            //qRvalue routes
+            Route::get('/qRvalues/data', 'QRValueController@data')->name('qRvalues.data');
+            Route::delete('/qRvalues/bulk_delete', 'QRValueController@bulkDelete')->name('qRvalues.bulk_delete');
+            Route::resource('qRvalues', 'QRValueController');
+
+
 
 
             //setting routes
@@ -67,7 +73,6 @@ Route::middleware([
                 Route::put('/password/update', 'PasswordController@update')->name('password.update');
 
             });
-
 
             // apartments routes
             Route::get('/apartments/data', 'ApartmentController@data')->name('apartments.data');

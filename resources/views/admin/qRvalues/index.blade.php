@@ -1,29 +1,14 @@
 @extends('layouts.admin.app')
 
-
 @section('content')
 
     <div>
-        <h2 > @php
-
-
-                /*use SimpleSoftwareIO\QrCode\Facades\QrCode;
-                  QrCode::size(250)->generate('www.google.com');*/
-
-
-            @endphp </h2>
-        <h2 >
-
-
-
-
-            {{$currentChapter==null?'المحضرات':$currentChapter->tittle}}</h2>
+        <h2>@lang('qRvalues.qRvalues')</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item">@lang('lectures.lectures')</li>
-        <li class="breadcrumb-item">{{$currentChapter==null?'المحضرات':$currentChapter->tittle}}</li>
+        <li class="breadcrumb-item">@lang('qRvalues.qRvalues')</li>
     </ul>
 
     <div class="row">
@@ -36,12 +21,12 @@
 
                     <div class="col-md-12">
 
-                        @if (auth()->user()->hasPermission('create_lectures'))
-                            <a href="{{ route('admin.lectures.create',['chapter_id'=>$currentChapter==null?null:$currentChapter->id]) }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a>
+                        @if (auth()->user()->hasPermission('create_qRvalues'))
+                            <a href="{{ route('admin.qRvalues.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a>
                         @endif
 
-                        @if (auth()->user()->hasPermission('delete_lectures'))
-                            <form method="post" action="{{ route('admin.lectures.bulk_delete') }}" style="display: inline-block;">
+                        @if (auth()->user()->hasPermission('delete_qRvalues'))
+                            <form method="post" action="{{ route('admin.qRvalues.bulk_delete') }}" style="display: inline-block;">
                                 @csrf
                                 @method('delete')
                                 <input type="hidden" name="record_ids" id="record-ids">
@@ -57,7 +42,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" id="data-table-search" class="form-control" autofocus lectureholder="@lang('site.search')">
+                            <input type="text" id="data-table-search" class="form-control" autofocus qRvalueholder="@lang('site.search')">
                         </div>
                     </div>
 
@@ -69,7 +54,7 @@
 
                         <div class="table-responsive">
 
-                            <table class="table datatable" id="lectures-table" style="width: 100%;">
+                            <table class="table datatable" id="qRvalues-table" style="width: 100%;">
                                 <thead>
                                 <tr>
                                     <th>
@@ -80,12 +65,12 @@
                                             </label>
                                         </div>
                                     </th>
-                                    <th>@lang('lectures.tittle')</th>
-                                   <th>@lang('lectures.price')</th>
-                                   {{-- <th>@lang('lectures.apartments_count')</th>
-                                    <th>@lang('lectures.related_apartments')</th>--}}
+                                    <th>@lang('qRvalues.tittle')</th>
+                                    <th>@lang('qRvalues.value')</th>
+                                    {{--<th>@lang('qRvalues.apartments_count')</th>
+                                    <th>@lang('qRvalues.related_apartments')</th>--}}
                                     <th>@lang('site.created_at')</th>
-                                    @if(auth()->user()->hasPermission('update_lectures')||auth()->user()->hasPermission('delete_lectures'))
+                                    @if(auth()->user()->hasPermission('update_qRvalues')||auth()->user()->hasPermission('delete_qRvalues'))
                                         <th>@lang('site.action')</th>
 
                                     @endif
@@ -111,8 +96,8 @@
 @push('scripts')
 
     <script>
-        let chapter = '{{request()->chapter_id}}';
-        let lecturesTable = $('#lectures-table').DataTable({
+
+        let qRvaluesTable = $('#qRvalues-table').DataTable({
             dom: "tiplr",
             serverSide: true,
             processing: true,
@@ -120,19 +105,16 @@
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('admin.lectures.data') }}',
-                data: function (d) {
-                    d.chapter_id = chapter;
-                }
+                url: '{{ route('admin.qRvalues.data') }}',
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                 {data: 'tittle', name: 'tittle'},
-                {data: 'price', name: 'price'},
+                {data: 'value', name: 'value'},
                 /*{data: 'apartments_count', name: 'apartments_count',searchable: false},
                 {data: 'related_apartments', name: 'related_apartments',searchable: false,sortable:false},*/
                 {data: 'created_at', name: 'created_at', searchable: false},
-                {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '30%'},
+                {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
             order: [[1, 'desc']],
             drawCallback: function (settings) {
@@ -144,42 +126,8 @@
         });
 
         $('#data-table-search').keyup(function () {
-            lecturesTable.search(this.value).draw();
+            qRvaluesTable.search(this.value).draw();
         })
-
-        $('#place').on('change', function () {
-            place = this.value;
-            apartmentsTable.ajax.reload();
-        })
-
-        $(document).ready(function()
-        {//same as: $(function() {
-
-           // alert("hi 1");
-        });
-
-        $(document).on('click','.showChapters',function () {
-
-            $.ajax({
-                url:'{{ url('admin/courses','')}}' + '/' + id +'/'+ 'get_course',
-
-                method:'GET',
-                success:function(response){
-                    console.log(response);
-                    $('#courseName').html(response.tittle);
-                },
-                error:function(response){
-                    console.log(response);
-
-                }
-
-            });
-
-        });
-
-
-
-
     </script>
 
 @endpush
