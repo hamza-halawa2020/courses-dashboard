@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             PlacesTableSeeder::class,
             StagesTableSeeder::class,
             UsersTableSeeder::class,
+            QRvaluesTableSeeder::class,
         ]);
     }
 }

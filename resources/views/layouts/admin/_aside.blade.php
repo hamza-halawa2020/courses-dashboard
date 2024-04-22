@@ -56,11 +56,17 @@
                         class="app-menu__label">@lang('lectures.lectures')</span></a></li>
         @endif
 
-        {{--qRvalues--}}
+       {{-- --}}{{--qRvalues--}}{{--
         @if (auth()->user()->hasPermission('read_places'))
             <li><a class="app-menu__item {{ request()->is('*qRvalues*') ? 'active' : '' }}"
                    href="{{ route('admin.qRvalues.index') }}"><i class="app-menu__icon fa fa-list"></i> <span
                         class="app-menu__label">@lang('qRvalues.qRvalues')</span></a></li>
+        @endif--}}
+        {{--QR--}}
+        @if (auth()->user()->hasPermission('read_QR'))
+            <li><a class="app-menu__item {{ request()->is('*QR*') ? 'active' : '' }}"
+                   href="{{ route('admin.QR.index') }}"><i class="app-menu__icon fa fa-list"></i> <span
+                        class="app-menu__label">@lang('QR.QRs')</span></a></li>
         @endif
 
         {{--settings--}}

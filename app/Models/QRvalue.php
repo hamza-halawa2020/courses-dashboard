@@ -14,6 +14,11 @@ class QRvalue extends Model
         'tittle',
         'value',
     ];
+
+
+    public function qRs(){
+        return $this->hasMany(QR::class);
+    }
    /* public function apartments(){
         return $this->hasMany(Apartment::class);
     }*/

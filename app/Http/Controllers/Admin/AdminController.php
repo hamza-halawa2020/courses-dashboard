@@ -65,7 +65,7 @@ class AdminController extends Controller
         $admin->attachRoles(['admin', $request->role_id]);
 
         session()->flash('success', __('site.added_successfully'));
-        return redirect()->route('admin.admins.index');
+        return qRect()->route('admin.admins.index');
 
     }// end of store
 
@@ -83,7 +83,7 @@ class AdminController extends Controller
         $admin->syncRoles(['admin', $request->role_id]);
 
         session()->flash('success', __('site.updated_successfully'));
-        return redirect()->route('admin.admins.index');
+        return qRect()->route('admin.admins.index');
 
     }// end of update
 

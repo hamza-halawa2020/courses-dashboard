@@ -221,7 +221,6 @@
 
             topStatistics();
 
-
         });
 
         function topStatistics() {

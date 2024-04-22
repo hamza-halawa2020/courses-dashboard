@@ -35,4 +35,6 @@ return [
     'bulk_delete' => 'حذف الكل',
     'loading' => 'جاري التحميل ...',
     'show_all' => 'عرض الكل ...',
+    'manage_qRValues' => 'ادارة الفئات',
+
 ];

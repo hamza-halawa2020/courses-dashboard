@@ -54,7 +54,12 @@ Route::middleware([
             //qRvalue routes
             Route::get('/qRvalues/data', 'QRValueController@data')->name('qRvalues.data');
             Route::delete('/qRvalues/bulk_delete', 'QRValueController@bulkDelete')->name('qRvalues.bulk_delete');
-            Route::resource('qRvalues', 'QRValueController');
+            Route::resource('qRvalues', 'QRValueController');//qRvalue routes
+
+            // QR
+            Route::get('/QR/data', 'QRController@data')->name('QR.data');
+            Route::delete('/QR/bulk_delete', 'QRController@bulkDelete')->name('QR.bulk_delete');
+            Route::resource('QR', 'QRController');
 
 
 

@@ -27,6 +27,7 @@ return [
             'chapters'=> 'c,r,u,d',
             'lectures'=> 'c,r,u,d',
             'qRvalues'=> 'c,r,u,d',
+            'QR'=> 'c,r,u,d',
         ],
         'admin' => [],
         'user' => [],

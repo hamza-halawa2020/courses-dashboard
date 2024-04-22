@@ -57,7 +57,6 @@ class Coupon extends Model
     {
         return $this->belongsTo('App\Models\Category');
        // return $this->belongsToMany(Genre::class, 'movie_genre');
-
     }
     public function brand()
     {
