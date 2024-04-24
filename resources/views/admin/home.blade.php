@@ -54,12 +54,12 @@
 
                             <div class="d-flex justify-content-between mb-1">
                                 <h5 class="mb-3 "><span class="fa fa-male "></span> @lang('stages.stages')</h5>
-                                <a href="">@lang('site.show_all')</a>
+                                <a href="{{route('admin.stages.index')}}">@lang('site.show_all')</a>
                             </div>
 
                             <div class="loader loader-sm"></div>
 
-                            <h3 class="mb-1" id="owners-count" style="display: none;"></h3>
+                            <h3 class="mb-1" id="stages-count" style="display: none;"></h3>
                         </div>
 
                     </div>
@@ -85,140 +85,48 @@
 
 
 
-                {{-- approved --}}
-                <div class="col-md-4 mt-4">
+                {{-- courses --}}
+                <div class="col-md-6 mt-4">
 
                     <div class="card">
 
                         <div class="card-body">
 
                             <div class="d-flex justify-content-between mb-1">
-                                <h5 class="mb-3 "><span class="fa fa-check mx-1"></span>@lang('apartments.approved')
-                                    @lang('apartments.apartments')</h5>
+                                <h5 class="mb-3 "><span class="fa fa-book mx-1"></span>@lang('courses.courses')</h5>
                                 <a
-                                    href="{{ route('admin.apartments.index', ['approved_state' => 1]) }}">@lang('site.show_all')</a>
+                                    href="{{ route('admin.courses.index') }}">@lang('site.show_all')</a>
                             </div>
 
                             <div class="loader loader-sm"></div>
 
-                            <h3 class="mb-1" id="approved-count" style="display: none;"></h3>
+                            <h3 class="mb-1" id="courses-count" style="display: none;"></h3>
                         </div>
 
                     </div>
 
                 </div><!-- end of col -->
-
-                {{-- waiting --}}
-                <div class="col-md-4 mt-4">
+                {{-- QR --}}
+                <div class="col-md-6 mt-4">
 
                     <div class="card">
 
                         <div class="card-body">
 
                             <div class="d-flex justify-content-between mb-1">
-                                <h5 class="mb-3 "><span class="fa fa-clock-o mx-1"></span>@lang('apartments.waiting')
-                                    @lang('apartments.apartments')</h5>
+                                <h5 class="mb-3 "><span class="fa fa-qrcode mx-1"></span>الاكواد</h5>
                                 <a
-                                    href="{{ route('admin.apartments.index', ['approved_state' => 3]) }}">@lang('site.show_all')</a>
+                                    href="{{ route('admin.QR.index') }}">@lang('site.show_all')</a>
                             </div>
 
                             <div class="loader loader-sm"></div>
 
-                            <h3 class="mb-1" id="waiting-count" style="display: none;"></h3>
+                            <h3 class="mb-1" id="qrs-count" style="display: none;"></h3>
                         </div>
 
                     </div>
 
                 </div><!-- end of col -->
-
-                {{-- unapproved --}}
-                <div class="col-md-4 mt-4">
-
-                    <div class="card">
-
-                        <div class="card-body">
-
-                            <div class="d-flex justify-content-between mb-1">
-                                <h5 class="mb-3 "><span class="fa fa-times mx-1"></span>@lang('apartments.unapproved')
-                                    @lang('apartments.apartments')</h5>
-                                <a
-                                    href="{{ route('admin.apartments.index', ['approved_state' => 2]) }}">@lang('site.show_all')</a>
-                            </div>
-
-                            <div class="loader loader-sm"></div>
-
-                            <h3 class="mb-1" id="unapproved-count" style="display: none;"></h3>
-                        </div>
-
-                    </div>
-
-                </div><!-- end of col -->
-
-                {{-- available --}}
-                <div class="col-md-4 mt-4">
-
-                    <div class="card">
-
-                        <div class="card-body">
-
-                            <div class="d-flex justify-content-between mb-1">
-                                <h5 class="mb-3 "><span class="fa fa-check mx-1"></span>@lang('apartments.available')
-                                    @lang('apartments.apartments')</h5>
-                                <a href="{{ route('admin.apartments.index', ['state' => 1]) }}">@lang('site.show_all')</a>
-                            </div>
-
-                            <div class="loader loader-sm"></div>
-
-                            <h3 class="mb-1" id="available-count" style="display: none;"></h3>
-                        </div>
-
-                    </div>
-
-                </div><!-- end of col -->
-
-                {{-- unavailable --}}
-                <div class="col-md-4 mt-4">
-
-                    <div class="card">
-
-                        <div class="card-body">
-
-                            <div class="d-flex justify-content-between mb-1">
-                                <h5 class="mb-3 "><span class="fa fa-times mx-1"></span>@lang('apartments.unavailable')
-                                    @lang('apartments.apartments')</h5>
-                                <a href="{{ route('admin.apartments.index', ['state' => 2]) }}">@lang('site.show_all')</a>
-                            </div>
-
-                            <div class="loader loader-sm"></div>
-
-                            <h3 class="mb-1" id="unavailable-count" style="display: none;"></h3>
-                        </div>
-
-                    </div>
-
-                </div><!-- end of col -->
-
-                {{-- images --}}
-                <div class="col-md-4 mt-4">
-
-                    <div class="card">
-
-                        <div class="card-body">
-
-                            <div class="d-flex justify-content-between mb-1">
-                                <h5 class="mb-3 "><span class="fa fa-picture-o mx-1"></span>Images</h5>
-                                <a href="#">@lang('site.show_all')</a>
-                            </div>
-
-                            <div class="loader loader-sm"></div>
-
-                            <h3 class="mb-1" id="images-count" style="display: none;"></h3>
-                        </div>
-
-                    </div>
-
-                </div><!-- end of col -->
-
 
             </div><!-- end of row -->
 
@@ -244,14 +152,11 @@
                     $('#top-statistics .loader-sm').hide();
 
                     $('#top-statistics #users-count').show().text(data.users_count);
-                    $('#top-statistics #owners-count').show().text(data.owners_count);
+                    $('#top-statistics #stages-count').show().text(data.stages_count);
                     $('#top-statistics #places-count').show().text(data.places_count);
-                    $('#top-statistics #approved-count').show().text(data.approved_count);
-                    $('#top-statistics #waiting-count').show().text(data.waiting_count);
-                    $('#top-statistics #unapproved-count').show().text(data.unapproved_count);
-                    $('#top-statistics #available-count').show().text(data.available_count);
-                    $('#top-statistics #unavailable-count').show().text(data.unavailable_count);
-                    $('#top-statistics #images-count').show().text(data.images_count);
+                    $('#top-statistics #courses-count').show().text(data.courses_count);
+                    $('#top-statistics #qrs-count').show().text(data.qrs_count);
+
 
                 },
 

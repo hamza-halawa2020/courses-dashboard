@@ -31,7 +31,7 @@
 
                     {{--phone--}}
                     <div class="form-group">
-                        <label>@lang('users.phone')</label>
+                        <label>رقم الهاتف</label>
                         <input type="tel" name="phone" class="form-control" value="{{ old('phone', auth()->user()->phone) }}">
                     </div>
 

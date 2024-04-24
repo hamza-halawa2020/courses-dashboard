@@ -19,7 +19,7 @@
         {{-- places --}}
         @if (auth()->user()->hasPermission('read_places'))
             <li><a class="app-menu__item {{ request()->is('*places*') ? 'active' : '' }}"
-                    href="{{ route('admin.places.index') }}"><i class="app-menu__icon fa fa-list"></i> <span
+                    href="{{ route('admin.places.index') }}"><i class="app-menu__icon fa fa-map"></i> <span
                         class="app-menu__label">@lang('places.places')</span></a></li>
         @endif
 
@@ -42,7 +42,7 @@
         {{-- courses --}}
         @if (auth()->user()->hasPermission('read_courses'))
             <li><a class="app-menu__item {{ request()->is('*courses*') ? 'active' : '' }}"
-                    href="{{ route('admin.courses.index') }}"><i class="app-menu__icon fa fa-user"></i> <span
+                    href="{{ route('admin.courses.index') }}"><i class="app-menu__icon fa fa-book"></i> <span
                         class="app-menu__label">@lang('courses.courses')</span></a></li>
         @endif
         {{-- chapters --}}{{--
@@ -69,7 +69,7 @@
         {{-- QR --}}
         @if (auth()->user()->hasPermission('read_QR'))
             <li><a class="app-menu__item {{ request()->is('*QR*') ? 'active' : '' }}"
-                    href="{{ route('admin.QR.index') }}"><i class="app-menu__icon fa fa-list"></i> <span
+                    href="{{ route('admin.QR.index') }}"><i class="app-menu__icon fa fa-qrcode"></i> <span
                         class="app-menu__label">@lang('QR.QRs')</span></a></li>
         @endif
 
