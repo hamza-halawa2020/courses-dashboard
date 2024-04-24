@@ -85,7 +85,8 @@ class LectureController extends Controller
     {
         // return $request;
         $currentChapter= Chapter::find($request->chapter_id);
-        $stages = Stage::all();
+        $stages = Stage::whereNotIn('id',[1])->get();
+
         return view('admin.lectures.create',compact('stages','currentChapter'));
 
     }// end of create
@@ -111,7 +112,7 @@ class LectureController extends Controller
 
     public function edit(Lecture $lecture)
     {
-        $stages = Stage::all();
+        $stages = Stage::whereNotIn('id',[1])->get();
         return view('admin.lectures.edit', compact('lecture','stages'));
 
     }// end of edit

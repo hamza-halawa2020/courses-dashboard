@@ -12,7 +12,7 @@ class Place extends Model
         'id',
         'name',
     ];
-    public function apartments(){
-        return $this->hasMany(Apartment::class);
+    public function users(){
+        return $this->hasMany(User::class);
     }
 }

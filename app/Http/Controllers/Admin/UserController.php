@@ -74,9 +74,9 @@ class UserController extends Controller
     }// end of data
 
     public function create()
-    {
-        $stages = Stage::all();
-        $places = Place::all();
+    {  // whereNotIn('id',[1])->get();
+        $stages = Stage::whereNotIn('id',[1])->get();
+        $places = Place::whereNotIn('id',[1])->get();
         return view('admin.users.create', compact('stages','places'));
 
     }// end of create
@@ -125,8 +125,8 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $stages = Stage::all();
-        $places = Place::all();
+        $stages = Stage::whereNotIn('id',[1])->get();
+        $places = Place::whereNotIn('id',[1])->get();
         return view('admin.users.edit', compact('user', 'stages','places'));
 
 

@@ -29,7 +29,7 @@ class StagesController extends Controller
 
     public function data()
     {
-        $stages = Stage::all();
+        $stages = Stage::whereNotIn('id',[1])->get();
 
         return DataTables::of($stages)
             ->addColumn('record_select', 'admin.stages.data_table.record_select')
@@ -79,7 +79,7 @@ class StagesController extends Controller
     {
         //$id = $stage->id;
         $user = User::where('id', $stage->id)->count();
-        if ($user>0){
+        if ($user> 0){
             session()->flash('error', __('site.can_not_stage'));
             return response(__('site.can_not_stage'));
         }
@@ -96,8 +96,15 @@ class StagesController extends Controller
     {
         foreach (json_decode(request()->record_ids) as $recordId) {
 
-            $stage = Stage::FindOrFail($recordId);
-            $this->delete($stage);
+            $user = User::where('stage_id', $recordId)->count();
+            if($user >  0){
+                session()->flash('error', __('site.can_not_stage'));
+                return response(__('site.can_not_stage'));
+            }else {
+                $stage = Stage::FindOrFail($recordId);
+                $this->delete($stage);
+
+            }
 
         }//end of for each
 

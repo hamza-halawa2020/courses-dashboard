@@ -59,7 +59,7 @@ class CourseController extends Controller
 
     public function create()
     {
-        $stages = Stage::all();
+        $stages = Stage::whereNotIn('id',[1])->get();
         return view('admin.courses.create',compact('stages'));
 
     }// end of create
@@ -74,7 +74,7 @@ class CourseController extends Controller
 
     public function edit(Course $course)
     {
-        $stages = Stage::all();
+        $stages = Stage::whereNotIn('id',[1])->get();
         return view('admin.courses.edit', compact('course','stages'));
 
     }// end of edit

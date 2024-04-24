@@ -17,8 +17,9 @@ class PlacesTableSeeder extends Seeder
     public function run()
     {
         $places = [
-            ['name' => 'سنتر النور'],
+            ['name' => 'super_admin'],
             ['name' => 'سنتر البيان'],
+            ['name' => 'سنتر النور'],
             ['name' => 'سنتر شباب الامه']
         ];
 

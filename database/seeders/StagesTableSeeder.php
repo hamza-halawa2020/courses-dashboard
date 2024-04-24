@@ -11,12 +11,13 @@ class StagesTableSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
+     * @return void~
      */
     public function run()
     {
         $stages = [
-            ['name' => 'اولي ثانوي '],
+            ['name' => 'super_admin'],
+            ['name' => 'اولي ثانوي'],
             ['name' => 'تانيه تانوي'],
             ['name' => 'تالته ثانوي']
         ];
@@ -24,11 +25,9 @@ class StagesTableSeeder extends Seeder
         foreach ($stages as $stage) {
 
             Stage::create($stage);
+        } //end of for each
 
 
-        }//end of for each
-
-
-    }//end of run
+    } //end of run
 
 }//end of seeder
