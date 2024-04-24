@@ -68,8 +68,7 @@
                                     </th>
                                     <th>@lang('chapters.tittle')</th>
                                    <th>@lang('chapters.price')</th>
-                                   {{-- <th>@lang('chapters.apartments_count')</th>
-                                    <th>@lang('chapters.related_apartments')</th>--}}
+                                   <th>@lang('chapters.lectures_count')</th>
                                     <th>@lang('site.created_at')</th>
                                     @if(auth()->user()->hasPermission('update_chapters')||auth()->user()->hasPermission('delete_chapters'))
                                         <th>@lang('site.action')</th>
@@ -115,8 +114,7 @@
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                 {data: 'tittle', name: 'tittle'},
                 {data: 'price', name: 'price'},
-                /*{data: 'apartments_count', name: 'apartments_count',searchable: false},
-                {data: 'related_apartments', name: 'related_apartments',searchable: false,sortable:false},*/
+                {data: 'lectures_count', name: 'lectures_count',searchable: false},
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '30%'},
             ],

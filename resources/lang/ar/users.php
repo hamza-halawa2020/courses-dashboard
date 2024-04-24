@@ -29,6 +29,7 @@ return [
     'male'=>'ذكر',
     'female'=>'انثي',
     'stage_withal' => 'المرحلة الدراسية',
+    'users_count' =>'عدد الطلاب ',
 
 
 ];

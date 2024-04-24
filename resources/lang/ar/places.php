@@ -5,6 +5,5 @@ return [
     'place' => 'السنتر',
     'name' => 'الاسم',
     'location' => 'المكان',
-    'related_apartments'=>'Related apartments',
-    'apartments_count'=>'Apartments count',
+    'users_count' =>'عدد الطلاب ',
 ];

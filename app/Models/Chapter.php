@@ -31,6 +31,8 @@ class Chapter extends Model
     {
         return $this->belongsTo('App\Models\Course');
     }
-
+    public function lectures(){
+        return $this->hasMany(Lecture::class);
+    }
 
 }

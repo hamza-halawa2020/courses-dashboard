@@ -29,9 +29,11 @@ class PlaceController extends Controller
         $places = Place:: whereNotIn('id',[1])->withCount('users')->get();
         return DataTables::of($places)
             ->addColumn('record_select', 'admin.places.data_table.record_select')
-            ->addColumn('related_apartments', 'admin.places.data_table.related_apartments')
             ->editColumn('created_at', function (Place $place) {
                 return $place->created_at->format('Y-m-d');
+            })
+            ->editColumn('users_count', function (Place $place) {
+                return $place->users->count();
             })
             ->addColumn('actions', 'admin.places.data_table.actions')
             ->rawColumns(['record_select', 'actions', 'related_apartments'])

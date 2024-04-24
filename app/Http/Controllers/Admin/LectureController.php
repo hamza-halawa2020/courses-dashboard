@@ -60,13 +60,10 @@ class LectureController extends Controller
 
         return DataTables::of($lectures)
             ->addColumn('record_select', 'admin.lectures.data_table.record_select')
-            //->addColumn('related_apartments', 'admin.lectures.data_table.related_apartments')
             ->editColumn('created_at', function (Lecture $lecture) {
                 return $lecture->created_at->format('Y-m-d');
-            })/*->editColumn('stage', function ( Lecture $lecture) {
-                $name = $lecture->stage->name;
-                return view('admin.users.data_table.stage', compact('name'));
-            })*/
+            })
+
             ->editColumn('status', function (Lecture $lec) {
                 if ($lec->status == '0') {
                     return '<h5><span class="badge badge-danger">غير نشطة</span></h5>';

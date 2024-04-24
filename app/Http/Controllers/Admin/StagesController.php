@@ -33,9 +33,11 @@ class StagesController extends Controller
 
         return DataTables::of($stages)
             ->addColumn('record_select', 'admin.stages.data_table.record_select')
-            //->addColumn('related_apartments', 'admin.stages.data_table.related_apartments')
             ->editColumn('created_at', function (Stage $stage) {
                 return $stage->created_at->format('Y-m-d');
+            })
+            ->editColumn('users_count', function (Stage $stage) {
+                return $stage->users->count();
             })
             ->addColumn('actions', 'admin.stages.data_table.actions')
             ->rawColumns(['record_select','actions','related_apartments'])

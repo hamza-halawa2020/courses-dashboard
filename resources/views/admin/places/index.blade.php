@@ -66,8 +66,7 @@
                                         </div>
                                     </th>
                                     <th>@lang('places.name')</th>
-                                    {{--<th>@lang('places.apartments_count')</th>
-                                    <th>@lang('places.related_apartments')</th>--}}
+                                    <th>@lang('places.users_count')</th>
                                     <th>@lang('site.created_at')</th>
                                     @if(auth()->user()->hasPermission('update_places')||auth()->user()->hasPermission('delete_places'))
                                         <th>@lang('site.action')</th>
@@ -100,17 +99,16 @@
             dom: "tiplr",
             serverSide: true,
             processing: true,
-            /*"language": {
+            "language": {
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
-            },*/
+            },
             ajax: {
                 url: '{{ route('admin.places.data') }}',
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                 {data: 'name', name: 'name'},
-                /*{data: 'apartments_count', name: 'apartments_count',searchable: false},
-                {data: 'related_apartments', name: 'related_apartments',searchable: false,sortable:false},*/
+                {data: 'users_count', name: 'users_count',searchable: false},
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],

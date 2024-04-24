@@ -3,12 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Apartment;
-use App\Models\Brand;
-use App\Models\Category;
-use App\Models\Coupon;
 use App\Models\Course;
-use App\Models\Image;
 use App\Models\Place;
 use App\Models\QR;
 use App\Models\Stage;
@@ -26,8 +21,8 @@ class HomeController extends Controller
     public function topStatistics()
     {
         $UsersCount = number_format( User::where('type','user')->count(),1);
-        $stagesCount = number_format( Stage::count(),1);
-        $placesCount = number_format( Place::count(),1);
+        $stagesCount = number_format( Stage::count(),1)-1;
+        $placesCount = number_format( Place::count(),1)-1;
         $coursesCount = number_format( Course::count(),1);
         $qrsCount = number_format( QR::count(),1);
 

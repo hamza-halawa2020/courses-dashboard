@@ -2,13 +2,15 @@
 
 @section('content')
     <div>
-        <h2>{{$lecture->tittle}}</h2>
+        <h2>{{ $lecture->tittle }}</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
         <li class="breadcrumb-item"><a href="{{ route('admin.lectures.index') }}">@lang('lectures.lectures')</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.lectures.index',['chapter_id' =>$lecture->chapter->id])}}">{{$lecture->tittle}}</a></li>
+        <li class="breadcrumb-item"><a
+                href="{{ route('admin.lectures.index', ['chapter_id' => $lecture->chapter->id]) }}">{{ $lecture->tittle }}</a>
+        </li>
         <li class="breadcrumb-item">@lang('site.edit')</li>
     </ul>
 
@@ -24,7 +26,7 @@
 
                     @include('admin.partials._errors')
 
-                    <input type="hidden" name="chapter_id" value="{{ $lecture->chapter->id}}">
+                    <input type="hidden" name="chapter_id" value="{{ $lecture->chapter->id }}">
                     <div class="row">
 
                         <div class="col-md-6">
@@ -45,16 +47,19 @@
                                 <label>@lang('lectures.notes')</span></label>
                                 <textarea type="text" name="notes" class="form-control" aria-label="With textarea"> {{ old('notes', $lecture->notes) }}</textarea>
                             </div>
-                            {{--start--}}
+                            {{-- start --}}
                             <div class="form-group">
                                 <label>@lang('lectures.start')<span class="text-danger">*</span></label>
-                                <input type="date" name="start" value="{{$lecture->start}}">
+                                <input type="datetime-local" name="start" class="form-control"
+                                    value="{{ $lecture->start }}">
                             </div>
                             {{-- end --}}
                             <div class="form-group">
                                 <label>@lang('lectures.end')<span class="text-danger">*</span></label>
-                                <input type="date" name="end" value="{{$lecture->end}}">
+                                <input type="datetime-local" name="end" class="form-control"
+                                    value="{{ $lecture->end }}">
                             </div>
+
 
                             {{-- button --}}
                             <div class="form-group">
@@ -95,7 +100,7 @@
 
         </div><!-- end of col -->
         @php
-            $start=$lecture->start;
+            $start = $lecture->start;
         @endphp
 
     </div><!-- end of row -->

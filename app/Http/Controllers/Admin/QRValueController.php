@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\QRvalueRequest;
 use App\Models\Apartment;
+use App\Models\QR;
 use App\Models\QRvalue;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -77,17 +78,17 @@ class QRValueController extends Controller
     public function destroy(QRvalue $qRvalue)
     {
         //after qr
-        /*$user = User::where('id', $stage->id)->count();
-        if ($user>0){
-            session()->flash('error', __('site.can_not_stage'));
-            return response(__('site.can_not_stage'));
+        $qr = QR::where('q_rvalue_id', $qRvalue->id)->count();
+        if ($qr > 0){
+            session()->flash('error', __('qRvalues.can_not_qr_value'));
+            return response(__('qRvalues.can_not_qr_value'));
         }
         else{
-            $this->delete($stage);
+            $this->delete($qRvalue);
             session()->flash('success', __('site.deleted_successfully'));
             return response(__('site.deleted_successfully'));
 
-        }*/
+        }
 
     }// end of destroy
 
@@ -95,8 +96,20 @@ class QRValueController extends Controller
     {
         foreach (json_decode(request()->record_ids) as $recordId) {
 
+            $qr = QR::where('q_rvalue_id', $recordId)->count();
+        if ($qr > 0){
+            session()->flash('error', __('qRvalues.can_not_qr_value'));
+            return response(__('qRvalues.can_not_qr_value'));
+        }
+        else{
             $qRvalue = QRvalue::FindOrFail($recordId);
             $this->delete($qRvalue);
+            session()->flash('success', __('site.deleted_successfully'));
+            return response(__('site.deleted_successfully'));
+
+        }
+
+
 
         }//end of for each
 

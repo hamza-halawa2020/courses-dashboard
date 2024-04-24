@@ -52,6 +52,9 @@ class CourseController extends Controller
                 $name = $course->stage->name;
                 return view('admin.users.data_table.stage', compact('name'));
             })
+            ->editColumn('chapters_count', function (Course $course) {
+                return $course->chapters->count();
+            })
             ->addColumn('actions', 'admin.courses.data_table.actions')
             ->rawColumns(['record_select','actions','related_apartments'])
             ->toJson();

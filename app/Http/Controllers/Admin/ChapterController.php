@@ -47,13 +47,12 @@ class ChapterController extends Controller
 
         return DataTables::of($chapters)
             ->addColumn('record_select', 'admin.chapters.data_table.record_select')
-            //->addColumn('related_apartments', 'admin.chapters.data_table.related_apartments')
             ->editColumn('created_at', function (Chapter $chapter) {
                 return $chapter->created_at->format('Y-m-d');
-            })/*->editColumn('stage', function ( Chapter $chapter) {
-                $name = $chapter->stage->name;
-                return view('admin.users.data_table.stage', compact('name'));
-            })*/
+            })
+            ->editColumn('lectures_count', function (Chapter $chapter) {
+                return $chapter->lectures->count();
+            })
             ->addColumn('actions', 'admin.chapters.data_table.actions')
             ->rawColumns(['record_select', 'actions', 'related_apartments'])
             ->toJson();

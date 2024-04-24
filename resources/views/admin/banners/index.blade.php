@@ -95,9 +95,9 @@
             dom: "tiplr",
             serverSide: true,
             processing: true,
-           /* "language": {
+            "language": {
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
-            },*/
+            },
             ajax: {
                 url: '{{ route('admin.banners.data') }}',
             },

@@ -30,17 +30,17 @@
                             {{--name--}}
                             <div class="form-group">
                                 <label>@lang('users.student_name')<span class="text-danger">*</span></label>
-                                <input type="text" name="name" class="form-control" value="{{ old('name') }}"  autofocus>
+                                <input type="text" name="name" class="form-control" value="{{ old('name') }}" required  autofocus >
                             </div>
                             {{--phone--}}
                             <div class="form-group">
                                 <label>@lang('users.phone')<span class="text-danger">*</span></label>
-                                <input type="tel" name="phone" class="form-control" value="{{ old('phone') }}" >
+                                <input type="tel" name="phone" class="form-control" value="{{ old('phone') }}" required >
                             </div>
 
                             <div class="form-group">
                                 <label>@lang('users.student_gender')<span class="text-danger">*</span></label>
-                                <select name="gender" class="form-control">
+                                <select name="gender" class="form-control" required>
                                     <option value="">@lang('users.select_gender')</option>
                                     <option value="male">@lang('users.male')</option>
                                     <option value="female">@lang('users.female')</option>

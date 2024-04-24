@@ -217,6 +217,21 @@ class UserController extends Controller
             } else return 'لقد حدث حضأ ما !!!';
 
 
+        }else{
+           //return $request;
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'gender' => $request->gender,
+                'parent_phone' => $request->parent_phone,
+                'parent_name' => $request->parent_name,
+                'stage_id' => $request->stage_id,
+                'place_id' => $request->place_id,
+            ]);
+
+            session()->flash('success', __('site.added_successfully'));
+            return redirect()->route('admin.users.index');
         }
 
 

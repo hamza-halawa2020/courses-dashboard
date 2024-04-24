@@ -67,8 +67,7 @@
                                     </th>
                                     <th>@lang('courses.tittle')</th>
                                     <th>@lang('users.stage_withal')</th>
-                                   {{-- <th>@lang('courses.apartments_count')</th>
-                                    <th>@lang('courses.related_apartments')</th>--}}
+                                    <th>@lang('courses.chapters_count')</th>
                                     <th>@lang('site.created_at')</th>
                                     @if(auth()->user()->hasPermission('update_courses')||auth()->user()->hasPermission('delete_courses'))
                                         <th>@lang('site.action')</th>
@@ -157,8 +156,7 @@
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                 {data: 'tittle', name: 'tittle'},
                 {data: 'stage', name: 'stage', searchable: false, sortable: false},
-                /*{data: 'apartments_count', name: 'apartments_count',searchable: false},
-                {data: 'related_apartments', name: 'related_apartments',searchable: false,sortable:false},*/
+                {data: 'chapters_count', name: 'chapters_count',searchable: false},
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '40%'},
             ],
