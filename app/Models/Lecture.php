@@ -19,6 +19,7 @@ class Lecture extends Model
         'notes',
         'start',
         'end',
+        'status',
     ];
 
 

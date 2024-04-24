@@ -48,6 +48,8 @@ Route::middleware([
             //lecture routes
             Route::get('/lectures/data', 'LectureController@data')->name('lectures.data');
             Route::delete('/lectures/bulk_delete', 'LectureController@bulkDelete')->name('lectures.bulk_delete');
+            Route::get('/lectures/{id}/find', 'LectureController@find')->name('lectures.find');
+
             Route::resource('lectures', 'LectureController');
 
 

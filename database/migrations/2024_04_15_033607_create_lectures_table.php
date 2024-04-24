@@ -22,6 +22,7 @@ class CreateLecturesTable extends Migration
             $table->longText('notes')->nullable();
             $table->date('start');
             $table->date('end');
+            $table->enum('status', [0,1]);
             $table->bigInteger('chapter_id')->unsigned();
             $table->foreign('chapter_id')->references('id')->on('chapters');
             $table->timestamps();

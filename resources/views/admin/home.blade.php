@@ -1,7 +1,6 @@
 @extends('layouts.admin.app')
 
 @section('content')
-
     <div>
         <h2>@lang('site.home')</h2>
     </div>
@@ -14,52 +13,19 @@
 
         <div class="col-md-12 mt-2">
 
-            {{--top statistics--}}
+            {{-- top statistics --}}
             <div class="row" id="top-statistics">
-                {{--<div class="col-md-4">
+                {{-- <div class="col-md-4">
                     <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
                         <div class="info">
                             <h4>Users </h4>
                             <p><b>5</b></p>
                         </div>
                     </div>
-                </div>--}}
-                {{--users--}}
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-1">
-                                <h5 class="mb-3"><span class="fa fa-users px-1"></span>@lang('users.users')</h5>
-                                <a href="{{ route('admin.users.index') }}">@lang('site.show_all')</a>
-                            </div>
-                            <div class="loader loader-sm"></div>
-                            <h2 class="mb-0" id="users-count" style="display: none"></h2>
-                        </div>
+                </div> --}}
 
-                    </div>
 
-                </div><!-- end of col -->
-                {{--owners--}}
-                <div class="col-md-4">
-
-                    <div class="card">
-
-                        <div class="card-body">
-
-                            <div class="d-flex justify-content-between mb-1">
-                                <h5 class="mb-3 "><span class="fa fa-male "></span> @lang('owners.owners')</h5>
-                                <a href="">@lang('site.show_all')</a>
-                            </div>
-
-                            <div class="loader loader-sm"></div>
-
-                            <h3 class="mb-1" id="owners-count" style="display: none;"></h3>
-                        </div>
-
-                    </div>
-
-                </div><!-- end of col -->
-                {{--places--}}
+                {{-- places --}}
                 <div class="col-md-4">
 
                     <div class="card">
@@ -79,7 +45,47 @@
 
                 </div><!-- end of col -->
 
-                {{--approved--}}
+                {{-- stages --}}
+                <div class="col-md-4">
+
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <div class="d-flex justify-content-between mb-1">
+                                <h5 class="mb-3 "><span class="fa fa-male "></span> @lang('stages.stages')</h5>
+                                <a href="">@lang('site.show_all')</a>
+                            </div>
+
+                            <div class="loader loader-sm"></div>
+
+                            <h3 class="mb-1" id="owners-count" style="display: none;"></h3>
+                        </div>
+
+                    </div>
+
+                </div><!-- end of col -->
+
+
+                {{-- users --}}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-1">
+                                <h5 class="mb-3"><span class="fa fa-users px-1"></span>@lang('users.users')</h5>
+                                <a href="{{ route('admin.users.index') }}">@lang('site.show_all')</a>
+                            </div>
+                            <div class="loader loader-sm"></div>
+                            <h2 class="mb-0" id="users-count" style="display: none"></h2>
+                        </div>
+
+                    </div>
+
+                </div><!-- end of col -->
+
+
+
+                {{-- approved --}}
                 <div class="col-md-4 mt-4">
 
                     <div class="card">
@@ -87,8 +93,10 @@
                         <div class="card-body">
 
                             <div class="d-flex justify-content-between mb-1">
-                                <h5 class="mb-3 "><span class="fa fa-check mx-1"></span>@lang('apartments.approved') @lang('apartments.apartments')</h5>
-                                <a href="{{ route('admin.apartments.index',['approved_state' =>1]) }}">@lang('site.show_all')</a>
+                                <h5 class="mb-3 "><span class="fa fa-check mx-1"></span>@lang('apartments.approved')
+                                    @lang('apartments.apartments')</h5>
+                                <a
+                                    href="{{ route('admin.apartments.index', ['approved_state' => 1]) }}">@lang('site.show_all')</a>
                             </div>
 
                             <div class="loader loader-sm"></div>
@@ -100,7 +108,7 @@
 
                 </div><!-- end of col -->
 
-                {{--waiting--}}
+                {{-- waiting --}}
                 <div class="col-md-4 mt-4">
 
                     <div class="card">
@@ -108,8 +116,10 @@
                         <div class="card-body">
 
                             <div class="d-flex justify-content-between mb-1">
-                                <h5 class="mb-3 "><span class="fa fa-clock-o mx-1"></span>@lang('apartments.waiting') @lang('apartments.apartments')</h5>
-                                <a href="{{ route('admin.apartments.index',['approved_state' =>3]) }}">@lang('site.show_all')</a>
+                                <h5 class="mb-3 "><span class="fa fa-clock-o mx-1"></span>@lang('apartments.waiting')
+                                    @lang('apartments.apartments')</h5>
+                                <a
+                                    href="{{ route('admin.apartments.index', ['approved_state' => 3]) }}">@lang('site.show_all')</a>
                             </div>
 
                             <div class="loader loader-sm"></div>
@@ -121,7 +131,7 @@
 
                 </div><!-- end of col -->
 
-                {{--unapproved--}}
+                {{-- unapproved --}}
                 <div class="col-md-4 mt-4">
 
                     <div class="card">
@@ -129,8 +139,10 @@
                         <div class="card-body">
 
                             <div class="d-flex justify-content-between mb-1">
-                                <h5 class="mb-3 "><span class="fa fa-times mx-1"></span>@lang('apartments.unapproved') @lang('apartments.apartments')</h5>
-                                <a href="{{ route('admin.apartments.index',['approved_state' =>2]) }}">@lang('site.show_all')</a>
+                                <h5 class="mb-3 "><span class="fa fa-times mx-1"></span>@lang('apartments.unapproved')
+                                    @lang('apartments.apartments')</h5>
+                                <a
+                                    href="{{ route('admin.apartments.index', ['approved_state' => 2]) }}">@lang('site.show_all')</a>
                             </div>
 
                             <div class="loader loader-sm"></div>
@@ -142,7 +154,7 @@
 
                 </div><!-- end of col -->
 
-                {{--available--}}
+                {{-- available --}}
                 <div class="col-md-4 mt-4">
 
                     <div class="card">
@@ -150,8 +162,9 @@
                         <div class="card-body">
 
                             <div class="d-flex justify-content-between mb-1">
-                                <h5 class="mb-3 "><span class="fa fa-check mx-1"></span>@lang('apartments.available') @lang('apartments.apartments')</h5>
-                                <a href="{{ route('admin.apartments.index',['state' =>1]) }}">@lang('site.show_all')</a>
+                                <h5 class="mb-3 "><span class="fa fa-check mx-1"></span>@lang('apartments.available')
+                                    @lang('apartments.apartments')</h5>
+                                <a href="{{ route('admin.apartments.index', ['state' => 1]) }}">@lang('site.show_all')</a>
                             </div>
 
                             <div class="loader loader-sm"></div>
@@ -163,7 +176,7 @@
 
                 </div><!-- end of col -->
 
-                {{--unavailable--}}
+                {{-- unavailable --}}
                 <div class="col-md-4 mt-4">
 
                     <div class="card">
@@ -171,8 +184,9 @@
                         <div class="card-body">
 
                             <div class="d-flex justify-content-between mb-1">
-                                <h5 class="mb-3 "><span class="fa fa-times mx-1"></span>@lang('apartments.unavailable') @lang('apartments.apartments')</h5>
-                                <a href="{{ route('admin.apartments.index',['state' =>2]) }}">@lang('site.show_all')</a>
+                                <h5 class="mb-3 "><span class="fa fa-times mx-1"></span>@lang('apartments.unavailable')
+                                    @lang('apartments.apartments')</h5>
+                                <a href="{{ route('admin.apartments.index', ['state' => 2]) }}">@lang('site.show_all')</a>
                             </div>
 
                             <div class="loader loader-sm"></div>
@@ -184,7 +198,7 @@
 
                 </div><!-- end of col -->
 
-                {{--images--}}
+                {{-- images --}}
                 <div class="col-md-4 mt-4">
 
                     <div class="card">
@@ -214,10 +228,8 @@
 @endsection
 
 @push('scripts')
-
     <script>
-
-        $(function () {
+        $(function() {
 
             topStatistics();
 
@@ -227,7 +239,7 @@
             $.ajax({
                 url: "{{ route('admin.home.top_statistics') }}",
                 cache: false,
-                success: function (data) {
+                success: function(data) {
 
                     $('#top-statistics .loader-sm').hide();
 
@@ -243,8 +255,7 @@
 
                 },
 
-            });//end of ajax call
+            }); //end of ajax call
         }
-
     </script>
 @endpush

@@ -11,7 +11,7 @@
         <li class="breadcrumb-item">@lang('users.users')</li>
     </ul>
 
-    <div class="row" id="booody" >
+    <div class="row" >
 
         <div class="col-md-12">
 
@@ -114,7 +114,7 @@
                             @method('put')
 
                             @include('admin.partials._errors')
-                            <input type="hidden" name="method" value="status">
+                            <input type="hidden" name="meth" value="status">
                             <input type="hidden" name="userIDStatus" id="userIDStatus" value="">
 
 
@@ -159,7 +159,7 @@
                             @method('put')
 
                             @include('admin.partials._errors')
-                            <input type="hidden" name="method" value="password">
+                            <input type="hidden" name="meth" value="password">
                             <input type="hidden" name="userIDPassword" id="userIDPassword" value="">
                             <label id="userNamePassword" > <span class="text-danger"></span></label>
 
@@ -209,7 +209,7 @@
                             @method('put')
 
                             @include('admin.partials._errors')
-                            <input type="hidden" name="method" value="balance">
+                            <input type="hidden" name="meth" value="balance">
                             <input type="hidden" name="userIDBalance" id="userIDBalance" value="">
 
                             <label id="userNameBalance" > <span class="text-danger"></span></label>
@@ -252,7 +252,7 @@
                             @method('put')
 
                             @include('admin.partials._errors')
-                            <input type="hidden" name="method" value="device">
+                            <input type="hidden" name="meth" value="device">
                             <input type="hidden" name="userIDDevice" id="userIDDevice" value="">
 
                             <label id="userNameDevice" > <span class="text-danger"></span></label>
@@ -378,6 +378,7 @@
 
                 method:'GET',
                 success:function(response){
+                    console.log('dddd');
                     $('#balanceValue').val('');
                     $('#editBalance').modal('show');
                     $('#userIDBalance').val(response.id);

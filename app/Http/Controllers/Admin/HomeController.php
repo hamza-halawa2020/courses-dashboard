@@ -8,7 +8,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Coupon;
 use App\Models\Image;
-use App\Models\Place;
+use App/Models\Place;
 use App\Models\User;
 
 class HomeController extends Controller

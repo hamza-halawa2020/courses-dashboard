@@ -67,8 +67,16 @@ class LectureController extends Controller
                 $name = $lecture->stage->name;
                 return view('admin.users.data_table.stage', compact('name'));
             })*/
+            ->editColumn('status', function (Lecture $lec) {
+                if ($lec->status == '0') {
+                    return '<h5><span class="badge badge-danger">غير نشطة</span></h5>';
+                } else {
+                    return '<h5><span class="badge badge-success">نشطة</span></h5>';
+
+                }
+            })
             ->addColumn('actions', 'admin.lectures.data_table.actions')
-            ->rawColumns(['record_select','actions','related_apartments'])
+            ->rawColumns(['record_select','actions','related_apartments','status'])
             ->toJson();
 
     }// end of data
@@ -110,13 +118,40 @@ class LectureController extends Controller
 
     public function update(LectureRequest $request, Lecture $lecture)
     {
+        //return  $request;
+        if($request->meth=='lectureStatus'){
 
+            $currentLecture = Lecture::find($request->lectureIDStatus);
 
-        //return $request;
-        $lecture->update($request->validated());
+            if ($currentLecture)
+            {
 
-        session()->flash('success', __('site.updated_successfully'));
-        return redirect()->route('admin.lectures.index',['course_id' =>$request->course_id]);
+                if ($request->statusLecValue == 0)
+                {
+
+                    $currentLecture->update([
+                        'status' => '1',
+                    ]);
+                }
+                else
+                {
+                    $currentLecture->update([
+                        'status' => '0',
+                    ]);
+                }
+                  return 'تم تغيير حالة المحاضرة بنجاح';
+
+            }
+            else return 'لقد حدث حضأ ما !!!';
+
+        }else{
+
+            $lecture->update($request->validated());
+            session()->flash('success', __('site.updated_successfully'));
+            return redirect()->route('admin.lectures.index',['chapter_id' =>$request->chapter_id]);
+
+        }
+
 
     }// end of update
 
@@ -155,4 +190,15 @@ class LectureController extends Controller
     {
         $lecture->delete();
     }// end of delete
+
+
+    public function find($id)
+    {
+        $lecture = Lecture::find($id);
+
+        if (!$lecture) {
+            abort(404);
+        }
+        return $lecture;
+    }// end of create
 }

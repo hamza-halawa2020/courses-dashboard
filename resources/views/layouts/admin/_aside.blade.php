@@ -16,65 +16,67 @@
                     class="app-menu__icon fa fa-home"></i> <span class="app-menu__label">@lang('site.home')</span></a>
         </li>
 
-        {{--places--}}
+        {{-- places --}}
         @if (auth()->user()->hasPermission('read_places'))
             <li><a class="app-menu__item {{ request()->is('*places*') ? 'active' : '' }}"
-                   href="{{ route('admin.places.index') }}"><i class="app-menu__icon fa fa-list"></i> <span
+                    href="{{ route('admin.places.index') }}"><i class="app-menu__icon fa fa-list"></i> <span
                         class="app-menu__label">@lang('places.places')</span></a></li>
         @endif
 
 
-        {{--stages--}}
+        {{-- stages --}}
         @if (auth()->user()->hasPermission('read_stages'))
             <li><a class="app-menu__item {{ request()->is('*stages*') ? 'active' : '' }}"
-                   href="{{ route('admin.stages.index') }}"><i class="app-menu__icon fa fa-list"></i> <span
+                    href="{{ route('admin.stages.index') }}"><i class="app-menu__icon fa fa-list"></i> <span
                         class="app-menu__label">@lang('stages.stages')</span></a></li>
         @endif
 
 
-        {{--users--}}
+        {{-- users --}}
         @if (auth()->user()->hasPermission('read_users'))
             <li><a class="app-menu__item {{ request()->is('*users*') ? 'active' : '' }}"
-                   href="{{ route('admin.users.index') }}"><i class="app-menu__icon fa fa-user"></i> <span
+                    href="{{ route('admin.users.index') }}"><i class="app-menu__icon fa fa-user"></i> <span
                         class="app-menu__label">@lang('users.users')</span></a></li>
         @endif
 
-        {{--courses--}}
+        {{-- courses --}}
         @if (auth()->user()->hasPermission('read_courses'))
             <li><a class="app-menu__item {{ request()->is('*courses*') ? 'active' : '' }}"
-                   href="{{ route('admin.courses.index') }}"><i class="app-menu__icon fa fa-user"></i> <span
+                    href="{{ route('admin.courses.index') }}"><i class="app-menu__icon fa fa-user"></i> <span
                         class="app-menu__label">@lang('courses.courses')</span></a></li>
         @endif
-        {{--chapters--}}{{--
+        {{-- chapters --}}{{--
         @if (auth()->user()->hasPermission('read_chapters'))
             <li><a class="app-menu__item {{ request()->is('*chapters*') ? 'active' : '' }}" href="{{ route('admin.chapters.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('chapters.chapters')</span></a></li>
-        @endif--}}
-        {{--lectures--}}
+        @endif
+        {{-- lectures --}}
+
+        {{--
         @if (auth()->user()->hasPermission('read_lectures'))
             <li><a class="app-menu__item {{ request()->is('*lectures*') ? 'active' : '' }}"
-                   href="{{ route('admin.lectures.index') }}"><i class="app-menu__icon fa fa-user"></i> <span
+                    href="{{ route('admin.lectures.index') }}"><i class="app-menu__icon fa fa-user"></i> <span
                         class="app-menu__label">@lang('lectures.lectures')</span></a></li>
         @endif
+        --}}
 
-       {{-- --}}{{--qRvalues--}}{{--
+
+        {{-- qRvalues --}}{{--
         @if (auth()->user()->hasPermission('read_places'))
             <li><a class="app-menu__item {{ request()->is('*qRvalues*') ? 'active' : '' }}"
                    href="{{ route('admin.qRvalues.index') }}"><i class="app-menu__icon fa fa-list"></i> <span
                         class="app-menu__label">@lang('qRvalues.qRvalues')</span></a></li>
-        @endif--}}
-        {{--QR--}}
+        @endif --}}
+        {{-- QR --}}
         @if (auth()->user()->hasPermission('read_QR'))
             <li><a class="app-menu__item {{ request()->is('*QR*') ? 'active' : '' }}"
-                   href="{{ route('admin.QR.index') }}"><i class="app-menu__icon fa fa-list"></i> <span
+                    href="{{ route('admin.QR.index') }}"><i class="app-menu__icon fa fa-list"></i> <span
                         class="app-menu__label">@lang('QR.QRs')</span></a></li>
         @endif
 
-        {{--settings--}}
+        {{-- settings --}}
         @if (auth()->user()->hasPermission('read_settings'))
             <li class="treeview {{ request()->is('*settings*') ? 'is-expanded' : '' }}"><a class="app-menu__item"
-                                                                                           href="#"
-                                                                                           data-toggle="treeview"><i
-                        class="app-menu__icon fa fa-cogs"></i><span
+                    href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cogs"></i><span
                         class="app-menu__label">@lang('settings.settings')</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
 
@@ -85,8 +87,8 @@
             </li>
         @endif
 
-        {{--profile--}}
-        <li class="treeview {{ request()->is('*profile*') || request()->is('*password*')  ? 'is-expanded' : '' }}"><a
+        {{-- profile --}}
+        <li class="treeview {{ request()->is('*profile*') || request()->is('*password*') ? 'is-expanded' : '' }}"><a
                 class="app-menu__item" href="#" data-toggle="treeview"><i
                     class="app-menu__icon fa fa-user-circle"></i><span
                     class="app-menu__label">@lang('users.profile')</span><i
@@ -100,20 +102,20 @@
         </li>
 
 
-        {{-- --}}{{--categories--}}{{--
+        {{-- --}}{{-- categories --}}{{--
        @if (auth()->user()->hasPermission('read_categories'))
            <li><a class="app-menu__item {{ request()->is('*categories*') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}"><i class="app-menu__icon fa fa-list"></i> <span class="app-menu__label">@lang('categories.categories')</span></a></li>
        @endif
 
-       --}}{{--brands--}}{{--
+       --}}{{-- brands --}}{{--
        @if (auth()->user()->hasPermission('read_brands'))
            <li><a class="app-menu__item {{ request()->is('*brands*') ? 'active' : '' }}" href="{{ route('admin.brands.index') }}"><i class="app-menu__icon fa fa-user-plus"></i> <span class="app-menu__label">@lang('brands.brands')</span></a></li>
        @endif
 
-       --}}{{--coupons--}}{{--
+       --}}{{-- coupons --}}{{--
        @if (auth()->user()->hasPermission('read_coupons'))
            <li><a class="app-menu__item {{ request()->is('*coupons*') ? 'active' : '' }}" href="{{ route('admin.coupons.index') }}"><i class="app-menu__icon fa fa-user-plus"></i> <span class="app-menu__label">@lang('coupons.coupons')</span></a></li>
-       @endif--}}
+       @endif --}}
 
     </ul>
 </aside>

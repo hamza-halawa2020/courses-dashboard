@@ -24,6 +24,10 @@ class LectureRequest extends FormRequest
     public function rules()
     {
         $rules = [
+            'method' => '',
+            'status' => '',
+            'userIDStatus' => '',
+            'statusValue' => '',
             'tittle' => 'required|unique:lectures',
             'price'=>'required',
             'chapter_id'=>'required',
@@ -37,15 +41,14 @@ class LectureRequest extends FormRequest
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
-            $chapter = $this->route()->parameter('chapter');
-            $rules['tittle'] = 'required|unique:lectures,tittle,' . $chapter->id;
-            $rules['price'] = 'required';
+            $lec = $this->route()->parameter('lecture');
+            $rules['tittle'] = 'unique:lectures,tittle,' . $lec->id;
+            $rules['price'] = '';
             $rules['chapter_id'] = '';
             $rules['video_url'] = '';
             $rules['des'] = '';
             $rules['end'] = '';
             $rules['start'] = '';
-            //$rules['stage_id'] = 'required';
         }//end of if
 
         return $rules;

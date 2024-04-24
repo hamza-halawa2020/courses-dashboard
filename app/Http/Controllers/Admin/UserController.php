@@ -135,11 +135,15 @@ class UserController extends Controller
 
     public function update(EditUserRequest $request, User $user)
     {
-        if ($request->method == 'status') {
+
+        //return $request->meth;
+
+        if ($request->meth == 'status') {
 
             $currentUser = User::find($request->userIDStatus);
 
             if ($currentUser) {
+
                 if ($request->statusValue == 0) {
                     $currentUser->update([
                         'status' => '1',
@@ -154,7 +158,8 @@ class UserController extends Controller
 
             } else return 'لقد حدث حضأ ما !!!';
 
-        } else if ($request->method == 'password')
+        }
+        else if ($request->meth == 'password')
         {
             $currentUser = User::find($request->userIDPassword);
             if ($currentUser) {
@@ -166,9 +171,8 @@ class UserController extends Controller
 
             } else return 'لقد حدث حضأ ما !!!';
 
-
         }
-        else if ($request->method == 'edit')
+        else if ($request->meth == 'edit')
         {
             $user->update([
                 'name' => $request->name,
@@ -185,7 +189,7 @@ class UserController extends Controller
             session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('admin.users.index');
         }
-        else if ($request->method == 'balance')
+        else if ($request->meth == 'balance')
         {
             $currentUser = User::find($request->userIDBalance);
             if ($currentUser) {
@@ -200,7 +204,7 @@ class UserController extends Controller
 
 
         }
-        else if ($request->method == 'device')
+        else if ($request->meth == 'device')
         {
             $currentUser = User::find($request->userIDDevice);
             if ($currentUser) {
