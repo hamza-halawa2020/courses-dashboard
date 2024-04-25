@@ -17,7 +17,7 @@
         <div class="col-md-12 ">
 
             <div class="tile shadow">
-                <input type="button" onclick="printInvoice();" value="Print">
+                <input type="button" onclick="printInvoice();" value="Print" class="form-control" >
                 <div class="row mb-2">
 
                 </div><!-- end of row -->
