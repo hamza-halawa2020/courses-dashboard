@@ -29,7 +29,7 @@ class StagesController extends Controller
 
     public function data()
     {
-        $stages = Stage::whereNotIn('id',[1])->get();
+        $stages = Stage::whereNotIn('id', [1])->get();
 
         return DataTables::of($stages)
             ->addColumn('record_select', 'admin.stages.data_table.record_select')
@@ -40,7 +40,7 @@ class StagesController extends Controller
                 return $stage->users->count();
             })
             ->addColumn('actions', 'admin.stages.data_table.actions')
-            ->rawColumns(['record_select','actions','related_apartments'])
+            ->rawColumns(['record_select', 'actions', 'related_apartments'])
             ->toJson();
 
     }// end of data
@@ -81,11 +81,10 @@ class StagesController extends Controller
     {
         //$id = $stage->id;
         $user = User::where('id', $stage->id)->count();
-        if ($user> 0){
+        if ($user > 0) {
             session()->flash('error', __('site.can_not_stage'));
             return response(__('site.can_not_stage'));
-        }
-        else{
+        } else {
             $this->delete($stage);
             session()->flash('success', __('site.deleted_successfully'));
             return response(__('site.deleted_successfully'));
@@ -99,10 +98,10 @@ class StagesController extends Controller
         foreach (json_decode(request()->record_ids) as $recordId) {
 
             $user = User::where('stage_id', $recordId)->count();
-            if($user >  0){
+            if ($user > 0) {
                 session()->flash('error', __('site.can_not_stage'));
                 return response(__('site.can_not_stage'));
-            }else {
+            } else {
                 $stage = Stage::FindOrFail($recordId);
                 $this->delete($stage);
 

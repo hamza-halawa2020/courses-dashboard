@@ -31,6 +31,12 @@
                         class="app-menu__label">@lang('stages.stages')</span></a></li>
         @endif
 
+        {{-- questions --}}
+        @if (auth()->user()->hasPermission('read_questions'))
+            <li><a class="app-menu__item {{ request()->is('*questions*') ? 'active' : '' }}"
+                    href="{{ route('admin.questions.index') }}"><i class="app-menu__icon fa fa-question"></i>
+                    <span class="app-menu__label">@lang('questions.questions')</span></a></li>
+        @endif
 
         {{-- users --}}
         @if (auth()->user()->hasPermission('read_users'))
@@ -76,8 +82,8 @@
 
 
         {{-- profile --}}
-        <li class="treeview {{ request()->is('*profile*') || request()->is('*password*') ? 'is-expanded' : '' }}"><a
-                class="app-menu__item" href="#" data-toggle="treeview"><i
+        <li class="treeview {{ request()->is('*profile*') || request()->is('*password*') ? 'is-expanded' : '' }}">
+            <a class="app-menu__item" href="#" data-toggle="treeview"><i
                     class="app-menu__icon fa fa-user-circle"></i><span
                     class="app-menu__label">@lang('users.profile')</span><i
                     class="treeview-indicator fa fa-angle-right"></i></a>

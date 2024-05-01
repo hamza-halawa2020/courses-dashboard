@@ -15,15 +15,15 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'name' => 'super_admin',
-            'email' => 'super_admin@app.com',
-            'password' => bcrypt('password'),
+            'name' => 'hamza halawa',
+            'email' => 'hamza@hamza.com',
+            'password' => bcrypt('123456'),
             'type' => 'super_admin',
-            'phone' => '01151997479',
-            'stage_id'=>1,
-            'place_id'=>1,
-            'parent_phone'=>'01151955479',
-            'parent_name'=>'mmm'
+            'phone' => '01149447078',
+            'stage_id' => 1,
+            'place_id' => 1,
+            'parent_phone' => '01151955479',
+            'parent_name' => 'mmm'
         ]);
 
         $user->attachRole('super_admin');

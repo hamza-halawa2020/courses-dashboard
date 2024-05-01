@@ -23,6 +23,11 @@ Route::middleware([
             Route::delete('/stages/bulk_delete', 'StagesController@bulkDelete')->name('stages.bulk_delete');
             Route::resource('stages', 'StagesController');
 
+            //question routes
+            Route::get('/questions/data', 'QuestionController@data')->name('questions.data');
+            Route::delete('/questions/bulk_delete', 'QuestionController@bulkDelete')->name('questions.bulk_delete');
+            Route::resource('questions', 'QuestionController');
+
 
             //user routes
             Route::get('/users/data', 'UserController@data')->name('users.data');
@@ -32,7 +37,7 @@ Route::middleware([
             Route::post('/users/sss', 'UserController@sss')->name('users.sss');
             Route::resource('users', 'UserController');
             //Route::resource('users', 'UserController')->name('test');
-
+    
 
             //course routes
             Route::get('/courses/data', 'CourseController@data')->name('courses.data');
@@ -57,7 +62,7 @@ Route::middleware([
             Route::get('/qRvalues/data', 'QRValueController@data')->name('qRvalues.data');
             Route::delete('/qRvalues/bulk_delete', 'QRValueController@bulkDelete')->name('qRvalues.bulk_delete');
             Route::resource('qRvalues', 'QRValueController');//qRvalue routes
-
+    
             // QR
             Route::get('/QR/data', 'QRController@data')->name('QR.data');
             Route::delete('/QR/bulk_delete', 'QRController@bulkDelete')->name('QR.bulk_delete');
