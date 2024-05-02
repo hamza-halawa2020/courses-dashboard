@@ -20,21 +20,22 @@
 
                     <div class="col-md-12">
 
-                        {{-- @if (auth()->user()->hasPermission('create_questions')) --}}
-                        <a href="{{ route('admin.questions.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>
-                            @lang('site.create')</a>
-                        {{-- @endif --}}
+                        @if (auth()->user()->hasPermission('create_questions'))
+                            <a href="{{ route('admin.questions.create') }}" class="btn btn-primary"><i
+                                    class="fa fa-plus"></i>
+                                @lang('site.create')</a>
+                        @endif
 
-                        {{-- @if (auth()->user()->hasPermission('delete_questions')) --}}
-                        <form method="post" action="{{ route('admin.questions.bulk_delete') }}"
-                            style="display: inline-block;">
-                            @csrf
-                            @method('delete')
-                            <input type="hidden" name="record_ids" id="record-ids">
-                            <button type="submit" class="btn btn-danger" id="bulk-delete" disabled="true"><i
-                                    class="fa fa-trash"></i> @lang('site.bulk_delete')</button>
-                        </form><!-- end of form -->
-                        {{-- @endif --}}
+                        @if (auth()->user()->hasPermission('delete_questions'))
+                            <form method="post" action="{{ route('admin.questions.bulk_delete') }}"
+                                style="display: inline-block;">
+                                @csrf
+                                @method('delete')
+                                <input type="hidden" name="record_ids" id="record-ids">
+                                <button type="submit" class="btn btn-danger" id="bulk-delete" disabled="true"><i
+                                        class="fa fa-trash"></i> @lang('site.bulk_delete')</button>
+                            </form><!-- end of form -->
+                        @endif
 
                     </div>
 
@@ -116,12 +117,13 @@
                     data: 'question',
                     name: 'question'
                 },
+                // {
+                //     data: 'answer_id',
+                //     name: 'answer_id',
+                //     searchable: false
+                // },
                 {
-                    data: 'answer',
-                    name: 'answer',
-                    searchable: false
-                },
-                {
+
                     data: 'stage_withal',
                     name: 'stage_withal',
                     searchable: false

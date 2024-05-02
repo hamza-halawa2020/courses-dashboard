@@ -24,7 +24,6 @@
                     </div>
                 </div> --}}
 
-
                 {{-- places --}}
                 <div class="col-md-4">
 
@@ -45,6 +44,26 @@
 
                 </div><!-- end of col -->
 
+                {{-- questions --}}
+                <div class="col-md-4">
+
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-1">
+                                <h5 class="mb-3 "><span class="fa fa-question"></span> @lang('questions.questions')</h5>
+                                <a href="{{ route('admin.questions.index') }}">@lang('site.show_all')</a>
+                            </div>
+
+                            <div class="loader loader-sm"></div>
+
+                            <h3 class="mb-1" id="questions-count" style="display: none;"></h3>
+                        </div>
+
+                    </div>
+
+                </div><!-- end of col -->
+
                 {{-- stages --}}
                 <div class="col-md-4">
 
@@ -54,7 +73,7 @@
 
                             <div class="d-flex justify-content-between mb-1">
                                 <h5 class="mb-3 "><span class="fa fa-male "></span> @lang('stages.stages')</h5>
-                                <a href="{{route('admin.stages.index')}}">@lang('site.show_all')</a>
+                                <a href="{{ route('admin.stages.index') }}">@lang('site.show_all')</a>
                             </div>
 
                             <div class="loader loader-sm"></div>
@@ -94,8 +113,7 @@
 
                             <div class="d-flex justify-content-between mb-1">
                                 <h5 class="mb-3 "><span class="fa fa-book mx-1"></span>@lang('courses.courses')</h5>
-                                <a
-                                    href="{{ route('admin.courses.index') }}">@lang('site.show_all')</a>
+                                <a href="{{ route('admin.courses.index') }}">@lang('site.show_all')</a>
                             </div>
 
                             <div class="loader loader-sm"></div>
@@ -115,8 +133,7 @@
 
                             <div class="d-flex justify-content-between mb-1">
                                 <h5 class="mb-3 "><span class="fa fa-qrcode mx-1"></span>الاكواد</h5>
-                                <a
-                                    href="{{ route('admin.QR.index') }}">@lang('site.show_all')</a>
+                                <a href="{{ route('admin.QR.index') }}">@lang('site.show_all')</a>
                             </div>
 
                             <div class="loader loader-sm"></div>

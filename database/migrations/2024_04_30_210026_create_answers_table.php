@@ -18,7 +18,7 @@ class CreateAnswersTable extends Migration
             $table->timestamps();
             $table->string('answer');
             $table->foreignId('question_id')->references('id')->on('questions')->onUpdate('cascade')->onDelete('cascade');
-
+            $table->boolean('is_right')->default(false);
         });
     }
 

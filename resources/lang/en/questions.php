@@ -6,5 +6,8 @@ return [
     'name' => 'Name',
     'answer' => 'answer',
     'stage_withal' => 'stage withal',
-    'choose the stage withal' => 'choose the stage withal'
+    'choose the stage withal' => 'choose the stage withal',
+    'false' => 'false',
+    'true' => 'true',
+
 ];

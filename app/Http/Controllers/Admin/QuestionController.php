@@ -55,12 +55,37 @@ class QuestionController extends Controller
     }
 
 
+    // public function store(Request $request)
+    // {
+    //     Question::create($request->only(['question', 'answer', 'stage_id']));
+    //     session()->flash('success', __('site.added_successfully'));
+    //     return redirect()->route('admin.questions.index');
+    // }
+
     public function store(Request $request)
     {
-        Question::create($request->only(['question', 'answer', 'stage_id']));
+        // Create the question
+        $question = Question::create([
+            'question' => $request->input('question'),
+            'stage_id' => $request->input('stage_id'),
+        ]);
+
+        // Store answers
+        $answers = $request->input('answers');
+        $is_right = $request->input('is_right');
+
+        foreach ($answers as $index => $answer) {
+            $question->answers()->create([
+                'answer' => $answer,
+                'is_right' => isset($is_right[$index]),
+                'question_id' => $question->id
+            ]);
+        }
+
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.questions.index');
     }
+
 
     public function edit()
     {
