@@ -104,10 +104,24 @@ class QuestionController extends Controller
         return redirect()->route('admin.questions.index');
     }
 
+    public function destroy(Question $question)
+    {
+        $question->delete();
+        session()->flash('success', __('site.deleted_successfully'));
+        return response(__('site.deleted_successfully'));
+        // }
+    } // end of destroy
 
+    public function bulkDelete()
+    {
+        foreach (json_decode(request()->record_ids) as $recordId) {
 
-    // private function delete(Request $place)
-    // {
-    //     $place->delete();
-    // } // end of delete
+            $question = question::FindOrFail($recordId);
+            $question->delete();
+
+        } //end of for each
+
+        session()->flash('success', __('site.deleted_successfully'));
+        return response(__('site.deleted_successfully'));
+    } // end of bulkDelete
 }
