@@ -76,7 +76,7 @@
         @if (auth()->user()->hasPermission('read_QR'))
             <li><a class="app-menu__item {{ request()->is('*QR*') ? 'active' : '' }}"
                     href="{{ route('admin.QR.index') }}"><i class="app-menu__icon fa fa-qrcode"></i> <span
-                        class="app-menu__label">@lang('QR.QRs')</span></a></li>
+                        class="app-menu__label">@lang('qR.QRs')</span></a></li>
         @endif
 
 

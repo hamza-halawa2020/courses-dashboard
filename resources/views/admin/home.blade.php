@@ -132,7 +132,7 @@
                         <div class="card-body">
 
                             <div class="d-flex justify-content-between mb-1">
-                                <h5 class="mb-3 "><span class="fa fa-qrcode mx-1"></span>الاكواد</h5>
+                                <h5 class="mb-3 "><span class="fa fa-qrcode mx-1"></span>@lang('qR.QRs')</h5>
                                 <a href="{{ route('admin.QR.index') }}">@lang('site.show_all')</a>
                             </div>
 

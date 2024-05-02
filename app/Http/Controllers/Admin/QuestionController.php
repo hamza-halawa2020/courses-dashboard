@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -21,14 +22,11 @@ class QuestionController extends Controller
 
     public function index()
     {
-        // $questions = Question::all();
         return view('admin.questions.index');
-        // return DataTables::of($questions)->toJson();
-    } // end of index
+    }
 
     public function data()
     {
-        // $questions = Question::with('stage')->get();
         $questions = Question::all();
 
 
@@ -55,22 +53,12 @@ class QuestionController extends Controller
     }
 
 
-    // public function store(Request $request)
-    // {
-    //     Question::create($request->only(['question', 'answer', 'stage_id']));
-    //     session()->flash('success', __('site.added_successfully'));
-    //     return redirect()->route('admin.questions.index');
-    // }
-
     public function store(Request $request)
     {
-        // Create the question
         $question = Question::create([
             'question' => $request->input('question'),
             'stage_id' => $request->input('stage_id'),
         ]);
-
-        // Store answers
         $answers = $request->input('answers');
         $is_right = $request->input('is_right');
 
@@ -87,18 +75,35 @@ class QuestionController extends Controller
     }
 
 
-    public function edit()
+    public function edit(Question $question)
     {
-        return view('admin.questions.edit', compact('question'));
-    } // end of edit
+        $answer = Answer::where('question_id', $question->id)->get();
+        $stages = Stage::all();
 
-    // public function update(Request $request, Request $place)
-    // {
-    //     $place->update($request->validated());
+        return view('admin.questions.edit', compact('question', 'stages', 'answer'));
+    }
 
-    //     session()->flash('success', __('site.updated_successfully'));
-    //     return redirect()->route('admin.questions.index');
-    // } // end of update
+    public function update(Request $request, $id)
+    {
+        $question = Question::findOrFail($id);
+        $question->update([
+            'question' => $request->question,
+            'stage_id' => $request->stage_id,
+        ]);
+
+        $answers = $request->input('answers');
+        $is_right = $request->input('is_right');
+        foreach ($answers as $index => $answer) {
+            $answer->update([
+                'answer' => $answer,
+                'is_right' => isset($is_right[$index]),
+            ]);
+        }
+
+        session()->flash('success', __('site.updated_successfully'));
+        return redirect()->route('admin.questions.index');
+    }
+
 
 
     // private function delete(Request $place)
