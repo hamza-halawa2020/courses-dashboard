@@ -15,6 +15,7 @@ class Lecture extends Model
         'chapter_id',
         'price',
         'video_url',
+        'note_book_url',
         'des',
         'notes',
         'start',

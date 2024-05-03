@@ -43,6 +43,10 @@ class QuestionController extends Controller
             ->toJson();
     }
 
+    public function show(Question $question)
+    {
+        return $question;
+    }
 
 
     public function create()
@@ -82,21 +86,46 @@ class QuestionController extends Controller
 
         return view('admin.questions.edit', compact('question', 'stages', 'answer'));
     }
+    // public function update(Request $request, $id)
+    // {
+    //     $question = Question::findOrFail($id);
+    //     $question->update([
+    //         'question' => $request->input('question'),
+    //         'stage_id' => $request->input('stage_id'),
+    //     ]);
 
-    public function update(Request $request, $id)
+    //     $answersData = $request->input('answers');
+    //     $isRightData = $request->input('is_right');
+
+    //     // foreach ($answersData as $index => $answer) {
+    //     $answer = Answer::update([
+    //         'answer' => $answersData,
+    //         'is_right' => $isRightData
+    //     ]);
+    //     // }
+
+    //     session()->flash('success', __('site.updated_successfully'));
+    //     return redirect()->route('admin.questions.index');
+    // }
+
+
+    public function update($id, Request $request)
     {
         $question = Question::findOrFail($id);
         $question->update([
-            'question' => $request->question,
-            'stage_id' => $request->stage_id,
+            'question' => $request->input('question'),
+            'stage_id' => $request->input('stage_id'),
         ]);
 
-        $answers = $request->input('answers');
-        $is_right = $request->input('is_right');
-        foreach ($answers as $index => $answer) {
+        $answers = $question->answers;
+
+
+        foreach ($answers as $answer) {
+            $answersData = $request->input('answers');
+            $isRightData = $request->input('is_right');
             $answer->update([
-                'answer' => $answer,
-                'is_right' => isset($is_right[$index]),
+                'answer' => $answersData,
+                'is_right' => $isRightData
             ]);
         }
 

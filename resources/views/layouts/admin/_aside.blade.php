@@ -51,27 +51,7 @@
                     href="{{ route('admin.courses.index') }}"><i class="app-menu__icon fa fa-book"></i> <span
                         class="app-menu__label">@lang('courses.courses')</span></a></li>
         @endif
-        {{-- chapters --}}{{--
-        @if (auth()->user()->hasPermission('read_chapters'))
-            <li><a class="app-menu__item {{ request()->is('*chapters*') ? 'active' : '' }}" href="{{ route('admin.chapters.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('chapters.chapters')</span></a></li>
-        @endif
-        {{-- lectures --}}
 
-        {{--
-        @if (auth()->user()->hasPermission('read_lectures'))
-            <li><a class="app-menu__item {{ request()->is('*lectures*') ? 'active' : '' }}"
-                    href="{{ route('admin.lectures.index') }}"><i class="app-menu__icon fa fa-user"></i> <span
-                        class="app-menu__label">@lang('lectures.lectures')</span></a></li>
-        @endif
-        --}}
-
-
-        {{-- qRvalues --}}{{--
-        @if (auth()->user()->hasPermission('read_places'))
-            <li><a class="app-menu__item {{ request()->is('*qRvalues*') ? 'active' : '' }}"
-                   href="{{ route('admin.qRvalues.index') }}"><i class="app-menu__icon fa fa-list"></i> <span
-                        class="app-menu__label">@lang('qRvalues.qRvalues')</span></a></li>
-        @endif --}}
         {{-- QR --}}
         @if (auth()->user()->hasPermission('read_QR'))
             <li><a class="app-menu__item {{ request()->is('*QR*') ? 'active' : '' }}"
@@ -95,21 +75,6 @@
             </ul>
         </li>
 
-
-        {{-- --}}{{-- categories --}}{{--
-       @if (auth()->user()->hasPermission('read_categories'))
-           <li><a class="app-menu__item {{ request()->is('*categories*') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}"><i class="app-menu__icon fa fa-list"></i> <span class="app-menu__label">@lang('categories.categories')</span></a></li>
-       @endif
-
-       --}}{{-- brands --}}{{--
-       @if (auth()->user()->hasPermission('read_brands'))
-           <li><a class="app-menu__item {{ request()->is('*brands*') ? 'active' : '' }}" href="{{ route('admin.brands.index') }}"><i class="app-menu__icon fa fa-user-plus"></i> <span class="app-menu__label">@lang('brands.brands')</span></a></li>
-       @endif
-
-       --}}{{-- coupons --}}{{--
-       @if (auth()->user()->hasPermission('read_coupons'))
-           <li><a class="app-menu__item {{ request()->is('*coupons*') ? 'active' : '' }}" href="{{ route('admin.coupons.index') }}"><i class="app-menu__icon fa fa-user-plus"></i> <span class="app-menu__label">@lang('coupons.coupons')</span></a></li>
-       @endif --}}
 
     </ul>
 </aside>

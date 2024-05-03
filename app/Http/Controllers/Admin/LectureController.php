@@ -13,10 +13,6 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class LectureController extends Controller
-
-
-
-
 {
     public function __construct()
     {
@@ -35,15 +31,14 @@ class LectureController extends Controller
 
         //return $request->chapter_id;
         $currentChapter = new Chapter();
-        if ($request->chapter_id==null){
+        if ($request->chapter_id == null) {
 
-            $currentChapter=null;
-        }
-        else{
-            $currentChapter= Chapter::find($request->chapter_id);
+            $currentChapter = null;
+        } else {
+            $currentChapter = Chapter::find($request->chapter_id);
         }
         //$currentChapter= Chapter::find($request->chapter_id);
-        return view('admin.lectures.index',compact('currentChapter'));
+        return view('admin.lectures.index', compact('currentChapter'));
 
     }// end of index
 
@@ -73,7 +68,7 @@ class LectureController extends Controller
                 }
             })
             ->addColumn('actions', 'admin.lectures.data_table.actions')
-            ->rawColumns(['record_select','actions','related_apartments','status'])
+            ->rawColumns(['record_select', 'actions', 'related_apartments', 'status'])
             ->toJson();
 
     }// end of data
@@ -81,72 +76,69 @@ class LectureController extends Controller
     public function create(Request $request)
     {
         // return $request;
-        $currentChapter= Chapter::find($request->chapter_id);
-        $stages = Stage::whereNotIn('id',[1])->get();
+        $currentChapter = Chapter::find($request->chapter_id);
+        $stages = Stage::whereNotIn('id', [1])->get();
 
-        return view('admin.lectures.create',compact('stages','currentChapter'));
+        return view('admin.lectures.create', compact('stages', 'currentChapter'));
 
     }// end of create
 
     public function store(LectureRequest $request)
     {
-       // return $request;
+        // return $request;
 
         Lecture::create([
-            'chapter_id'=>$request->chapter_id,
-            'tittle'=>$request->tittle,
-            'price'=>$request->price,
-            'video_url'=>$request->video_url,
-            'des'=>$request->des,
-            'notes'=>$request->notes,
-            'start'=>$request->start,
-            'end'=>$request->end,
+            'chapter_id' => $request->chapter_id,
+            'tittle' => $request->tittle,
+            'price' => $request->price,
+            'video_url' => $request->video_url,
+            'note_book_url' => $request->note_book_url,
+            'des' => $request->des,
+            'notes' => $request->notes,
+            'start' => $request->start,
+            'end' => $request->end,
         ]);
         session()->flash('success', __('site.added_successfully'));
-        return redirect()->route('admin.lectures.index',['chapter_id' =>$request->chapter_id]);
+        return redirect()->route('admin.lectures.index', ['chapter_id' => $request->chapter_id]);
 
     }// end of store
 
     public function edit(Lecture $lecture)
     {
-        $stages = Stage::whereNotIn('id',[1])->get();
-        return view('admin.lectures.edit', compact('lecture','stages'));
+        $stages = Stage::whereNotIn('id', [1])->get();
+        return view('admin.lectures.edit', compact('lecture', 'stages'));
 
     }// end of edit
 
     public function update(LectureRequest $request, Lecture $lecture)
     {
         //return  $request;
-        if($request->meth=='lectureStatus'){
+        if ($request->meth == 'lectureStatus') {
 
             $currentLecture = Lecture::find($request->lectureIDStatus);
 
-            if ($currentLecture)
-            {
+            if ($currentLecture) {
 
-                if ($request->statusLecValue == 0)
-                {
+                if ($request->statusLecValue == 0) {
 
                     $currentLecture->update([
                         'status' => '1',
                     ]);
-                }
-                else
-                {
+                } else {
                     $currentLecture->update([
                         'status' => '0',
                     ]);
                 }
-                  return 'تم تغيير حالة المحاضرة بنجاح';
+                return 'تم تغيير حالة المحاضرة بنجاح';
 
-            }
-            else return 'لقد حدث حضأ ما !!!';
+            } else
+                return 'لقد حدث حضأ ما !!!';
 
-        }else{
+        } else {
 
             $lecture->update($request->validated());
             session()->flash('success', __('site.updated_successfully'));
-            return redirect()->route('admin.lectures.index',['chapter_id' =>$request->chapter_id]);
+            return redirect()->route('admin.lectures.index', ['chapter_id' => $request->chapter_id]);
 
         }
 
@@ -157,11 +149,10 @@ class LectureController extends Controller
     {
         //$id = $lecture->id;
         $user = User::where('id', $lecture->id)->count();
-        if ($user>0){
+        if ($user > 0) {
             session()->flash('error', __('site.can_not_lecture'));
             return response(__('site.can_not_lecture'));
-        }
-        else{
+        } else {
             $this->delete($lecture);
             session()->flash('success', __('site.deleted_successfully'));
             return response(__('site.deleted_successfully'));

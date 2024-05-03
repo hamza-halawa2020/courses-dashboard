@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\City;
-use App\Models\Stage;
 use App\Models\Place;
 use Illuminate\Database\Seeder;
 
@@ -17,7 +15,6 @@ class PlacesTableSeeder extends Seeder
     public function run()
     {
         $places = [
-            ['name' => 'super_admin'],
             ['name' => 'سنتر البيان'],
             ['name' => 'سنتر النور'],
             ['name' => 'سنتر شباب الامه']

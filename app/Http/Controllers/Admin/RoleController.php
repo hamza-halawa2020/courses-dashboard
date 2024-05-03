@@ -26,7 +26,7 @@ class RoleController extends Controller
 
     public function data()
     {
-        $roles = Role::whereNotIn('name', ['super_admin', 'admin', 'user','owner'])
+        $roles = Role::whereNotIn('name', ['super_admin', 'admin', 'user', 'owner'])
             ->withCount(['users']);
 
         return DataTables::of($roles)

@@ -23,7 +23,7 @@ class LaratrustSeeder extends Seeder
         if ($config === null) {
             $this->command->error("The configuration has not been published. Did you run `php artisan vendor:publish --tag=\"laratrust-seeder\"`");
             $this->command->line('');
-            return false;
+            // return false;
         }
 
         $mapPermission = collect(config('laratrust_seeder.permissions_map'));
@@ -33,8 +33,8 @@ class LaratrustSeeder extends Seeder
             // Create a new role
             $role = \App\Models\Role::firstOrCreate([
                 'name' => $key,
-                'display_name' => ucwords(str_replace('_', ' ', $key)),
-                'description' => ucwords(str_replace('_', ' ', $key))
+                // 'display_name' => ucwords(str_replace('_', ' ', $key)),
+                // 'description' => ucwords(str_replace('_', ' ', $key))
             ]);
             $permissions = [];
 
@@ -49,8 +49,8 @@ class LaratrustSeeder extends Seeder
 
                     $permissions[] = \App\Models\Permission::firstOrCreate([
                         'name' => $permissionValue . '_' . $module,
-                        'display_name' => ucfirst($permissionValue) . ' ' . ucfirst($module),
-                        'description' => ucfirst($permissionValue) . ' ' . ucfirst($module),
+                        // 'display_name' => ucfirst($permissionValue) . ' ' . ucfirst($module),
+                        // 'description' => ucfirst($permissionValue) . ' ' . ucfirst($module),
                     ])->id;
 
                     $this->command->info('Creating Permission to ' . $permissionValue . ' for ' . $module);

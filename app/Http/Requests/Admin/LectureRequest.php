@@ -29,13 +29,14 @@ class LectureRequest extends FormRequest
             'userIDStatus' => '',
             'statusValue' => '',
             'tittle' => 'required|unique:lectures',
-            'price'=>'required',
-            'chapter_id'=>'required',
-            'video_url'=>'',
-            'des'=>'',
-            'start'=>'',
-            'end'=>'',
-            'notes'=>'',
+            'price' => 'required',
+            'chapter_id' => 'required',
+            'video_url' => '',
+            'note_book_url' => '',
+            'des' => '',
+            'start' => '',
+            'end' => '',
+            'notes' => '',
 
         ];
 

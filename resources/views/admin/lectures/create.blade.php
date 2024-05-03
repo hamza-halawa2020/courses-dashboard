@@ -1,7 +1,6 @@
 @extends('layouts.admin.app')
 
 @section('content')
-
     <div>
         <h2>@lang('lectures.lectures')</h2>
     </div>
@@ -23,42 +22,40 @@
                     @method('post')
 
                     @include('admin.partials._errors')
-                    <input type="hidden" name="chapter_id" value="{{$currentChapter->id}}">
+                    <input type="hidden" name="chapter_id" value="{{ $currentChapter->id }}">
                     <div class="row">
 
                         <div class="col-md-6">
 
-                            {{--tittle--}}
+                            {{-- tittle --}}
                             <div class="form-group">
                                 <label>@lang('lectures.tittle')<span class="text-danger">*</span></label>
                                 <input type="text" name="tittle" class="form-control" value="{{ old('tittle') }}"
-                                       required autofocus>
+                                    required autofocus>
                             </div>
-                            {{--des--}}
+                            {{-- des --}}
                             <div class="form-group">
                                 <label>@lang('lectures.des')</span></label>
-                                <textarea type="text" name="des" class="form-control"
-                                          aria-label="With textarea"> {{old('des')}}</textarea>
+                                <textarea type="text" name="des" class="form-control" aria-label="With textarea"> {{ old('des') }}</textarea>
                             </div>
-                            {{--notes--}}
+                            {{-- notes --}}
                             <div class="form-group">
                                 <label>@lang('lectures.notes')</span></label>
-                                <textarea type="text" name="notes" class="form-control"
-                                          aria-label="With textarea"> {{old('notes')}}</textarea>
+                                <textarea type="text" name="notes" class="form-control" aria-label="With textarea"> {{ old('notes') }}</textarea>
                             </div>
 
-                            {{--start--}}
+                            {{-- start --}}
                             <div class="form-group">
                                 <label>@lang('lectures.start')<span class="text-danger">*</span></label>
-                                    <input type="datetime-local" name="start" class="form-control">
+                                <input type="datetime-local" name="start" class="form-control">
                             </div>
-                            {{--end--}}
+                            {{-- end --}}
                             <div class="form-group">
                                 <label>@lang('lectures.end')<span class="text-danger">*</span></label>
                                 <input type="datetime-local" name="end" class="form-control">
                             </div>
 
-                            {{--button--}}
+                            {{-- button --}}
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary"><i
                                         class="fa fa-plus"></i>@lang('site.create')</button>
@@ -67,17 +64,21 @@
 
                         <div class="col-md-6">
 
-                            {{--video_url--}}
+                            {{-- video_url --}}
                             <div class="form-group">
                                 <label>@lang('lectures.video_url')<span class="text-danger">*</span></label>
-                                <textarea type="text" name="video_url" class="form-control"
-                                          aria-label="With textarea"> {{old('video_url')}}</textarea>
+                                <textarea type="text" name="video_url" class="form-control" aria-label="With textarea"> {{ old('video_url') }}</textarea>
+                            </div>
+                            {{-- note_book_url --}}
+                            <div class="form-group">
+                                <label>@lang('lectures.note_book_url')<span class="text-danger">*</span></label>
+                                <textarea type="text" name="note_book_url" class="form-control" aria-label="With textarea"> {{ old('note_book_url') }}</textarea>
                             </div>
 
                             <div class="form-group">
                                 <label>@lang('lectures.price')<span class="text-danger">*</span></label>
                                 <input type="number" name="price" class="form-control" min="0"
-                                       value="{{ old('price') }}" required>
+                                    value="{{ old('price') }}" required>
                             </div>
 
 
@@ -93,7 +94,4 @@
         </div><!-- end of col -->
 
     </div><!-- end of row -->
-
 @endsection
-
-
