@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\Http\Requests\Admin\EditUserRequest;
+use App\Models\Balance;
 use App\Models\Coupon;
 use App\Models\Place;
 use App\Models\Stage;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 
@@ -31,7 +33,9 @@ class UserController extends Controller
 
     public function data()
     {
-        $users = User::where('type', 'user')->select();
+        $users = User::with('balances')->where('type', 'user')->select();
+
+
 
         return DataTables::of($users)
             ->addColumn('record_select', 'admin.users.data_table.record_select')->
@@ -56,6 +60,7 @@ class UserController extends Controller
                     return 'انثي';
                 }
             })
+
             ->editColumn('stage', function (User $user) {
                 $name = $user->stage->name;
                 return view('admin.users.data_table.stage', compact('name'));
@@ -63,6 +68,10 @@ class UserController extends Controller
             ->editColumn('place', function (User $user) {
                 $name = $user->place->name;
                 return view('admin.users.data_table.place', compact('name'));
+            })
+            ->editColumn('balance', function ($user) {
+                $latestBalance = $user->balances->first();
+                return $latestBalance ? $latestBalance->total : 0;
             })
             ->editColumn('edit', function ($row) {
                 return ' <a href="javascript:void(0)" class="btn btn-warning btn-sm editUser" data-id="' . $row->id . '" ><i class="fa fa-edit"  ></i></a>';

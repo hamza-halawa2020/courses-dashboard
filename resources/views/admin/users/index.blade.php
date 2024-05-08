@@ -307,6 +307,7 @@
                     data: 'balance',
                     name: 'balance'
                 },
+
                 {
                     data: 'stage',
                     name: 'stage',

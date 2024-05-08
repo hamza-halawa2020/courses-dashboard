@@ -37,6 +37,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function balances()
+    {
+        return $this->hasMany(Balance::class);
+    }
+
     //atr
     public function getNameAttribute($value)
     {
@@ -85,10 +90,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Coupon::class, 'user_favourite_coupon', 'user_id', 'coupon_id');
 
     }
-    public function balances()
-    {
-        return $this->hasMany(Balance::class);
-    }
+
     public function adminAddedBalances()
     {
         return $this->hasMany(AdminAddedBalance::class);

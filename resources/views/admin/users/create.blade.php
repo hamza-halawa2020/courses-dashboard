@@ -111,7 +111,7 @@
 
                             {{-- balance --}}
                             <div class="form-group">
-                                <label>@lang('users.balance')<span class="text-danger">*</span></label>
+                                <label>@lang('users.balance')</label>
                                 <input type="number" name="balance" class="form-control" value="{{ old('balance', 0) }}"
                                     required>
                             </div>
