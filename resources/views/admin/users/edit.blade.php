@@ -101,13 +101,6 @@
                                 <input type="tel" name="parent_phone" class="form-control"
                                     value="{{ old('parent_phone', $user->parent_phone) }}">
                             </div>
-
-                            {{-- balance --}}
-                            <div class="form-group">
-                                <label>@lang('users.balance')<span class="text-danger">*</span></label>
-                                <input type="number" name="balance" class="form-control"
-                                    value="{{ old('balance', $user->balance) }}" required>
-                            </div>
                         </div>
                     </div>
                 </form><!-- end of form -->

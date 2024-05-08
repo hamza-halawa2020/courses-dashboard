@@ -201,18 +201,7 @@ class UserController extends Controller
 
             session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('admin.users.index');
-        } else if ($request->meth == 'balance') {
-            if ($user->balances()->exists()) {
-                $user->balances()->increment('total', $request->balance);
-                $balanceDetails = $user->balances()->first()->details()->create(['amount' => $request->balance]);
-                $user->adminAddedBalances()->create(['balance_details_id' => $balanceDetails->id]);
-            } else {
-                $balance = $user->balances()->create(['total' => $request->balance]);
-                $balance->details()->create(['amount' => $request->balance]);
-                $user->adminAddedBalances()->create(['balance_details_id' => $balance->details->id]);
-            }
 
-            return 'تم اضافة الرصيد بنجاح';
 
         } else if ($request->meth == 'device') {
             $currentUser = User::find($request->userIDDevice);
