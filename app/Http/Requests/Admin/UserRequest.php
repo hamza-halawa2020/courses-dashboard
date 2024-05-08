@@ -30,13 +30,12 @@ class UserRequest extends FormRequest
             'email' => 'nullable|unique:users,email|email',
             'password' => 'required|confirmed',
             'type' => 'required',
-            'gender'=>'required',
-            'stage_id'=>'required',
-            'place_id'=>'required',
-            'balance'=>'',
+            'gender' => 'required',
+            'stage_id' => 'required',
+            'place_id' => 'required',
             // parent attribute
-            'parent_name'=>'',
-            'parent_phone'=>'unique:users,parent_phone'
+            'parent_name' => '',
+            'parent_phone' => 'unique:users,parent_phone'
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {

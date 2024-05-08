@@ -27,45 +27,29 @@ class QRController extends Controller
     }
 
 
+
     public function store(QRRequest $request)
     {
-
-        //return $request;
-
-        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-        $number = $request->number;
-
-        for ($j = 0; $j < $number; $j++) {
-            $pin = mt_rand(1000000, 9999999)
-                . mt_rand(1000000, 9999999)
-                . $characters[rand(0, strlen($characters) - 1)];
+        for ($i = 0; $i < $request->number; $i++) {
+            $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $pin = mt_rand(1000000, 9999999) . mt_rand(1000000, 9999999) . $characters[rand(0, strlen($characters) - 1)];
             $string = str_shuffle($pin);
 
-            /*Storage::disk('public')->put(
-                'QR/' . $string . '.png', base64_decode(
-                DNS2D::getBarcodePNG('QR/' . $string . '.png', 'QRCODE', 8, 8,array(0,0,200))));*/
+            $dns2d = new \Milon\Barcode\DNS2D();
 
+            $qrImage = $dns2d->getBarcodePNG($string, 'QRCODE', 8, 8);
 
-            $qRs = QR::create([
+            $folderPath = 'qr/';
+            $fileName = $string . '.png';
+            $filePath = public_path($folderPath . $fileName);
+            file_put_contents($filePath, base64_decode($qrImage));
+
+            QR::create([
                 'code' => $string,
-                'image' => $string . '.png',
+                'image' => $folderPath . $fileName,
                 'q_rvalue_id' => $request->qRvalue_id
             ]);
-            /*            Storage::disk('public')->put('QR/'.$string.'.png',base64_decode(DNS2D::getBarcodePNG('QR/'.$string.'.png','QRCODE',8,8)));*/
-
-
-            Storage::disk('public')->put(
-                'QR/' . $string . '.png', // path
-                base64_decode((new DNS2D())->getBarcodePNG('QR/' . $string . '.png', 'QRCODE', 8, 8, array(200, 200, 0))));
-
-
-            //DNS2D::getBarcodePNG('QR/' . 1 . '.png', 'QRCODE', 8, 8)
-            //base64_decode((new DNS2D())->getBarcodePNG("$post->qr_code", DATAMATRIX'));
-
-
         }
-
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.QR.index');
     }

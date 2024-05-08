@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'courses' => 'الكورسات',
+    'courses' => 'الباب كامل',
     'course' => 'كورس',
     'course_withal' => 'الكورس',
     'tittle' => 'العنوان',

@@ -75,9 +75,9 @@ class UserController extends Controller
 
     public function create()
     {  // whereNotIn('id',[1])->get();
-        $stages = Stage::whereNotIn('id',[1])->get();
-        $places = Place::whereNotIn('id',[1])->get();
-        return view('admin.users.create', compact('stages','places'));
+        $stages = Stage::whereNotIn('id', [1])->get();
+        $places = Place::whereNotIn('id', [1])->get();
+        return view('admin.users.create', compact('stages', 'places'));
 
     }// end of create
 
@@ -100,17 +100,14 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-
-        //return $request;
         $requestData = $request->validated();
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'type' => 'user',
             'gender' => $request->gender,
             'password' => bcrypt($request->password),
-            'balance' => $request->balance,
             'parent_phone' => $request->parent_phone,
             'parent_name' => $request->parent_name,
             'status' => '1',
@@ -118,16 +115,34 @@ class UserController extends Controller
             'place_id' => $request->place_id,
         ]);
 
+        if ($request->balance) {
+            $balance = $user->balances()->create(['total' => $request->balance]);
+            if ($balance) {
+                $balanceDetails = $balance->balanceDetails()->create(['amount' => $request->balance]);
+                if ($balanceDetails) {
+                    $user->adminAddedBalances()->create(['balance_details_id' => $balanceDetails->id]);
+                } else {
+                    // Handle error if balance details creation fails
+                    $balance->delete(); // Rollback balance creation
+                    $user->delete(); // Rollback user creation
+                    return back()->with('error', __('site.error_message'));
+                }
+            } else {
+                // Handle error if balance creation fails
+                $user->delete(); // Rollback user creation
+                return back()->with('error', __('site.error_message'));
+            }
+        }
+
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.users.index');
-
-    }// end of store
+    }
 
     public function edit(User $user)
     {
-        $stages = Stage::whereNotIn('id',[1])->get();
-        $places = Place::whereNotIn('id',[1])->get();
-        return view('admin.users.edit', compact('user', 'stages','places'));
+        $stages = Stage::whereNotIn('id', [1])->get();
+        $places = Place::whereNotIn('id', [1])->get();
+        return view('admin.users.edit', compact('user', 'stages', 'places'));
 
 
 
@@ -156,11 +171,10 @@ class UserController extends Controller
                 }
                 return 'تم تغيير حالة الطالب بنجاح';
 
-            } else return 'لقد حدث حضأ ما !!!';
+            } else
+                return 'لقد حدث حضأ ما !!!';
 
-        }
-        else if ($request->meth == 'password')
-        {
+        } else if ($request->meth == 'password') {
             $currentUser = User::find($request->userIDPassword);
             if ($currentUser) {
                 $currentUser->update([
@@ -169,11 +183,10 @@ class UserController extends Controller
 
                 return 'تم اعادة تعيين كلمة السر بنجاح';
 
-            } else return 'لقد حدث حضأ ما !!!';
+            } else
+                return 'لقد حدث حضأ ما !!!';
 
-        }
-        else if ($request->meth == 'edit')
-        {
+        } else if ($request->meth == 'edit') {
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -188,37 +201,34 @@ class UserController extends Controller
 
             session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('admin.users.index');
-        }
-        else if ($request->meth == 'balance')
-        {
-            $currentUser = User::find($request->userIDBalance);
-            if ($currentUser) {
-                $currentUser->update([
-                    'balance' => $currentUser->balance + $request->balance,
-                ]);
-                // code for add balance recored
+        } else if ($request->meth == 'balance') {
+            if ($user->balances()->exists()) {
+                $user->balances()->increment('total', $request->balance);
+                $balanceDetails = $user->balances()->first()->details()->create(['amount' => $request->balance]);
+                $user->adminAddedBalances()->create(['balance_details_id' => $balanceDetails->id]);
+            } else {
+                $balance = $user->balances()->create(['total' => $request->balance]);
+                $balance->details()->create(['amount' => $request->balance]);
+                $user->adminAddedBalances()->create(['balance_details_id' => $balance->details->id]);
+            }
 
-                return 'تم اضافة الرصيد بنجاح';
+            return 'تم اضافة الرصيد بنجاح';
 
-            } else return 'لقد حدث حضأ ما !!!';
-
-
-        }
-        else if ($request->meth == 'device')
-        {
+        } else if ($request->meth == 'device') {
             $currentUser = User::find($request->userIDDevice);
             if ($currentUser) {
                 $currentUser->update([
-                    'device_id' =>null,
+                    'device_id' => null,
                 ]);
 
                 return 'تم اعادة تعيين الهاتف بنجاح';
 
-            } else return 'لقد حدث حضأ ما !!!';
+            } else
+                return 'لقد حدث حضأ ما !!!';
 
 
-        }else{
-           //return $request;
+        } else {
+            //return $request;
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,

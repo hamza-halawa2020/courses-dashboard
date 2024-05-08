@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserFavouriteApartment extends Migration
+class CreateBalanceDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateUserFavouriteApartment extends Migration
      */
     public function up()
     {
-        Schema::create('user_favourite_apartment', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('apartment_id')->constrained()->onDelete('cascade');
+        Schema::create('balance_details', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
+            $table->string('amount');
+            $table->foreignId('balance_id')->references('id')->on('balances')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -27,6 +28,6 @@ class CreateUserFavouriteApartment extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_favourite_apartment');
+        Schema::dropIfExists('balance_details');
     }
 }

@@ -1,11 +1,10 @@
 <?php
 
-use App\Models\Apartment;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImagesTable extends Migration
+class CreateBalancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +13,11 @@ class CreateImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('balances', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Apartment::class);
-            $table->string('image');
             $table->timestamps();
+            $table->string('total');
+            $table->foreignId('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -29,6 +28,6 @@ class CreateImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('balances');
     }
 }

@@ -16,7 +16,6 @@ class StagesTableSeeder extends Seeder
     public function run()
     {
         $stages = [
-            ['name' => 'super_admin'],
             ['name' => 'اولي ثانوي'],
             ['name' => 'تانيه تانوي'],
             ['name' => 'تالته ثانوي']

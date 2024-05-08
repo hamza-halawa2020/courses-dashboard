@@ -13,8 +13,21 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, Notifiable, LaratrustUserTrait;
 
-    protected $fillable = ['name', 'email', 'password', 'type', 'image', 'phone', 'stage_id', 'balance', 'gender',
-        'parent_name','parent_phone','status','device_id','place_id'];
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'type',
+        'image',
+        'phone',
+        'stage_id',
+        'gender',
+        'parent_name',
+        'parent_phone',
+        'status',
+        'device_id',
+        'place_id'
+    ];
 
     protected $appends = ['image_path'];
 
@@ -72,22 +85,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Coupon::class, 'user_favourite_coupon', 'user_id', 'coupon_id');
 
     }
-
-    public function favouriteApartments()
+    public function balances()
     {
-
-        return $this->belongsToMany(Apartment::class, 'user_favourite_apartment', 'user_id', 'apartment_id');
-
+        return $this->hasMany(Balance::class);
     }
-
-    public function apartments()
+    public function adminAddedBalances()
     {
-        return $this->hasMany(Apartment::class);
-    }
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(AdminAddedBalance::class);
     }
 
     public function stage()

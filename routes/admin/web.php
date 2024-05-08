@@ -86,10 +86,7 @@ Route::middleware([
 
             });
 
-            // apartments routes
-            Route::get('/apartments/data', 'ApartmentController@data')->name('apartments.data');
-            Route::delete('/apartments/bulk_delete', 'ApartmentController@bulkDelete')->name('apartments.bulk_delete');
-            Route::resource('apartments', 'ApartmentController');
+
 
             // posts routes
             Route::get('/posts/data', 'PostController@data')->name('posts.data');

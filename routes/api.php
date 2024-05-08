@@ -1,54 +1,34 @@
 <?php
 
 
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\PlaceController;
+use App\Http\Controllers\Api\QuestionController;
+use App\Http\Controllers\Api\StageController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/login', 'AuthController@login');
-Route::post('/register', 'AuthController@register');
-//Route::get('/apartments_for_anyone', 'ApartmentController@forAnyone');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function () {
 
     //user route
-    Route::get( '/user', 'AuthController@user');
-    Route::post( '/change_password', 'AuthController@changePassword');
+    Route::get('/user', [AuthController::class, 'user']);
+    Route::post('/change_password', [AuthController::class, 'changePassword']);
     ////===================   Places ============================
-     Route::get('/places', 'PlaceController@index');
+    Route::get('/places', [PlaceController::class, 'index']);
+    ////===================   Stages ============================
+    Route::get('/stages', [StageController::class, 'index']);
+    ////===================   questions ============================
+    Route::get('/questions', [QuestionController::class, 'index']);
+    Route::get('/questions/{id}', [QuestionController::class, 'show']);
+    Route::get('/random-question', [QuestionController::class, 'randomQuestion']);
 
-    ///=================== Apartments for anyone ===================
-   Route::get('/apartments_for_anyone', 'ApartmentController@forAnyone');
+    ////===================   courses ============================
+    Route::get('/courses', [CourseController::class, 'index']);
+    Route::get('/courses/{id}', [CourseController::class, 'show']);
 
-
-
-    //owners
-///=================== Apartments for owner ===================
-    Route::get('/apartments_for_owner', 'ApartmentController@forOwner');
-    Route::get('/filter', 'ApartmentController@filter');
-    Route::get('/filter_data', 'ApartmentController@filterData');
-    Route::get('/get_favourites', 'ApartmentController@getFavourites');
-    Route::get('/toggle', 'ApartmentController@toggleFavourite');
-
-    Route::group(['prefix' => 'apartment'], function () {
-
-        Route::post('/add', 'ApartmentController@storeApartment');
-        Route::put('/update', 'ApartmentController@updateApartment');
-        Route::delete('/delete', 'ApartmentController@deleteApartment');
-        Route::post('/add_image', 'ApartmentController@storeImage');
-        Route::post('/update_image', 'ApartmentController@updateImage');
-        Route::delete('/delete_image', 'ApartmentController@deleteImage');
-
-    });
-
-    ////=================== posts ============================
-    Route::group(['prefix' => 'post'], function () {
-
-        Route::get('/get_all', 'PostController@getAll');
-        Route::get('/get_own', 'PostController@getOwn');
-        Route::post('/add', 'PostController@store');
-        Route::put('/update', 'PostController@update');
-        Route::delete('/delete', 'PostController@delete');
-
-    });
 
 });
 

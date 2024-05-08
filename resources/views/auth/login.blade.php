@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta name="description" content="">
 
@@ -19,8 +20,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/font-awesome.min.css') }}">
 
     @if (app()->getLocale() == 'ar')
-
-        {{--google font--}}
+        {{-- google font --}}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cairo:400,600&display=swap">
 
         <style>
@@ -28,11 +28,11 @@
                 font-family: 'cairo', 'sans-serif';
             }
 
-            .breadcrumb-item + .breadcrumb-item {
+            .breadcrumb-item+.breadcrumb-item {
                 padding-left: .5rem;
             }
 
-            .breadcrumb-item + .breadcrumb-item::before {
+            .breadcrumb-item+.breadcrumb-item::before {
                 padding-left: .5rem;
             }
 
@@ -42,22 +42,25 @@
         </style>
     @endif
 
-    {{--jquery--}}
+    {{-- jquery --}}
     <script src="{{ asset('admin_assets/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/jquery-ui.js') }}"></script>
 
-    {{--noty--}}
+    {{-- noty --}}
     <link rel="stylesheet" href="{{ asset('admin_assets/plugins/noty/noty.css') }}">
     <script src="{{ asset('admin_assets/plugins/noty/noty.min.js') }}"></script>
 
-    {{--datatable--}}
-    <script type="text/javascript" src="{{ asset('admin_assets/plugins/jquery.dataTables/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('admin_assets/plugins/dataTables.bootstrap/dataTables.bootstrap.min.js') }}"></script>
+    {{-- datatable --}}
+    <script type="text/javascript" src="{{ asset('admin_assets/plugins/jquery.dataTables/jquery.dataTables.min.js') }}">
+    </script>
+    <script type="text/javascript"
+        src="{{ asset('admin_assets/plugins/dataTables.bootstrap/dataTables.bootstrap.min.js') }}"></script>
 
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/custom.css')}}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/custom.css') }}">
     <style>
         .loader {
-            -webkit-animation: spin 2s linear infinite; /* Safari */
+            -webkit-animation: spin 2s linear infinite;
+            /* Safari */
             animation: spin 2s linear infinite;
         }
 
@@ -82,6 +85,7 @@
             0% {
                 -webkit-transform: rotate(0deg);
             }
+
             100% {
                 -webkit-transform: rotate(360deg);
             }
@@ -91,6 +95,7 @@
             0% {
                 transform: rotate(0deg);
             }
+
             100% {
                 transform: rotate(360deg);
             }
@@ -102,11 +107,13 @@
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Login - Vali Admin</title>
     <style>
         .loader {
-            -webkit-animation: spin 2s linear infinite; /* Safari */
+            -webkit-animation: spin 2s linear infinite;
+            /* Safari */
             animation: spin 2s linear infinite;
         }
 
@@ -131,6 +138,7 @@
             0% {
                 -webkit-transform: rotate(0deg);
             }
+
             100% {
                 -webkit-transform: rotate(360deg);
             }
@@ -140,95 +148,103 @@
             0% {
                 transform: rotate(0deg);
             }
+
             100% {
                 transform: rotate(360deg);
             }
         }
     </style>
 </head>
+
 <body>
-<section class="material-half-bg">
-    <div class="cover"></div>
-</section>
-<section class="login-content">
-    <div class="logo">
-        <h1> {{ config('app.name') }} </h1>
-    </div>
-    <div class="login-box">
-        <div class="card-body">
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
-                <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
-                <div class="form-group row">
-                    <label class="control-label">USER NAME OR EMAIL</label>
-                    <div class="col-md-12">
-                        <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+    <section class="material-half-bg">
+        <div class="cover"></div>
+    </section>
+    <section class="login-content">
+        <div class="logo">
+            <h1> {{ config('app.name') }} </h1>
+        </div>
+        <div class="login-box">
+            <div class="card-body">
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+                    <div class="form-group row">
+                        <label class="control-label">USER NAME OR EMAIL</label>
+                        <div class="col-md-12">
+                            <input id="username" type="text"
+                                class="form-control @error('username') is-invalid @enderror" name="username"
+                                value="{{ old('username') }}" required autocomplete="username" autofocus>
 
-                        @error('username')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="control-label">PASSWORD</label>
-
-                    <div class="col-md-12">
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-12  ">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                            <label class="form-check-label" for="remember">
-                                {{ __('Remember Me') }}
-                            </label>
+                            @error('username')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
-                </div>
 
-                <div class="form-group row mb-0">
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary">
-                            {{ __('Login') }}
-                        </button>
+                    <div class="form-group row">
+                        <label class="control-label">PASSWORD</label>
 
-                        @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                {{ __('Forgot Your Password?') }}
-                            </a>
-                        @endif
+                        <div class="col-md-12">
+                            <input id="password" type="password"
+                                class="form-control @error('password') is-invalid @enderror" name="password" required
+                                autocomplete="current-password">
+
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
-    </div>
 
-</section>
-<!-- Essential javascripts for application to work-->
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/main.js"></script>
-<!-- The javascript plugin to display page loading on top-->
-<script src="js/plugins/pace.min.js"></script>
-<script type="text/javascript">
-    // Login Page Flipbox control
-    $('.login-content [data-toggle="flip"]').click(function() {
-        $('.login-box').toggleClass('flipped');
-        return false;
-    });
-</script>
+                    <div class="form-group row">
+                        <div class="col-md-12  ">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                                    {{ old('remember') ? 'checked' : '' }}>
+
+                                <label class="form-check-label" for="remember">
+                                    {{ __('Remember Me') }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-0">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Login') }}
+                            </button>
+
+                            @if (Route::has('password.request'))
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </section>
+    <!-- Essential javascripts for application to work-->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="js/plugins/pace.min.js"></script>
+    <script type="text/javascript">
+        // Login Page Flipbox control
+        $('.login-content [data-toggle="flip"]').click(function() {
+            $('.login-box').toggleClass('flipped');
+            return false;
+        });
+    </script>
 </body>
+
 </html>

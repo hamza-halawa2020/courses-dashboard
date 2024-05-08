@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->integer('balance')->default(0);
             $table->string('parent_phone')->unique()->nullable();
             $table->string('parent_name')->nullable();
             $table->enum('status', ['0', '1'])->default('0');
