@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
-    protected $fillable = ['id', 'tittle','stage_id'];
+    protected $fillable = ['id', 'title', 'stage_id'];
 
     public function stage()
     {
         return $this->belongsTo(Stage::class);
     }
-    public function chapters(){
+    public function chapters()
+    {
         return $this->hasMany(Chapter::class);
     }
 }

@@ -24,16 +24,16 @@ class ChapterRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'tittle' => 'required|unique:chapters',
-            'price'=>'required',
-            'course_id'=>'required',
+            'title' => 'required|unique:chapters',
+            'price' => 'required',
+            'course_id' => 'required',
             //'stage_id' => 'required',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
-            $chapter = $this->route()->parameter('chapter');    
-            $rules['tittle'] = 'required|unique:chapters,tittle,' . $chapter->id;
+            $chapter = $this->route()->parameter('chapter');
+            $rules['title'] = 'required|unique:chapters,title,' . $chapter->id;
             $rules['price'] = 'required';
             $rules['course_id'] = '';
             //$rules['stage_id'] = 'required';

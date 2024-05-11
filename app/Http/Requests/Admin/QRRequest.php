@@ -25,14 +25,14 @@ class QRRequest extends FormRequest
     {
         $rules = [
             'number' => '',
-            'qRvalue_id'=>'required'
+            'qRvalue_id' => 'required'
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
             $qRvalue = $this->route()->parameter('qRvalue');
-            $rules['tittle'] = 'required|unique:q_rvalues,id,' . $qRvalue->id;
-            $rules['value']='required';
+            $rules['title'] = 'required|unique:q_rvalues,id,' . $qRvalue->id;
+            $rules['value'] = 'required';
         }//end of if
 
         return $rules;

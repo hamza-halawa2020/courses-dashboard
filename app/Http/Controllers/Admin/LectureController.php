@@ -89,7 +89,7 @@ class LectureController extends Controller
 
         Lecture::create([
             'chapter_id' => $request->chapter_id,
-            'tittle' => $request->tittle,
+            'title' => $request->title,
             'price' => $request->price,
             'video_url' => $request->video_url,
             'note_book_url' => $request->note_book_url,

@@ -11,7 +11,7 @@ class Lecture extends Model
 
     protected $fillable = [
         'id',
-        'tittle',
+        'title',
         'chapter_id',
         'price',
         'video_url',

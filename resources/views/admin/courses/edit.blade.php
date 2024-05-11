@@ -1,7 +1,6 @@
 @extends('layouts.admin.app')
 
 @section('content')
-
     <div>
         <h2>@lang('courses.courses')</h2>
     </div>
@@ -24,10 +23,11 @@
 
                     @include('admin.partials._errors')
                     <div class="col-md-6">
-                        {{--name--}}
+                        {{-- name --}}
                         <div class="form-group">
-                            <label>@lang('courses.tittle') <span class="text-danger">*</span></label>
-                            <input type="text" name="tittle" class="form-control" value="{{ old('tittle', $course->tittle) }}" required>
+                            <label>@lang('courses.title') <span class="text-danger">*</span></label>
+                            <input type="text" name="title" class="form-control"
+                                value="{{ old('title', $course->title) }}" required>
                         </div>
                     </div><!-- end of col -->
 
@@ -35,19 +35,20 @@
                     <div class="col-md-6">
 
 
-                        {{--stage--}}
+                        {{-- stage --}}
                         <div class="form-group">
                             <label>@lang('stages.stage_withal')<span class="text-danger">*</span></label>
                             <select name="stage_id" class="form-control">
-                                <option value="{{$course->stage->id}}">{{$course->stage->name}}</option>
-                                @foreach($stages as $stage)
-                                    <option value="{{$stage->id}}">{{$stage->name}}</option>
+                                <option value="{{ $course->stage->id }}">{{ $course->stage->name }}</option>
+                                @foreach ($stages as $stage)
+                                    <option value="{{ $stage->id }}">{{ $stage->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        {{--Button--}}
+                        {{-- Button --}}
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.update')</button>
+                            <button type="submit" class="btn btn-primary"><i
+                                    class="fa fa-plus"></i>@lang('site.update')</button>
                         </div>
 
                     </div><!-- end of col -->
@@ -64,6 +65,4 @@
         </div><!-- end of col -->
 
     </div><!-- end of row -->
-
 @endsection
-

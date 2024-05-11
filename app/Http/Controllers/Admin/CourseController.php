@@ -12,8 +12,6 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class CourseController extends Controller
-
-
 {
     public function __construct()
     {
@@ -48,7 +46,7 @@ class CourseController extends Controller
             //->addColumn('related_apartments', 'admin.courses.data_table.related_apartments')
             ->editColumn('created_at', function (Course $course) {
                 return $course->created_at->format('Y-m-d');
-            })->editColumn('stage', function ( Course $course) {
+            })->editColumn('stage', function (Course $course) {
                 $name = $course->stage->name;
                 return view('admin.users.data_table.stage', compact('name'));
             })
@@ -56,20 +54,20 @@ class CourseController extends Controller
                 return $course->chapters->count();
             })
             ->addColumn('actions', 'admin.courses.data_table.actions')
-            ->rawColumns(['record_select','actions','related_apartments'])
+            ->rawColumns(['record_select', 'actions', 'related_apartments'])
             ->toJson();
     }// end of data
 
     public function create()
     {
-        $stages = Stage::whereNotIn('id',[1])->get();
-        return view('admin.courses.create',compact('stages'));
+        $stages = Stage::whereNotIn('id', [1])->get();
+        return view('admin.courses.create', compact('stages'));
 
     }// end of create
 
     public function store(CourseRequest $request)
     {
-        Course::create($request->only(['tittle','stage_id']));
+        Course::create($request->only(['title', 'stage_id']));
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.courses.index');
 
@@ -77,8 +75,8 @@ class CourseController extends Controller
 
     public function edit(Course $course)
     {
-        $stages = Stage::whereNotIn('id',[1])->get();
-        return view('admin.courses.edit', compact('course','stages'));
+        $stages = Stage::whereNotIn('id', [1])->get();
+        return view('admin.courses.edit', compact('course', 'stages'));
 
     }// end of edit
 
@@ -100,7 +98,7 @@ class CourseController extends Controller
         //return $course->id;
 
         $chapters = Chapter::where('course_id', $course->id)->count();
-        if($chapters==0){
+        if ($chapters == 0) {
             $course = Course::FindOrFail($course->id);
             $this->delete($course);
             session()->flash('success', __('site.deleted_successfully'));
@@ -131,10 +129,10 @@ class CourseController extends Controller
 
 
             $chapters = Chapter::where('course_id', $recordId)->count();
-            if($chapters==0){
+            if ($chapters == 0) {
                 $course = Course::FindOrFail($recordId);
                 $this->delete($course);
-            }else {
+            } else {
                 session()->flash('error', __('site.can_not_course'));
                 return response(__('site.can_not_course'));
             }

@@ -15,4 +15,10 @@ class BannerController extends Controller
         $banners = Banner::all();
         return response()->api(BannerResource::collection($banners));
     }
+
+    public function show($id)
+    {
+        $banner = Banner::findOrFail($id);
+        return new BannerResource($banner);
+    }
 }

@@ -15,7 +15,7 @@ class CreateQRvaluesTable extends Migration
     {
         Schema::create('q_rvalues', function (Blueprint $table) {
             $table->id();
-            $table->string('tittle');
+            $table->string('title');
             $table->integer('value');
             $table->timestamps();
         });

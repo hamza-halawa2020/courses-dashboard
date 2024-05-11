@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AdminAddedBalance extends Model
+class QrAddedBalance extends Model
 {
     use HasFactory;
-    protected $fillable = ['balance_details_id', 'user_id'];
+    protected $fillable = ['balance_details_id', 'qr_id'];
 
-    public function user()
+    public function qr()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(QR::class);
     }
 
     public function balanceDetails()
     {
         return $this->belongsTo(BalanceDetail::class);
     }
+
 }

@@ -96,6 +96,8 @@ class User extends Authenticatable
         return $this->hasMany(AdminAddedBalance::class);
     }
 
+
+
     public function stage()
     {
         return $this->belongsTo(Stage::class);

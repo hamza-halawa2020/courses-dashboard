@@ -13,9 +13,6 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class ChapterController extends Controller
-
-
-
 {
     public function __construct()
     {
@@ -30,7 +27,7 @@ class ChapterController extends Controller
         // return $request->course;
         //return Course::find($request->course);
         //return $request->course_id;
-        $currentCourse =  Course::find($request->course_id);
+        $currentCourse = Course::find($request->course_id);
         return view('admin.chapters.index', compact('currentCourse'));
     } // end of index
 
@@ -61,7 +58,7 @@ class ChapterController extends Controller
     public function create(Request $request)
     {
         // return $request;
-        $currentCourse =  Course::find($request->course_id);
+        $currentCourse = Course::find($request->course_id);
         $stages = Stage::all();
         return view('admin.chapters.create', compact('stages', 'currentCourse'));
     } // end of create
@@ -71,7 +68,7 @@ class ChapterController extends Controller
         //return $request;
 
         Chapter::create([
-            'tittle' => $request->tittle,
+            'title' => $request->title,
             'price' => $request->price,
             'course_id' => $request->course_id,
         ]);

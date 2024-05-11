@@ -1,7 +1,6 @@
 @extends('layouts.admin.app')
 
 @section('content')
-
     <div>
         <h2>@lang('qRvalues.qRvalues')</h2>
     </div>
@@ -24,20 +23,21 @@
 
                     @include('admin.partials._errors')
 
-                    {{--tittle--}}
+                    {{-- title --}}
                     <div class="form-group">
-                        <label>@lang('qRvalues.tittle') <span class="text-danger">*</span></label>
-                        <input type="text" name="tittle" class="form-control" value="{{ old('tittle', $qRvalue->tittle) }}" required>
+                        <label>@lang('qRvalues.title') <span class="text-danger">*</span></label>
+                        <input type="text" name="title" class="form-control"
+                            value="{{ old('title', $qRvalue->title) }}" required>
                     </div>
 
-                    {{--value--}}
+                    {{-- value --}}
                     <div class="form-group">
                         <label>@lang('qRvalues.value')<span class="text-danger">*</span></label>
                         <input type="number" name="value" class="form-control" min="0"
-                               value="{{ old('value',$qRvalue->value) }}" required>
+                            value="{{ old('value', $qRvalue->value) }}" required>
                     </div>
 
-                    {{--Button--}}
+                    {{-- Button --}}
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.update')</button>
                     </div>
@@ -49,6 +49,4 @@
         </div><!-- end of col -->
 
     </div><!-- end of row -->
-
 @endsection
-

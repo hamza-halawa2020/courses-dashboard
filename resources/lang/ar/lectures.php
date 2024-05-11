@@ -4,7 +4,7 @@ return [
     'lectures' => 'المحاضرات',
     'lecture' => 'محاضرة',
     'lecture_withal' => 'المحاضرة',
-    'tittle' => 'العنوان',
+    'title' => 'العنوان',
     'price' => 'السعر',
     'status' => 'حالة المحاضرة',
     'video_url' => 'عنوان الفيديو',

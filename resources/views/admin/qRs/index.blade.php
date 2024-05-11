@@ -42,7 +42,7 @@
                                 <div class="card-body">
 
                                     <div class="d-flex justify-content-between mb-1">
-                                        <h4 class="mb-3 "><span class="fa fa-qrcode mx-1"></span> {{ $qRvalue->tittle }}
+                                        <h4 class="mb-3 "><span class="fa fa-qrcode mx-1"></span> {{ $qRvalue->title }}
                                         </h4>
                                         <a href="{{ route('admin.QR.show', $qRvalue->id) }}">@lang('site.show_all')</a>
                                     </div>

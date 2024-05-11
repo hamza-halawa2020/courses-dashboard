@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class QR extends Model
 {
     use HasFactory;
-    public $fillable=[
+    public $fillable = [
         'id',
         'code',
         'q_rvalue_id',
@@ -35,12 +35,16 @@ class QR extends Model
     //att
     public function getImagePathAttribute()
     {
-        return '/storage/QR/'. $this->image;
+        return '/storage/QR/' . $this->image;
 
     }
 
     public function qRvalue()
     {
         return $this->belongsTo('App\Models\QRvalue');
+    }
+    public function qrAddedBalances()
+    {
+        return $this->hasMany(QrAddedBalance::class);
     }
 }

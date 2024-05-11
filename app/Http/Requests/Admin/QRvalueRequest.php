@@ -24,15 +24,15 @@ class QRvalueRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'tittle' => 'required|unique:q_rvalues',
-            'value'=>'required'
+            'title' => 'required|unique:q_rvalues',
+            'value' => 'required'
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
             $qRvalue = $this->route()->parameter('qRvalue');
-            $rules['tittle'] = 'required|unique:q_rvalues,id,' . $qRvalue->id;
-            $rules['value']='required';
+            $rules['title'] = 'required|unique:q_rvalues,id,' . $qRvalue->id;
+            $rules['value'] = 'required';
         }//end of if
 
         return $rules;

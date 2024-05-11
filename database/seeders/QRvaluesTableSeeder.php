@@ -16,11 +16,11 @@ class QRvaluesTableSeeder extends Seeder
     public function run()
     {
         $cities = [
-            ['tittle' => 'فئة ال 50','value'=>'50'],
-            ['tittle' => 'فئة ال 100','value'=>'100'],
-            ['tittle' => 'فئة ال 150','value'=>'150'],
-            ['tittle' => 'فئة ال 200','value'=>'200'],
-            ['tittle' => 'فئة ال 250','value'=>'250'],
+            ['title' => 'فئة ال 50', 'value' => '50'],
+            ['title' => 'فئة ال 100', 'value' => '100'],
+            ['title' => 'فئة ال 150', 'value' => '150'],
+            ['title' => 'فئة ال 200', 'value' => '200'],
+            ['title' => 'فئة ال 250', 'value' => '250'],
         ];
 
         foreach ($cities as $city) {

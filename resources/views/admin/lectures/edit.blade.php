@@ -2,14 +2,14 @@
 
 @section('content')
     <div>
-        <h2>{{ $lecture->tittle }}</h2>
+        <h2>{{ $lecture->title }}</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
         <li class="breadcrumb-item"><a href="{{ route('admin.lectures.index') }}">@lang('lectures.lectures')</a></li>
         <li class="breadcrumb-item"><a
-                href="{{ route('admin.lectures.index', ['chapter_id' => $lecture->chapter->id]) }}">{{ $lecture->tittle }}</a>
+                href="{{ route('admin.lectures.index', ['chapter_id' => $lecture->chapter->id]) }}">{{ $lecture->title }}</a>
         </li>
         <li class="breadcrumb-item">@lang('site.edit')</li>
     </ul>
@@ -31,11 +31,11 @@
 
                         <div class="col-md-6">
 
-                            {{-- tittle --}}
+                            {{-- title --}}
                             <div class="form-group">
-                                <label>@lang('lectures.tittle')<span class="text-danger">*</span></label>
-                                <input type="text" name="tittle" class="form-control"
-                                    value="{{ old('tittle', $lecture->tittle) }}" required autofocus>
+                                <label>@lang('lectures.title')<span class="text-danger">*</span></label>
+                                <input type="text" name="title" class="form-control"
+                                    value="{{ old('title', $lecture->title) }}" required autofocus>
                             </div>
                             {{-- des --}}
                             <div class="form-group">

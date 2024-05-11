@@ -9,14 +9,14 @@ class Banner extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','id','image'];
+    protected $fillable = ['name', 'id', 'image', 'price'];
 
     protected $appends = ['image_path'];
 
     //att
     public function getImagePathAttribute()
     {
-        return '/storage/uploads/banners/'. $this->image;
+        return '/storage/uploads/banners/' . $this->image;
 
     }
 }

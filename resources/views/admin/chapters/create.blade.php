@@ -1,7 +1,6 @@
 @extends('layouts.admin.app')
 
 @section('content')
-
     <div>
         <h2>@lang('chapters.chapters')</h2>
     </div>
@@ -26,10 +25,11 @@
 
                     <div class="col-md-6">
 
-                        {{--tittle--}}
+                        {{-- title --}}
                         <div class="form-group">
-                            <label>@lang('chapters.tittle')<span class="text-danger">*</span></label>
-                            <input type="text" name="tittle" class="form-control" value="{{ old('tittle') }}" required autofocus>
+                            <label>@lang('chapters.title')<span class="text-danger">*</span></label>
+                            <input type="text" name="title" class="form-control" value="{{ old('title') }}" required
+                                autofocus>
                         </div>
 
                     </div><!-- end of col -->
@@ -38,14 +38,15 @@
 
                         <div class="form-group">
                             <label>@lang('chapters.price')<span class="text-danger">*</span></label>
-                            <input type="hidden" name="course_id"  value="{{$currentCourse->id}}">
+                            <input type="hidden" name="course_id" value="{{ $currentCourse->id }}">
 
                             <input type="number" name="price" class="form-control" min="0"
-                                   value="{{ old('price') }}" required>
+                                value="{{ old('price') }}" required>
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
+                            <button type="submit" class="btn btn-primary"><i
+                                    class="fa fa-plus"></i>@lang('site.create')</button>
                         </div>
                     </div><!-- end of col -->
 
@@ -59,7 +60,4 @@
         </div><!-- end of col -->
 
     </div><!-- end of row -->
-
 @endsection
-
-

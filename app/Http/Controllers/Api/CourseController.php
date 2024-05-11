@@ -18,8 +18,9 @@ class CourseController extends Controller
 
     public function index()
     {
-        $userStageId = Auth::user()->stage_id;
-        $courses = Course::where('stage_id', $userStageId)->get();
+        // $userStageId = Auth::user()->stage_id;
+        // $courses = Course::where('stage_id', $userStageId)->get();
+        $courses = Course::with('chapters')->get();
         return response()->api(CourseResource::collection($courses));
     }
 

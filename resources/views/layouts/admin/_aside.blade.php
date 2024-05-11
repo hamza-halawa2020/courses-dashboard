@@ -32,11 +32,11 @@
         @endif
 
         {{-- questions --}}
-        @if (auth()->user()->hasPermission('read_questions'))
-            <li><a class="app-menu__item {{ request()->is('*questions*') ? 'active' : '' }}"
-                    href="{{ route('admin.questions.index') }}"><i class="app-menu__icon fa fa-question"></i>
-                    <span class="app-menu__label">@lang('questions.questions')</span></a></li>
-        @endif
+        {{-- @if (auth()->user()->hasPermission('read_questions')) --}}
+        <li><a class="app-menu__item {{ request()->is('*questions*') ? 'active' : '' }}"
+                href="{{ route('admin.questions.index') }}"><i class="app-menu__icon fa fa-question"></i>
+                <span class="app-menu__label">@lang('questions.questions')</span></a></li>
+        {{-- @endif --}}
 
         {{-- users --}}
         @if (auth()->user()->hasPermission('read_users'))

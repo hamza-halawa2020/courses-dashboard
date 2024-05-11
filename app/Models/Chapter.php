@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Chapter extends Model
 {
     use HasFactory;
-    protected $fillable = ['id', 'tittle','course_id','price'];
+    protected $fillable = ['id', 'title', 'course_id', 'price'];
 
 
     //scope
@@ -31,7 +31,8 @@ class Chapter extends Model
     {
         return $this->belongsTo('App\Models\Course');
     }
-    public function lectures(){
+    public function lectures()
+    {
         return $this->hasMany(Lecture::class);
     }
 

@@ -1,7 +1,6 @@
 @extends('layouts.admin.app')
 
 @section('content')
-
     <div>
         <h2>@lang('chapters.chapters')</h2>
     </div>
@@ -24,10 +23,11 @@
 
                     @include('admin.partials._errors')
                     <div class="col-md-6">
-                        {{--tittle--}}
+                        {{-- title --}}
                         <div class="form-group">
-                            <label>@lang('chapters.tittle') <span class="text-danger">*</span></label>
-                            <input type="text" name="tittle" class="form-control" value="{{ old('tittle', $chapter->tittle) }}" required>
+                            <label>@lang('chapters.title') <span class="text-danger">*</span></label>
+                            <input type="text" name="title" class="form-control"
+                                value="{{ old('title', $chapter->title) }}" required>
                         </div>
                     </div><!-- end of col -->
 
@@ -35,14 +35,15 @@
 
                         <div class="form-group">
                             <label>@lang('chapters.price')<span class="text-danger">*</span></label>
-                            <input type="hidden" name="course_id"  value="{{$chapter->course_id}}">
+                            <input type="hidden" name="course_id" value="{{ $chapter->course_id }}">
                             <input type="number" name="price" class="form-control" min="0"
-                                   value="{{ old('price',$chapter->price)}}" required>
+                                value="{{ old('price', $chapter->price) }}" required>
                         </div>
 
-                        {{--Button--}}
+                        {{-- Button --}}
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.update')</button>
+                            <button type="submit" class="btn btn-primary"><i
+                                    class="fa fa-plus"></i>@lang('site.update')</button>
                         </div>
 
                     </div><!-- end of col -->
@@ -55,6 +56,4 @@
         </div><!-- end of col -->
 
     </div><!-- end of row -->
-
 @endsection
-

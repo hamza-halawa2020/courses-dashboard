@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class QRValueController extends Controller
-
 {
     public function __construct()
     {
@@ -39,7 +38,7 @@ class QRValueController extends Controller
                 return $qRvalue->created_at->format('Y-m-d');
             })
             ->addColumn('actions', 'admin.qRvalues.data_table.actions')
-            ->rawColumns(['record_select','actions','related_apartments'])
+            ->rawColumns(['record_select', 'actions', 'related_apartments'])
             ->toJson();
 
     }// end of data
@@ -52,7 +51,7 @@ class QRValueController extends Controller
 
     public function store(QRvalueRequest $request)
     {
-        QRvalue::create($request->only(['tittle','value']));
+        QRvalue::create($request->only(['title', 'value']));
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.qRvalues.index');
 
@@ -79,11 +78,10 @@ class QRValueController extends Controller
     {
         //after qr
         $qr = QR::where('q_rvalue_id', $qRvalue->id)->count();
-        if ($qr > 0){
+        if ($qr > 0) {
             session()->flash('error', __('qRvalues.can_not_qr_value'));
             return response(__('qRvalues.can_not_qr_value'));
-        }
-        else{
+        } else {
             $this->delete($qRvalue);
             session()->flash('success', __('site.deleted_successfully'));
             return response(__('site.deleted_successfully'));
@@ -97,17 +95,16 @@ class QRValueController extends Controller
         foreach (json_decode(request()->record_ids) as $recordId) {
 
             $qr = QR::where('q_rvalue_id', $recordId)->count();
-        if ($qr > 0){
-            session()->flash('error', __('qRvalues.can_not_qr_value'));
-            return response(__('qRvalues.can_not_qr_value'));
-        }
-        else{
-            $qRvalue = QRvalue::FindOrFail($recordId);
-            $this->delete($qRvalue);
-            session()->flash('success', __('site.deleted_successfully'));
-            return response(__('site.deleted_successfully'));
+            if ($qr > 0) {
+                session()->flash('error', __('qRvalues.can_not_qr_value'));
+                return response(__('qRvalues.can_not_qr_value'));
+            } else {
+                $qRvalue = QRvalue::FindOrFail($recordId);
+                $this->delete($qRvalue);
+                session()->flash('success', __('site.deleted_successfully'));
+                return response(__('site.deleted_successfully'));
 
-        }
+            }
 
 
 

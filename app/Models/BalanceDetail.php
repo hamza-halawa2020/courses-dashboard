@@ -14,4 +14,12 @@ class BalanceDetail extends Model
     {
         return $this->belongsTo(Balance::class);
     }
+    public function qrAddedBalances()
+    {
+        return $this->hasMany(QrAddedBalance::class);
+    }
+    public function adminAddedBalances()
+    {
+        return $this->hasMany(AdminAddedBalance::class);
+    }
 }

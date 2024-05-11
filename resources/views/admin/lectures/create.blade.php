@@ -27,10 +27,10 @@
 
                         <div class="col-md-6">
 
-                            {{-- tittle --}}
+                            {{-- title --}}
                             <div class="form-group">
-                                <label>@lang('lectures.tittle')<span class="text-danger">*</span></label>
-                                <input type="text" name="tittle" class="form-control" value="{{ old('tittle') }}"
+                                <label>@lang('lectures.title')<span class="text-danger">*</span></label>
+                                <input type="text" name="title" class="form-control" value="{{ old('title') }}"
                                     required autofocus>
                             </div>
                             {{-- des --}}

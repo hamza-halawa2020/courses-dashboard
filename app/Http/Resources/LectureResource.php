@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Stage;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CourseResource extends JsonResource
+class LectureResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,12 +18,14 @@ class CourseResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'stage_id' => $this->stage_id ? [
-                'id' => Stage::find($this->stage_id)->id,
-                'name' => Stage::find($this->stage_id)->name,
-            ] : null,
+            'price' => $this->price,
+            'video_url' => $this->video_url,
+            'note_book_url' => $this->note_book_url,
+            'des' => $this->des,
+            'start' => $this->start,
+            'end' => $this->end,
+            'status' => $this->status,
             'created_at' => $this->created_at,
-            'chapters' => ChapterResource::collection($this->chapters),
         ];
     }
 }

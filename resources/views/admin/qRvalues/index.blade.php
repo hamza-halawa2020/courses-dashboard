@@ -1,7 +1,6 @@
 @extends('layouts.admin.app')
 
 @section('content')
-
     <div>
         <h2>@lang('qRvalues.qRvalues')</h2>
     </div>
@@ -22,15 +21,18 @@
                     <div class="col-md-12">
 
                         @if (auth()->user()->hasPermission('create_qRvalues'))
-                            <a href="{{ route('admin.qRvalues.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a>
+                            <a href="{{ route('admin.qRvalues.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>
+                                @lang('site.create')</a>
                         @endif
 
                         @if (auth()->user()->hasPermission('delete_qRvalues'))
-                            <form method="post" action="{{ route('admin.qRvalues.bulk_delete') }}" style="display: inline-block;">
+                            <form method="post" action="{{ route('admin.qRvalues.bulk_delete') }}"
+                                style="display: inline-block;">
                                 @csrf
                                 @method('delete')
                                 <input type="hidden" name="record_ids" id="record-ids">
-                                <button type="submit" class="btn btn-danger" id="bulk-delete" disabled="true"><i class="fa fa-trash"></i> @lang('site.bulk_delete')</button>
+                                <button type="submit" class="btn btn-danger" id="bulk-delete" disabled="true"><i
+                                        class="fa fa-trash"></i> @lang('site.bulk_delete')</button>
                             </form><!-- end of form -->
                         @endif
 
@@ -42,7 +44,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" id="data-table-search" class="form-control" autofocus qRvalueholder="@lang('site.search')">
+                            <input type="text" id="data-table-search" class="form-control" autofocus
+                                qRvalueholder="@lang('site.search')">
                         </div>
                     </div>
 
@@ -56,26 +59,25 @@
 
                             <table class="table datatable" id="qRvalues-table" style="width: 100%;">
                                 <thead>
-                                <tr>
-                                    <th>
-                                        <div class="animated-checkbox">
-                                            <label class="m-0">
-                                                <input type="checkbox" id="record__select-all">
-                                                <span class="label-text"></span>
-                                            </label>
-                                        </div>
-                                    </th>
-                                    <th>@lang('qRvalues.tittle')</th>
-                                    <th>@lang('qRvalues.value')</th>
-                                    {{--<th>@lang('qRvalues.apartments_count')</th>
-                                    <th>@lang('qRvalues.related_apartments')</th>--}}
-                                    <th>@lang('site.created_at')</th>
-                                    @if(auth()->user()->hasPermission('update_qRvalues')||auth()->user()->hasPermission('delete_qRvalues'))
-                                        <th>@lang('site.action')</th>
-
-                                    @endif
-                                    <th></th>
-                                </tr>
+                                    <tr>
+                                        <th>
+                                            <div class="animated-checkbox">
+                                                <label class="m-0">
+                                                    <input type="checkbox" id="record__select-all">
+                                                    <span class="label-text"></span>
+                                                </label>
+                                            </div>
+                                        </th>
+                                        <th>@lang('qRvalues.title')</th>
+                                        <th>@lang('qRvalues.value')</th>
+                                        {{-- <th>@lang('qRvalues.apartments_count')</th>
+                                    <th>@lang('qRvalues.related_apartments')</th> --}}
+                                        <th>@lang('site.created_at')</th>
+                                        @if (auth()->user()->hasPermission('update_qRvalues') || auth()->user()->hasPermission('delete_qRvalues'))
+                                            <th>@lang('site.action')</th>
+                                        @endif
+                                        <th></th>
+                                    </tr>
                                 </thead>
                             </table>
 
@@ -90,13 +92,10 @@
         </div><!-- end of col -->
 
     </div><!-- end of row -->
-
 @endsection
 
 @push('scripts')
-
     <script>
-
         let qRvaluesTable = $('#qRvalues-table').DataTable({
             dom: "tiplr",
             serverSide: true,
@@ -107,17 +106,40 @@
             ajax: {
                 url: '{{ route('admin.qRvalues.data') }}',
             },
-            columns: [
-                {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-                {data: 'tittle', name: 'tittle'},
-                {data: 'value', name: 'value'},
+            columns: [{
+                    data: 'record_select',
+                    name: 'record_select',
+                    searchable: false,
+                    sortable: false,
+                    width: '1%'
+                },
+                {
+                    data: 'title',
+                    name: 'title'
+                },
+                {
+                    data: 'value',
+                    name: 'value'
+                },
                 /*{data: 'apartments_count', name: 'apartments_count',searchable: false},
                 {data: 'related_apartments', name: 'related_apartments',searchable: false,sortable:false},*/
-                {data: 'created_at', name: 'created_at', searchable: false},
-                {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
+                {
+                    data: 'created_at',
+                    name: 'created_at',
+                    searchable: false
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    searchable: false,
+                    sortable: false,
+                    width: '20%'
+                },
             ],
-            order: [[1, 'desc']],
-            drawCallback: function (settings) {
+            order: [
+                [1, 'desc']
+            ],
+            drawCallback: function(settings) {
                 $('.record__select').prop('checked', false);
                 $('#record__select-all').prop('checked', false);
                 $('#record-ids').val();
@@ -125,9 +147,8 @@
             }
         });
 
-        $('#data-table-search').keyup(function () {
+        $('#data-table-search').keyup(function() {
             qRvaluesTable.search(this.value).draw();
         })
     </script>
-
 @endpush

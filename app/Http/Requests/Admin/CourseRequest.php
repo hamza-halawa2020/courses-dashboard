@@ -24,14 +24,14 @@ class CourseRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'tittle' => 'required|unique:courses',
+            'title' => 'required|unique:courses',
             'stage_id' => 'required',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
             $course = $this->route()->parameter('course');
-            $rules['tittle'] = 'required|unique:courses,tittle,' . $course->id;
+            $rules['title'] = 'required|unique:courses,title,' . $course->id;
             $rules['stage_id'] = 'required';
         }//end of if
 

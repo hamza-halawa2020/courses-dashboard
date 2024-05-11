@@ -4,7 +4,7 @@ return [
     'chapters' => 'الشباتز',
     'chapter' => 'شابتر',
     'chapter_withal' => 'الشابتر',
-    'tittle' => 'العنوان',
+    'title' => 'العنوان',
     'price' => 'السعر',
     'lectures_count' => 'عدد المحاضرات',
 

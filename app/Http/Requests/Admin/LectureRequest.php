@@ -28,7 +28,7 @@ class LectureRequest extends FormRequest
             'status' => '',
             'userIDStatus' => '',
             'statusValue' => '',
-            'tittle' => 'required|unique:lectures',
+            'title' => 'required|unique:lectures',
             'price' => 'required',
             'chapter_id' => 'required',
             'video_url' => '',
@@ -43,7 +43,7 @@ class LectureRequest extends FormRequest
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
             $lec = $this->route()->parameter('lecture');
-            $rules['tittle'] = 'unique:lectures,tittle,' . $lec->id;
+            $rules['title'] = 'unique:lectures,title,' . $lec->id;
             $rules['price'] = '';
             $rules['chapter_id'] = '';
             $rules['video_url'] = '';

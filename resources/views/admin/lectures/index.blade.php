@@ -13,13 +13,13 @@
 
 
 
-            {{ $currentChapter == null ? 'المحضرات' : $currentChapter->tittle }}</h2>
+            {{ $currentChapter == null ? 'المحضرات' : $currentChapter->title }}</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
         <li class="breadcrumb-item">@lang('lectures.lectures')</li>
-        <li class="breadcrumb-item">{{ $currentChapter == null ? 'المحضرات' : $currentChapter->tittle }}</li>
+        <li class="breadcrumb-item">{{ $currentChapter == null ? 'المحضرات' : $currentChapter->title }}</li>
     </ul>
 
     <div class="row">
@@ -80,14 +80,14 @@
                                                 </label>
                                             </div>
                                         </th>
-                                        <th>@lang('lectures.tittle')</th>
+                                        <th>@lang('lectures.title')</th>
                                         <th>@lang('lectures.price')</th>
                                         <th>@lang('lectures.status')</th>
 
                                         {{-- <th>@lang('lectures.apartments_count')</th>
                                      <th>@lang('lectures.related_apartments')</th> --}}
                                         <th>@lang('lectures.start')</th>
-                                        <th>@lang('lectures.end'    )</th>
+                                        <th>@lang('lectures.end')</th>
                                         @if (auth()->user()->hasPermission('update_lectures') || auth()->user()->hasPermission('delete_lectures'))
                                             <th>@lang('site.action')</th>
                                         @endif
@@ -130,10 +130,10 @@
                             <input type="hidden" name="meth" value="lectureStatus">
                             <input type="hidden" name="lectureIDStatus" id="lectureIDStatus" value="">
 
-                            {{-- tittle --}}
+                            {{-- title --}}
                             <div class="form-group">
                                 <label>حالة {{ '/' }}<span class="text-danger"></span></label>
-                                <label id="lectureTittleStatus"> <span class="text-danger"></span></label>
+                                <label id="lectureTitleStatus"> <span class="text-danger"></span></label>
                                 <input type="hidden" name="statusLecValue" id="statusLecValue" value="">
                                 <input type="text" name="status" class="form-control" value="" id="lecStatus"
                                     disabled>
@@ -181,8 +181,8 @@
                     width: '1%'
                 },
                 {
-                    data: 'tittle',
-                    name: 'tittle'
+                    data: 'title',
+                    name: 'title'
                 },
                 {
                     data: 'price',
@@ -253,7 +253,7 @@
                 success: function(response) {
                     //console.log('clicked')
                     $('#editLecStatus').modal('show');
-                    $('#lectureTittleStatus').html(response.tittle);
+                    $('#lectureTitleStatus').html(response.title);
                     $('#lectureIDStatus').val(response.id);
                     $('#statusLecValue').val(response.status);
                     if (response.status == 1) {

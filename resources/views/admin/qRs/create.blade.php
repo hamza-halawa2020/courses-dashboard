@@ -1,7 +1,6 @@
 @extends('layouts.admin.app')
 
 @section('content')
-
     <div>
         <h2>@lang('qR.QRs')</h2>
     </div>
@@ -24,19 +23,20 @@
 
                     @include('admin.partials._errors')
 
-                    {{--number--}}
+                    {{-- number --}}
                     <div class="form-group">
                         <label>@lang('qR.number')<span class="text-danger">*</span></label>
-                        <input type="number" name="number" class="form-control" value="{{ old('number') }}" required autofocus>
+                        <input type="number" name="number" class="form-control" value="{{ old('number') }}" required
+                            autofocus>
                     </div>
 
-                    {{--qRvalues--}}
+                    {{-- qRvalues --}}
                     <div class="form-group">
                         <label>@lang('qR.qRvalue')<span class="text-danger">*</span></label>
-                        <select name="qRvalue_id" class="form-control" required >
+                        <select name="qRvalue_id" class="form-control" required>
                             <option value="">@lang('qR.select_qRvalue')</option>
-                            @foreach($qRvalues as $qRvalue)
-                                <option value="{{$qRvalue->id}}">{{$qRvalue->tittle}}</option>
+                            @foreach ($qRvalues as $qRvalue)
+                                <option value="{{ $qRvalue->id }}">{{ $qRvalue->title }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -52,7 +52,4 @@
         </div><!-- end of col -->
 
     </div><!-- end of row -->
-
 @endsection
-
-
