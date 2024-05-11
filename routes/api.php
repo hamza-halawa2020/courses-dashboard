@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BalanceController;
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\ChapterController;
 use App\Http\Controllers\Api\CourseController;
@@ -18,34 +19,41 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/banners', [BannerController::class, 'index']);
 Route::get('/banners/{id}', [BannerController::class, 'show']);
 
-// Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
 
-//user route
-Route::get('/user', [AuthController::class, 'user']);
-Route::post('/change_password', [AuthController::class, 'changePassword']);
-////===================   Places ============================
-Route::get('/places', [PlaceController::class, 'index']);
+    //user route
+    Route::get('/user', [AuthController::class, 'user']);
+    Route::post('/change_password', [AuthController::class, 'changePassword']);
+    ////===================   Places ============================
+    Route::get('/places', [PlaceController::class, 'index']);
 
-////===================   Stages ============================
-Route::get('/stages', [StageController::class, 'index']);
-////===================   questions ============================
-Route::get('/questions', [QuestionController::class, 'index']);
-Route::get('/questions/{id}', [QuestionController::class, 'show']);
-Route::get('/random-question', [QuestionController::class, 'randomQuestion']);
+    ////===================   Stages ============================
+    Route::get('/stages', [StageController::class, 'index']);
+    ////===================   questions ============================
+    Route::get('/questions', [QuestionController::class, 'index']);
+    Route::get('/questions/{id}', [QuestionController::class, 'show']);
+    Route::get('/random-question', [QuestionController::class, 'randomQuestion']);
 
-////===================   courses ============================
-Route::get('/courses', [CourseController::class, 'index']);
-Route::get('/courses/{id}', [CourseController::class, 'show']);
+    ////===================   courses ============================
+    Route::get('/courses', [CourseController::class, 'index']);
+    Route::get('/courses/{id}', [CourseController::class, 'show']);
 
-////===================   chapters ============================
-Route::get('/chapters', [ChapterController::class, 'index']);
-Route::get('/chapters/{id}', [ChapterController::class, 'show']);
+    ////===================   chapters ============================
+    Route::get('/chapters', [ChapterController::class, 'index']);
+    Route::get('/chapters/{id}', [ChapterController::class, 'show']);
 
-////===================   lectures ============================
-Route::get('/lectures', [LectureController::class, 'index']);
-Route::get('/lectures/{id}', [LectureController::class, 'show']);
+    ////===================   lectures ============================
+    Route::get('/lectures', [LectureController::class, 'index']);
+    Route::get('/lectures/{id}', [LectureController::class, 'show']);
+
+    ////===================   balance ============================
+    Route::get('/balances', [BalanceController::class, 'index']);
+    Route::get('/balances/{id}', [BalanceController::class, 'show']);
+    Route::post('/balances', [BalanceController::class, 'addBalanceByQrCode']);
 
 
 
-// });
+
+
+});
 

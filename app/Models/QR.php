@@ -41,7 +41,7 @@ class QR extends Model
 
     public function qRvalue()
     {
-        return $this->belongsTo('App\Models\QRvalue');
+        return $this->belongsTo(QRvalue::class);
     }
     public function qrAddedBalances()
     {

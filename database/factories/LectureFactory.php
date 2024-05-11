@@ -16,7 +16,13 @@ class LectureFactory extends Factory
         return [
             'title' => $this->faker->title(),
             'price' => $this->faker->numberBetween(100, 999),
-            'course_id' => $this->faker->numberBetween(1, 5),
+            'video_url' => $this->faker->name(),
+            'note_book_url' => $this->faker->name(),
+            'des' => $this->faker->name(),
+            'notes' => $this->faker->name(),
+            'start' => $this->faker->time(now()),
+            'end' => $this->faker->time(now()),
+            'chapter_id' => $this->faker->numberBetween(1, 5),
             'created_at' => $this->faker->time(),
         ];
     }

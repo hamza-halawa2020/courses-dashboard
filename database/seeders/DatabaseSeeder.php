@@ -6,6 +6,7 @@ use App\Models\Answer;
 use App\Models\Banner;
 use App\Models\Chapter;
 use App\Models\Course;
+use App\Models\Lecture;
 use App\Models\Question;
 use Illuminate\Database\Seeder;
 
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
         Banner::factory(5)->create();
         Course::factory(5)->create();
         Chapter::factory(15)->create();
+        Lecture::factory(40)->create();
 
     }
 }
