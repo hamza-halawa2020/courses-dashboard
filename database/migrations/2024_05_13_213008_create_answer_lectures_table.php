@@ -17,7 +17,7 @@ class CreateAnswerLecturesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('answer');
-            $table->foreignId('question_home_work_id')->references('id')->on('question_home_works')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('exam_lecture_id')->references('id')->on('exam_lectures')->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('is_right')->default(false);
         });
     }
