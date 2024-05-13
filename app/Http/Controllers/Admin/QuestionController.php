@@ -14,10 +14,10 @@ class QuestionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:read_questions')->only(['index']);
-        $this->middleware('permission:create_questions')->only(['create', 'store']);
-        $this->middleware('permission:update_questions')->only(['edit', 'update']);
-        $this->middleware('permission:delete_questions')->only(['delete', 'bulk_delete']);
+        // $this->middleware('permission:read_questions')->only(['index']);
+        // $this->middleware('permission:create_questions')->only(['create', 'store']);
+        // $this->middleware('permission:update_questions')->only(['edit', 'update']);
+        // $this->middleware('permission:delete_questions')->only(['delete', 'bulk_delete']);
     } // end of __construct
 
     public function index()
