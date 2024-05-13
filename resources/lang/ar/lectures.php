@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'lectures' => 'المحاضرات',
-    'lecture' => 'محاضرة',
-    'lecture_withal' => 'المحاضرة',
+    'lectures' => 'الدروس',
+    'lecture' => 'درس',
+    'lecture_withal' => 'lecture_withal',
     'title' => 'العنوان',
     'price' => 'السعر',
     'status' => 'حالة المحاضرة',

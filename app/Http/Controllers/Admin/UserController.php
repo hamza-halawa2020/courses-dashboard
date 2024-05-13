@@ -208,10 +208,34 @@ class UserController extends Controller
                 'place_id' => $request->place_id,
             ]);
 
+
             session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('admin.users.index');
 
 
+
+        } elseif ($request->meth == 'balance') {
+            $selectedUser = User::find($request->userIDBalance);
+
+            if (!$selectedUser) {
+                return 'User not found';
+            }
+            $balance = $selectedUser->balances()->first();
+
+            if (!$balance) {
+                $balance = $selectedUser->balances()->create(['total' => 0]);
+            }
+
+            $balanceDetail = $balance->balanceDetails()->create(['amount' => $request->balance]);
+
+            if ($balanceDetail) {
+                $balance->total += $request->balance;
+                $balance->save();
+
+                $selectedUser->adminAddedBalances()->create(['balance_details_id' => $balanceDetail->id]);
+            } else {
+                return back()->with('error', __('site.error_message'));
+            }
         } else if ($request->meth == 'device') {
             $currentUser = User::find($request->userIDDevice);
             if ($currentUser) {

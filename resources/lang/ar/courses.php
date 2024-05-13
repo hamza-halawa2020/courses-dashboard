@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'courses' => 'الباب كامل',
-    'course' => 'كورس',
-    'course_withal' => 'الكورس',
+    'courses' => 'الوحدات',
+    'course' => 'وحدة',
+    'course_withal' => 'course_withal',
     'title' => 'العنوان',
-    'chapters_count' => 'عدد الشابترز',
+    'chapters_count' => 'عدد الابواب',
 ];
