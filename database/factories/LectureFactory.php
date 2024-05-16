@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Chapter;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class LectureFactory extends Factory
@@ -22,7 +23,7 @@ class LectureFactory extends Factory
             'notes' => $this->faker->name(),
             'start' => $this->faker->time(now()),
             'end' => $this->faker->time(now()),
-            'chapter_id' => $this->faker->numberBetween(1, 5),
+            'chapter_id' => Chapter::factory(),
             'created_at' => $this->faker->time(),
         ];
     }

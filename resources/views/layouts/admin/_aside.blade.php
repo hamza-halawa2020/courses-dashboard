@@ -38,6 +38,11 @@
                 <span class="app-menu__label">@lang('questions.questions')</span></a></li>
         {{-- @endif --}}
 
+        {{-- teachers --}}
+        <li><a class="app-menu__item {{ request()->is('*teachers*') ? 'active' : '' }}"
+                href="{{ route('admin.teachers.index') }}"><i class="app-menu__icon fa fa-users"></i>
+                <span class="app-menu__label">@lang('teachers.teachers')</span></a></li>
+
         {{-- users --}}
         @if (auth()->user()->hasPermission('read_users'))
             <li><a class="app-menu__item {{ request()->is('*users*') ? 'active' : '' }}"

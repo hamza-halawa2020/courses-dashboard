@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
-////===================   banner ============================
+////=================== banner ============================
 Route::get('/banners', [BannerController::class, 'index']);
 Route::get('/banners/{id}', [BannerController::class, 'show']);
 
@@ -24,29 +24,29 @@ Route::middleware('auth:sanctum')->group(function () {
     //user route
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/change_password', [AuthController::class, 'changePassword']);
-    ////===================   Places ============================
+    ////=================== Places ============================
     Route::get('/places', [PlaceController::class, 'index']);
 
-    ////===================   Stages ============================
+    ////=================== Stages ============================
     Route::get('/stages', [StageController::class, 'index']);
-    ////===================   questions ============================
+    ////=================== questions ============================
     Route::get('/questions', [QuestionController::class, 'index']);
     Route::get('/questions/{id}', [QuestionController::class, 'show']);
     Route::get('/random-question', [QuestionController::class, 'randomQuestion']);
 
-    ////===================   courses ============================
+    ////=================== courses ============================
     Route::get('/courses', [CourseController::class, 'index']);
     Route::get('/courses/{id}', [CourseController::class, 'show']);
 
-    ////===================   chapters ============================
+    ////=================== chapters ============================
     Route::get('/chapters', [ChapterController::class, 'index']);
     Route::get('/chapters/{id}', [ChapterController::class, 'show']);
 
-    ////===================   lectures ============================
+    ////=================== lectures ============================
     Route::get('/lectures', [LectureController::class, 'index']);
     Route::get('/lectures/{id}', [LectureController::class, 'show']);
 
-    ////===================   balance ============================
+    ////=================== balance ============================
     Route::get('/balances', [BalanceController::class, 'index']);
     Route::get('/balances/{id}', [BalanceController::class, 'show']);
     Route::post('/balances', [BalanceController::class, 'addBalanceByQrCode']);

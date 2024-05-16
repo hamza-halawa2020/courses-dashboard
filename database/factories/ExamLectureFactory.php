@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Stage;
+use App\Models\Lecture;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class QuestionFactory extends Factory
+class ExamLectureFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,8 +15,8 @@ class QuestionFactory extends Factory
     public function definition()
     {
         return [
-            'question' => $this->faker->name(),
-            'stage_id' => Stage::factory(),
+            'question' => $this->faker->title(),
+            'lecture_id' => Lecture::factory(),
         ];
     }
 }

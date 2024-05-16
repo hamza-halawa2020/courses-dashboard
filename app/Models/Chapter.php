@@ -29,7 +29,7 @@ class Chapter extends Model
     // relations
     public function course()
     {
-        return $this->belongsTo('App\Models\Course');
+        return $this->belongsTo(Course::class);
     }
     public function lectures()
     {

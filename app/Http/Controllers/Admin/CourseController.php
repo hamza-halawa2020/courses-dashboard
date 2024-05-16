@@ -31,10 +31,10 @@ class CourseController extends Controller
 
 
 
-    public function show(Course $course)
+    public function show($id)
     {
-        return $course;
-        //$course->delete();
+        $course = Course::findOrFail($id);
+        return view('admin.courses.show', compact('course'));
     }// end of show
 
     public function data()
