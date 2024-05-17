@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <div>
         <h2>@lang('teachers.teacher')</h2>
     </div>
@@ -17,9 +16,10 @@
             <div class="col-md-12">
                 <h1>@lang('teachers.teacher') {{ $teacher->name }}</h1>
             </div>
-            <div class="col-md-12">
-                {{ $teacher->details }}</div>
-            <div class="col-md-12 h2">
+            <div class="col-md-12 h5">
+                {{ $teacher->details }}
+            </div>
+            <div class="col-md-12 h3 mt-5">
                 <a href="{{ route('admin.courses.index') }}">
                     @lang('courses.courses')
                 </a>
@@ -31,14 +31,16 @@
                 @else
             </div>
 
-            <ul>
+            <div>
                 @foreach ($teacher->courses as $course)
-                    <li>
-                        <a href="{{ route('admin.courses.show', $course->id) }}">{{ $course->title }}</a>
-                    </li>
-                    <li>{{ $course->stage_id }}</li>
+                    <div>
+                        <div class="col">@lang('courses.title')
+                            <a href="{{ route('admin.courses.show', $course->id) }}">{{ $course->title }}</a>
+                        </div>
+                    </div>
+                    <div class="col">{{ $course->stage_id }}</div>
                 @endforeach
-            </ul>
+            </div>
             @endif
         </div>
     </div>
