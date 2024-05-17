@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\CourseRequest;
 use App\Models\Chapter;
 use App\Models\Course;
 use App\Models\Stage;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -35,7 +36,8 @@ class CourseController extends Controller
     {
         $course = Course::findOrFail($id);
         return view('admin.courses.show', compact('course'));
-    }// end of show
+    }
+
 
     public function data()
     {
@@ -58,16 +60,24 @@ class CourseController extends Controller
             ->toJson();
     }// end of data
 
+    // public function create()
+    // {
+    //     $stages = Stage::whereNotIn('id', [1])->get();
+    //     return view('admin.courses.create', compact('stages'));
+
+    // }// end of create
     public function create()
     {
-        $stages = Stage::whereNotIn('id', [1])->get();
-        return view('admin.courses.create', compact('stages'));
+        $stages = Stage::all();
+        $teachers = Teacher::all();
 
-    }// end of create
+        return view('admin.courses.create', compact('stages', 'teachers'));
+    }
+
 
     public function store(CourseRequest $request)
     {
-        Course::create($request->only(['title', 'stage_id']));
+        Course::create($request->only(['title', 'stage_id', 'teacher_id']));
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.courses.index');
 
