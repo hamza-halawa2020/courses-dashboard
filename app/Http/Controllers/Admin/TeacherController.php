@@ -54,9 +54,15 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // public function show($id)
+    // {
+    //     $teacher = Teacher::findOrFail($id);
+    //     return view('admin.teachers.show', compact('teacher'));
+    // }
+
     public function show($id)
     {
-        $teacher = Teacher::findOrFail($id);
+        $teacher = Teacher::with('courses.stage')->findOrFail($id);
         return view('admin.teachers.show', compact('teacher'));
     }
 

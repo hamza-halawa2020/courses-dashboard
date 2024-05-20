@@ -32,13 +32,17 @@ class CourseController extends Controller
 
 
 
+    // public function show($id)
+    // {
+    //     $course = Course::findOrFail($id);
+    //     return view('admin.courses.show', compact('course'));
+    // }
+
     public function show($id)
     {
-        $course = Course::findOrFail($id);
+        $course = Course::with('chapters')->findOrFail($id);
         return view('admin.courses.show', compact('course'));
     }
-
-
     public function data()
     {
         $courses = Course::all();

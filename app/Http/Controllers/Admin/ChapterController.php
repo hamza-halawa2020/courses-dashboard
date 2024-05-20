@@ -22,21 +22,39 @@ class ChapterController extends Controller
         $this->middleware('permission:delete_chapters')->only(['delete', 'bulk_delete']);
     } // end of __construct
 
+    // public function index(Request $request)
+    // {
+    //     // return $request->course;
+    //     //return Course::find($request->course);
+    //     //return $request->course_id;
+    //     $currentCourse = Course::find($request->course_id);
+    //     return view('admin.chapters.index', compact('currentCourse'));
+    // } // end of index
+
+
     public function index(Request $request)
     {
-        // return $request->course;
-        //return Course::find($request->course);
-        //return $request->course_id;
-        $currentCourse = Course::find($request->course_id);
+        $currentCourse = Course::with('chapters')->find($request->course_id);
+
+        if (!$currentCourse) {
+            abort(404, 'Course not found');
+        }
+
         return view('admin.chapters.index', compact('currentCourse'));
-    } // end of index
+    }
 
 
-    public function show(Chapter $chapter)
+    // public function show($id)
+    // {
+    //     $chapter = Chapter::with('course')->findOrFail($id);
+
+    //     return view('admin.chapters.show', compact('chapter'));
+    // }
+    public function show($id)
     {
-        return $chapter;
-        //$chapter->delete();
-    } // end of show
+        $chapter = Chapter::with(['course', 'lectures'])->findOrFail($id);
+        return view('admin.chapters.show', compact('chapter'));
+    }
 
     public function data()
     {

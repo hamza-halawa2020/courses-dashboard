@@ -9,5 +9,8 @@ return [
     'choose the stage withal' => 'اختر المرحلة الدراسية',
     'false' => 'خطأ',
     'true' => 'صحيح',
+    'exam' => 'اختبار',
+    'exams' => 'اختبارات',
+
 
 ];
