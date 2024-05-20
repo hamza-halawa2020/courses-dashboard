@@ -25,10 +25,27 @@ class QuestionController extends Controller
         return view('admin.questions.index');
     }
 
+    // public function data()
+    // {
+    //     $questions = Question::all();
+
+
+    //     return DataTables::of($questions)
+    //         ->addColumn('record_select', 'admin.questions.data_table.record_select')
+    //         ->editColumn('id', function (Question $question) {
+    //             return $question;
+    //         })
+    //         ->addColumn('stage_withal', function (Question $question) {
+    //             return $question->stage->name;
+    //         })
+    //         ->addColumn('actions', 'admin.questions.data_table.actions')
+    //         ->rawColumns(['record_select', 'stage_withal', 'actions'])
+    //         ->toJson();
+    // }
     public function data()
     {
-        $questions = Question::all();
-
+        // Use eager loading to fetch questions with their stages
+        $questions = Question::with('stage')->get();
 
         return DataTables::of($questions)
             ->addColumn('record_select', 'admin.questions.data_table.record_select')
@@ -36,12 +53,14 @@ class QuestionController extends Controller
                 return $question;
             })
             ->addColumn('stage_withal', function (Question $question) {
-                return $question->stage->name;
+                // Check if the stage exists
+                return $question->stage ? $question->stage->name : 'N/A';
             })
             ->addColumn('actions', 'admin.questions.data_table.actions')
             ->rawColumns(['record_select', 'stage_withal', 'actions'])
             ->toJson();
     }
+
 
     public function show(Question $question)
     {

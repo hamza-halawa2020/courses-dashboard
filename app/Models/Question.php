@@ -9,6 +9,7 @@ class Question extends Model
 {
     use HasFactory;
     protected $fillable = ['question', 'stage_id'];
+    protected $table = 'questions';
 
     public function stage()
     {

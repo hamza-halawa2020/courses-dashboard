@@ -23,21 +23,26 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->api([], 1, $validator->errors()->first());
         }
-        $credentials = $request->only('phone', 'password');
-        if (Auth::attempt($credentials)) {
 
+        $credentials = $request->only('phone', 'password');
+
+        if (Auth::attempt($credentials)) {
             $user = Auth::user();
+
+            if ($user->status == 0) {
+                Auth::logout();
+                return response()->api([], 1, 'Your account is inactive. Please contact support.');
+            }
+
             $data['user'] = new UserResource($user);
             $data['token'] = $user->createToken('my-app-token')->plainTextToken;
+
             return response()->api($data, 0, 'تم تسجيل الدخول بنجاح');
-
         } else {
-
             return response()->api([], 1, __('auth.failed'));
+        }
+    }
 
-        }//end of else
-
-    }//end of login
 
     public function register(Request $request)
     {

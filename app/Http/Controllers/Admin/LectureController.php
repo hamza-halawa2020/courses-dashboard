@@ -147,17 +147,10 @@ class LectureController extends Controller
 
     public function destroy(Lecture $lecture)
     {
-        //$id = $lecture->id;
-        $user = User::where('id', $lecture->id)->count();
-        if ($user > 0) {
-            session()->flash('error', __('site.can_not_lecture'));
-            return response(__('site.can_not_lecture'));
-        } else {
-            $this->delete($lecture);
-            session()->flash('success', __('site.deleted_successfully'));
-            return response(__('site.deleted_successfully'));
-
-        }
+        $user = Lecture::where('id', $lecture->id);
+        $user->delete();
+        session()->flash('success', __('site.deleted_successfully'));
+        return response(__('site.deleted_successfully'));
 
     }// end of destroy
 

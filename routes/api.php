@@ -24,11 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //user route
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/change_password', [AuthController::class, 'changePassword']);
-    ////=================== Places ============================
-    Route::get('/places', [PlaceController::class, 'index']);
 
-    ////=================== Stages ============================
-    Route::get('/stages', [StageController::class, 'index']);
     ////=================== questions ============================
     Route::get('/questions', [QuestionController::class, 'index']);
     Route::get('/questions/{id}', [QuestionController::class, 'show']);
@@ -57,3 +53,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
+////=================== Places ============================
+Route::get('/places', [PlaceController::class, 'index']);
+
+////=================== Stages ============================
+Route::get('/stages', [StageController::class, 'index']);

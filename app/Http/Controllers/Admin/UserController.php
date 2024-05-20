@@ -33,54 +33,51 @@ class UserController extends Controller
 
     public function data()
     {
-        $users = User::with('balances')->where('type', 'user')->select();
-
-
+        // Eager load the stage, place, and balances relationships to minimize database queries
+        $users = User::with([
+            'stage',
+            'place',
+            'balances' => function ($query) {
+                $query->orderBy('created_at', 'desc'); // Ensure the latest balance is first
+            }
+        ])->where('type', 'user')->get();
 
         return DataTables::of($users)
-            ->addColumn('record_select', 'admin.users.data_table.record_select')->
-            editColumn('image', function (User $user) {
+            ->addColumn('record_select', 'admin.users.data_table.record_select')
+            ->editColumn('image', function (User $user) {
                 return view('admin.users.data_table.image', compact('user'));
             })
             ->editColumn('created_at', function (User $user) {
                 return $user->created_at->format('Y-m-d');
             })
             ->editColumn('status', function (User $user) {
-                if ($user->status == '0') {
-                    return '<h5><span class="badge badge-danger">غير نشط</span></h5>';
-                } else {
-                    return '<h5><span class="badge badge-success">نشط</span></h5>';
-
-                }
+                return $user->status == '0'
+                    ? '<h5><span class="badge badge-danger">غير نشط</span></h5>'
+                    : '<h5><span class="badge badge-success">نشط</span></h5>';
             })
             ->editColumn('gender', function (User $user) {
-                if ($user->gender == 'male') {
-                    return 'ذكر';
-                } else {
-                    return 'انثي';
-                }
+                return $user->gender == 'male' ? 'ذكر' : 'انثي';
             })
-
             ->editColumn('stage', function (User $user) {
-                $name = $user->stage->name;
+                $name = $user->stage ? $user->stage->name : 'N/A';
                 return view('admin.users.data_table.stage', compact('name'));
             })
             ->editColumn('place', function (User $user) {
-                $name = $user->place->name;
+                $name = $user->place ? $user->place->name : 'N/A';
                 return view('admin.users.data_table.place', compact('name'));
             })
-            ->editColumn('balance', function ($user) {
+            ->editColumn('balance', function (User $user) {
                 $latestBalance = $user->balances->first();
                 return $latestBalance ? $latestBalance->total : 0;
             })
             ->editColumn('edit', function ($row) {
-                return ' <a href="javascript:void(0)" class="btn btn-warning btn-sm editUser" data-id="' . $row->id . '" ><i class="fa fa-edit"  ></i></a>';
+                return '<a href="javascript:void(0)" class="btn btn-warning btn-sm editUser" data-id="' . $row->id . '"><i class="fa fa-edit"></i></a>';
             })
             ->addColumn('actions', 'admin.users.data_table.actions')
             ->rawColumns(['record_select', 'actions', 'edit', 'status'])
             ->toJson();
+    }
 
-    }// end of data
 
     public function create()
     {  // whereNotIn('id',[1])->get();
