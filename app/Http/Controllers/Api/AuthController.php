@@ -50,6 +50,8 @@ class AuthController extends Controller
             'name' => 'required',
             'phone' => 'required|unique:users,phone|max:11|string',
             'password' => 'required|min:6',
+            'parent_phone' => 'required|max:11|string',
+            'parent_name' => 'required',
             'place_id' => 'required',
             'stage_id' => 'required'
         ], $this->message());
@@ -62,9 +64,12 @@ class AuthController extends Controller
             'name' => $request->name,
             'type' => 'user',
             'phone' => $request->phone,
+            'parent_phone' => $request->parent_phone,
+            'parent_name' => $request->parent_name,
             'place_id' => $request->place_id,
             'stage_id' => $request->stage_id,
             'password' => bcrypt($request->password),
+
         ]);
 
         $data['user'] = new UserResource($user);

@@ -14,7 +14,20 @@ class LectureResource extends JsonResource
      */
     public function toArray($request)
     {
-        // return parent::toArray($request);
+        $user = $request->user();
+
+        $hasAccess = $user && $this->userCanAccess->contains('user_id', $user->id);
+
+        return $hasAccess ? $this->fullDetails() : $this->limitedDetails();
+    }
+
+    /**
+     * Return full details of the lecture.
+     *
+     * @return array
+     */
+    private function fullDetails()
+    {
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -26,6 +39,20 @@ class LectureResource extends JsonResource
             'end' => $this->end,
             'status' => $this->status,
             'created_at' => $this->created_at,
+        ];
+    }
+
+    /**
+     * Return limited details of the lecture.
+     *
+     * @return array
+     */
+    private function limitedDetails()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'price' => $this->price,
         ];
     }
 }

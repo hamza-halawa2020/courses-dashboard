@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\LectureController;
 use App\Http\Controllers\Api\PlaceController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\StageController;
+use App\Http\Controllers\Api\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -30,6 +31,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/questions/{id}', [QuestionController::class, 'show']);
     Route::get('/random-question', [QuestionController::class, 'randomQuestion']);
 
+    ////=================== teachers ============================
+    Route::get('/teachers', [TeacherController::class, 'index']);
+    Route::get('/teachers/{id}', [TeacherController::class, 'show']);
     ////=================== courses ============================
     Route::get('/courses', [CourseController::class, 'index']);
     Route::get('/courses/{id}', [CourseController::class, 'show']);

@@ -44,4 +44,10 @@ class Lecture extends Model
     {
         return $this->belongsTo(Chapter::class);
     }
+
+    public function userCanAccess()
+    {
+        return $this->hasMany(UserCanAccess::class);
+    }
+
 }

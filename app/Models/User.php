@@ -41,6 +41,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Balance::class);
     }
+    public function userCanAccess()
+    {
+        return $this->hasMany(UserCanAccess::class);
+    }
+
+    // public function accessibleLectures()
+    // {
+    //     return $this->belongsToMany(Lecture::class, 'user_can_access');
+    // }
 
     //atr
     public function getNameAttribute($value)

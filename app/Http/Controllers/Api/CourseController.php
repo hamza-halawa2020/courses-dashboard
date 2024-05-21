@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CourseResource;
 use App\Models\Course;
+use App\Models\Lecture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,15 +25,7 @@ class CourseController extends Controller
     }
 
 
-    // public function show($id)
-    // {
-    //     $userStageId = Auth::user()->stage_id;
-    //     $course = Course::findOrFail($id);
-    //     if ($userStageId != $course->stage_id) {
-    //         abort(403, 'Unauthorized Action');
-    //     }
-    //     return response()->api(new CourseResource($course));
-    // }
+
 
     public function show($id)
     {

@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('parent_phone')->unique()->nullable();
             $table->string('parent_name')->nullable();
-            $table->enum('status', ['0', '1'])->default('0');
+            $table->enum('status', ['0', '1'])->default('1');
             $table->string('device_id')->nullable();
             $table->bigInteger('place_id')->unsigned();
             $table->foreign('place_id')->references('id')->on('places');
