@@ -22,9 +22,14 @@ Route::get('/banners/{id}', [BannerController::class, 'show']);
 
 Route::middleware('auth:sanctum')->group(function () {
 
+
+
+
     //user route
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/change_password', [AuthController::class, 'changePassword']);
+    Route::post('/profile', [AuthController::class, 'updateUser']);
+
 
     ////=================== questions ============================
     Route::get('/questions', [QuestionController::class, 'index']);

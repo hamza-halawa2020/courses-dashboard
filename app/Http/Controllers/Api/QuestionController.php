@@ -19,7 +19,9 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::all();
+        $userStageId = auth()->user()->stage_id;
+
+        $questions = Question::where('stage_id', $userStageId)->get();
 
         return response()->api(QuestionResource::collection($questions));
 
@@ -33,13 +35,16 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        $Question = Question::findOrFail($id);
+        $userStageId = auth()->user()->stage_id;
+
+        $Question = Question::where('stage_id', $userStageId)->findOrFail($id);
         return response()->api(new QuestionResource($Question));
     }
 
     public function randomQuestion()
     {
         $userId = auth()->id();
+        $userStageId = auth()->user()->stage_id;
         $viewCountKey = 'question_view_count_' . $userId;
         $lastViewedAtKey = 'last_question_viewed_at_' . $userId;
 
@@ -48,7 +53,7 @@ class QuestionController extends Controller
         if ($viewCount >= 2 && $lastViewedAt && Carbon::parse($lastViewedAt)->addHours(24)->isFuture()) {
             return response()->api([], 1, 'You have already viewed the maximum number of questions within the last 24 hours.');
         }
-        $question = Question::inRandomOrder()->limit(1)->get();
+        $question = Question::where('stage_id', $userStageId)->inRandomOrder()->limit(1)->get();
 
         $viewCount++;
         Cache::put($viewCountKey, $viewCount, now()->addHours(24));

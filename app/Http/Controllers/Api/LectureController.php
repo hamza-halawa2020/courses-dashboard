@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\LectureResource;
 use App\Models\Lecture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LectureController extends Controller
 {
@@ -16,14 +17,28 @@ class LectureController extends Controller
      */
     public function index()
     {
-        $lectures = Lecture::all();
+        $user = Auth::user();
+        $stageId = $user->stage_id;
+        $lectures = Lecture::with('chapter')
+            ->whereHas('chapter.course', function ($query) use ($stageId) {
+                $query->where('stage_id', $stageId);
+            })->get();
+
+
+        // $lectures = Lecture::all();
         return response()->api(LectureResource::collection($lectures));
     }
 
 
     public function show($id)
     {
-        $lecture = Lecture::findOrFail($id);
+        $user = Auth::user();
+        $stageId = $user->stage_id;
+        $lecture = Lecture::with('chapter')
+            ->whereHas('chapter.course', function ($query) use ($stageId) {
+                $query->where('stage_id', $stageId);
+            })->findOrFail($id);
+
         return response()->api(new LectureResource($lecture));
     }
 
