@@ -12,6 +12,6 @@ class AnswerHomeWork extends Model
 
     public function questionHomeWork()
     {
-        return $this->belongsTo(QusetionHomeWork::class);
+        return $this->belongsTo(QuestionHomeWork::class);
     }
 }

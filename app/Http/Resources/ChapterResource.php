@@ -14,13 +14,38 @@ class ChapterResource extends JsonResource
      */
     public function toArray($request)
     {
+        $user = $request->user();
+        $hasAccess = $user && $this->userCanAccess && $this->userCanAccess->contains('user_id', $user->id);
+
+        return $hasAccess ? $this->fullDetails() : $this->limitedDetails();
+    }
+
+
+
+
+    private function fullDetails()
+    {
         // return parent::toArray($request);
         return [
             'id' => $this->id,
             'title' => $this->title,
             'created_at' => $this->created_at,
             'price' => $this->price,
+            'examChapters' => ExamChapterResource::collection($this->examChapters),
             'lectures' => LectureResource::collection($this->lectures),
+
+        ];
+    }
+
+    private function limitedDetails()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'created_at' => $this->created_at,
+            'price' => $this->price,
+            'lectures' => LectureResource::collection($this->lectures),
+
         ];
     }
 }

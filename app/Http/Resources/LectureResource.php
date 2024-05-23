@@ -6,26 +6,22 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class LectureResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
     public function toArray($request)
     {
         $user = $request->user();
 
-        $hasAccess = $user && $this->userCanAccess->contains('user_id', $user->id);
+        $hasLectureAccess = $user && $this->userCanAccess && $this->userCanAccess->contains('user_id', $user->id);
+        $hasChapterAccess = $user && $this->chapter && $this->chapter->userCanAccess && $this->chapter->userCanAccess->contains('user_id', $user->id);
 
-        return $hasAccess ? $this->fullDetails() : $this->limitedDetails();
+        if ($hasChapterAccess) {
+            return $this->fullDetails();
+        } elseif ($hasLectureAccess) {
+            return $this->lectureDetails();
+        } else {
+            return $this->limitedDetails();
+        }
     }
 
-    /**
-     * Return full details of the lecture.
-     *
-     * @return array
-     */
     private function fullDetails()
     {
         return [
@@ -39,20 +35,32 @@ class LectureResource extends JsonResource
             'end' => $this->end,
             'status' => $this->status,
             'created_at' => $this->created_at,
+            'question_home_works' => QuestionHomeWorkResource::collection($this->questionHomeWorks),
+            'exam_lectures' => ExamLectureResource::collection($this->examLectures),
         ];
     }
 
-    /**
-     * Return limited details of the lecture.
-     *
-     * @return array
-     */
+    private function lectureDetails()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'price' => $this->price,
+            'video_url' => $this->video_url,
+            'des' => $this->des,
+            'start' => $this->start,
+            'end' => $this->end,
+            'status' => $this->status,
+        ];
+    }
+
     private function limitedDetails()
     {
         return [
             'id' => $this->id,
             'title' => $this->title,
             'price' => $this->price,
+            'des' => $this->des,
         ];
     }
 }

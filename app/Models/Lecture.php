@@ -45,6 +45,14 @@ class Lecture extends Model
         return $this->belongsTo(Chapter::class);
     }
 
+    public function questionHomeWorks()
+    {
+        return $this->hasMany(QuestionHomeWork::class);
+    }
+    public function examLectures()
+    {
+        return $this->hasMany(ExamLecture::class);
+    }
     public function userCanAccess()
     {
         return $this->hasMany(UserCanAccess::class);

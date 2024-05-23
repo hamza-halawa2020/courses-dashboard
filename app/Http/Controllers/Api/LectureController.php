@@ -23,10 +23,8 @@ class LectureController extends Controller
             ->whereHas('chapter.course', function ($query) use ($stageId) {
                 $query->where('stage_id', $stageId);
             })->get();
-
-
-        // $lectures = Lecture::all();
         return response()->api(LectureResource::collection($lectures));
+
     }
 
 
@@ -34,7 +32,7 @@ class LectureController extends Controller
     {
         $user = Auth::user();
         $stageId = $user->stage_id;
-        $lecture = Lecture::with('chapter')
+        $lecture = Lecture::with('chapter', 'questionHomeWorks')
             ->whereHas('chapter.course', function ($query) use ($stageId) {
                 $query->where('stage_id', $stageId);
             })->findOrFail($id);

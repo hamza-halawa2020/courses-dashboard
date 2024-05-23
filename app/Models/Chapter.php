@@ -35,5 +35,14 @@ class Chapter extends Model
     {
         return $this->hasMany(Lecture::class);
     }
+    public function examChapters()
+    {
+        return $this->hasMany(ExamChapter::class);
+    }
+
+    public function userCanAccess()
+    {
+        return $this->hasMany(UserCanAccess::class);
+    }
 
 }

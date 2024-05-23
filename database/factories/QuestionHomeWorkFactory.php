@@ -3,17 +3,17 @@
 namespace Database\Factories;
 
 use App\Models\Lecture;
-use App\Models\QusetionHomeWork;
+use App\Models\QuestionHomeWork;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class QusetionHomeWorkFactory extends Factory
+class QuestionHomeWorkFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array
      */
-    protected $model = QusetionHomeWork::class;
+    protected $model = QuestionHomeWork::class;
     public function definition()
     {
         return [

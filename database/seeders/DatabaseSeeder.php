@@ -14,7 +14,7 @@ use App\Models\ExamLecture;
 use App\Models\Lecture;
 use App\Models\Place;
 use App\Models\Question;
-use App\Models\QusetionHomeWork;
+use App\Models\QuestionHomeWork;
 use App\Models\Stage;
 use App\Models\Teacher;
 use App\Models\User;
@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
         Course::factory(5)->create();
         Chapter::factory(5)->create();
         Lecture::factory(40)->create();
-        QusetionHomeWork::factory(10)->create();
+        QuestionHomeWork::factory(10)->create();
         AnswerHomeWork::factory(30)->create();
         ExamChapter::factory(30)->create();
         AnswerChapter::factory(30)->create();

@@ -56,9 +56,10 @@ class Admin extends Authenticatable
     }// end of scopeWhenRoleId
 
     //rel
-    public function favouriteCoupons(){
+    public function favouriteCoupons()
+    {
 
-        return $this->belongsToMany(Coupon::class,'user_favourite_coupon','user_id','coupon_id');
+        return $this->belongsToMany(Coupon::class, 'user_favourite_coupon', 'user_id', 'coupon_id');
 
     }
 

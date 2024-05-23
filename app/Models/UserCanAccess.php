@@ -11,6 +11,7 @@ class UserCanAccess extends Model
     protected $fillable = [
         'user_id',
         'lecture_id',
+        'chapter_id',
     ];
 
     protected $table = 'user_can_access';
@@ -22,5 +23,9 @@ class UserCanAccess extends Model
     public function lecture()
     {
         return $this->belongsTo(lecture::class);
+    }
+    public function chapter()
+    {
+        return $this->belongsTo(Chapter::class);
     }
 }

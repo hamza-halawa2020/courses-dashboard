@@ -17,7 +17,8 @@ class CreateUserCanAccessTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('lecture_id')->references('id')->on('lectures')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('lecture_id')->nullable()->references('id')->on('lectures')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('chapter_id')->nullable()->references('id')->on('chapters')->onUpdate('cascade')->onDelete('cascade');
 
         });
     }
