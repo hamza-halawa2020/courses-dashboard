@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CourseResource;
+use App\Models\Chapter;
 use App\Models\Course;
 use App\Models\Lecture;
 use Illuminate\Http\Request;
@@ -23,8 +24,6 @@ class CourseController extends Controller
         $courses = Course::where('stage_id', $userStageId)->get();
         return response()->api(CourseResource::collection($courses));
     }
-
-
 
 
     public function show($id)

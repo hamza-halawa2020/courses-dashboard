@@ -22,4 +22,9 @@ class BalanceDetail extends Model
     {
         return $this->hasMany(AdminAddedBalance::class);
     }
+
+    public function buyCourseBalance()
+    {
+        return $this->hasMany(BuyCourseBalance::class);
+    }
 }

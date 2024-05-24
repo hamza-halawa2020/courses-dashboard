@@ -28,4 +28,8 @@ class UserCanAccess extends Model
     {
         return $this->belongsTo(Chapter::class);
     }
+    public function buyCourseBalance()
+    {
+        return $this->hasMany(BuyCourseBalance::class);
+    }
 }

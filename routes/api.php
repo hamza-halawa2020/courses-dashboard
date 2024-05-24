@@ -46,6 +46,7 @@ Route::middleware('auth:sanctum')->group(function () {
     ////=================== chapters ============================
     Route::get('/chapters', [ChapterController::class, 'index']);
     Route::get('/chapters/{id}', [ChapterController::class, 'show']);
+    Route::post('/chapters/{id}/buy', [ChapterController::class, 'buyChapter']);
 
     ////=================== lectures ============================
     Route::get('/lectures', [LectureController::class, 'index']);

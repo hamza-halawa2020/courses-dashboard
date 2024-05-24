@@ -105,6 +105,11 @@ class User extends Authenticatable
         return $this->hasMany(AdminAddedBalance::class);
     }
 
+    public function buyCourseBalance()
+    {
+        return $this->hasMany(BuyCourseBalance::class);
+    }
+
 
 
     public function stage()
