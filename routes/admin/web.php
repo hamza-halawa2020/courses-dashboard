@@ -57,7 +57,13 @@ Route::middleware([
             Route::resource('chapters', 'ChapterController');
 
             //examchapter
-            Route::get('exam_chapters/{examChapter}', [ExamChapterController::class, 'show'])->name('admin.exam_chapters.show');
+            Route::get('exam_chapters_with_chapters/{chapterId?}', [ExamChapterController::class, 'index'])->name('exam_chapters.index');
+            Route::get('exam_chapters/{id}', [ExamChapterController::class, 'show'])->name('exam_chapters.show');
+            Route::put('exam_chapters/{id}', [ExamChapterController::class, 'edit'])->name('exam_chapters.edit');
+            Route::post('exam_chapters', [ExamChapterController::class, 'create'])->name('exam_chapters.create');
+            Route::delete('exam_chapters/{id}', [ExamChapterController::class, 'destroy'])->name('exam_chapters.destroy');
+            Route::delete('exam_chapters/bulk_delete', [ExamChapterController::class, 'bulkDelete'])->name('exam_chapters.bulk_delete');
+
 
             //lecture routes
             Route::get('/lectures/data', 'LectureController@data')->name('lectures.data');

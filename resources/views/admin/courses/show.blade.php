@@ -47,11 +47,12 @@
                                                 class="btn btn-info btn-sm">
                                                 @lang('lectures.lectures')
                                             </a>
-
-                                            <a href="{{ route('admin.exam_chapters.index', $chapter->examChapters) }}"
+                                            <a href="{{ route('admin.exam_chapters.index', ['chapterId' => $chapter->id]) }}
+                                                "
                                                 class="btn btn-info btn-sm">
                                                 @lang('questions.exams_chapter')
                                             </a>
+
 
                                         </td>
                                     </tr>
