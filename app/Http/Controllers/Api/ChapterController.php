@@ -54,23 +54,19 @@ class ChapterController extends Controller
             return response()->api([], 1, 'Insufficient balance.');
         }
 
-        // Deduct the price from user's balance
         $userBalance->total -= $chapter->price;
         $userBalance->save();
 
-        // Log the purchase details in balance details
         $balanceDetail = BalanceDetail::create([
             'amount' => -$chapter->price,
             'balance_id' => $userBalance->id,
         ]);
 
-        // Grant access to the chapter
         $userCanAccess = UserCanAccess::create([
             'user_id' => $user->id,
             'chapter_id' => $chapterId,
         ]);
 
-        // Log the purchase in buy course balance
         BuyCourseBalance::create([
             'balance_details_id' => $balanceDetail->id,
             'user_can_access_id' => $userCanAccess->id,

@@ -12,32 +12,22 @@ use Carbon\Carbon;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $userStageId = auth()->user()->stage_id;
 
-        $questions = Question::where('stage_id', $userStageId)->get();
+        $questions = Question::with('answers')->where('stage_id', $userStageId)->get();
 
         return response()->api(QuestionResource::collection($questions));
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $userStageId = auth()->user()->stage_id;
 
-        $Question = Question::where('stage_id', $userStageId)->findOrFail($id);
+        $Question = Question::with('answers')->where('stage_id', $userStageId)->findOrFail($id);
         return response()->api(new QuestionResource($Question));
     }
 
@@ -53,13 +43,13 @@ class QuestionController extends Controller
         if ($viewCount >= 2 && $lastViewedAt && Carbon::parse($lastViewedAt)->addHours(24)->isFuture()) {
             return response()->api([], 1, 'You have already viewed the maximum number of questions within the last 24 hours.');
         }
-        $question = Question::where('stage_id', $userStageId)->inRandomOrder()->limit(1)->get();
+        $question = Question::with('answers')->where('stage_id', $userStageId)->inRandomOrder()->limit(1)->get();
 
         $viewCount++;
         Cache::put($viewCountKey, $viewCount, now()->addHours(24));
         Cache::put($lastViewedAtKey, Carbon::now(), now()->addHours(24));
 
-        return response()->api(new QuestionResource($question));
+        return response()->api(QuestionResource::collection($question));
     }
 
 }
