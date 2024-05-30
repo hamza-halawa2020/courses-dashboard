@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ExamChapterController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([
@@ -54,6 +55,9 @@ Route::middleware([
             Route::get('/chapters/data', 'ChapterController@data')->name('chapters.data');
             Route::delete('/chapters/bulk_delete', 'ChapterController@bulkDelete')->name('chapters.bulk_delete');
             Route::resource('chapters', 'ChapterController');
+
+            //examchapter
+            Route::get('exam_chapters/{examChapter}', [ExamChapterController::class, 'show'])->name('admin.exam_chapters.show');
 
             //lecture routes
             Route::get('/lectures/data', 'LectureController@data')->name('lectures.data');

@@ -1,7 +1,6 @@
 @extends('layouts.admin.app')
 
 @section('content')
-
     <div>
         <h2>@lang('stages.stages')</h2>
     </div>
@@ -24,12 +23,13 @@
 
                     @include('admin.partials._errors')
 
-                    {{--name--}}
+                    {{-- name --}}
                     <div class="form-group">
                         <label>@lang('stages.name') <span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control" value="{{ old('name', $stage->name) }}" required>
+                        <input type="text" name="name" class="form-control" value="{{ old('name', $stage->name) }}"
+                            required>
                     </div>
-                    {{--Button--}}
+                    {{-- Button --}}
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.update')</button>
                     </div>
@@ -41,6 +41,4 @@
         </div><!-- end of col -->
 
     </div><!-- end of row -->
-
 @endsection
-
