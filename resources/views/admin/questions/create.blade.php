@@ -64,10 +64,10 @@
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
                     </div>
-                </form><!-- end of form -->
-            </div><!-- end of tile -->
-        </div><!-- end of col -->
-    </div><!-- end of row -->
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
@@ -111,26 +111,3 @@
         });
     </script>
 @endpush
-{{-- @section('scripts')
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const addAnswerButton = document.getElementById('add-answer');
-            const answersContainer = document.getElementById('answers-container');
-
-            addAnswerButton.addEventListener('click', function() {
-                const answerGroup = document.createElement('div');
-                answerGroup.classList.add('answer-group', 'mb-3');
-
-                answerGroup.innerHTML = `
-                    <input type="text" name="answers[]" class="form-control mb-2" placeholder="Answer" required>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="is_right[]" value="1">
-                        <label class="form-check-label">@lang('questions.true')</label>
-                    </div>
-                `;
-
-                answersContainer.appendChild(answerGroup);
-            });
-        });
-    </script>
-@endsection --}}

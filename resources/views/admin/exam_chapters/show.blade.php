@@ -7,28 +7,26 @@
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.exam_chapters.index') }}">@lang('exams.examChapters')</a></li>
-        <li class="breadcrumb-item">{{ $examChapter->question }}</li>
-
+        <li class="breadcrumb-item"><a
+                href="{{ route('admin.exam_chapters.index', $examChapter->chapter_id) }}">@lang('exams.exams_chapters')</a></li>
+        <li class="breadcrumb-item">@lang('site.show')</li>
     </ul>
 
     <div class="row">
         <div class="col-md-12">
             <div class="tile shadow">
-                <div class="row mb-2">
-                    <div class="col-md-12">
-                        <a href="{{ route('admin.exam_chapters.edit', $examChapter->id) }}" class="btn btn-warning"><i
-                                class="fa fa-edit"></i> @lang('site.edit')</a>
-                        <form method="post" action="{{ route('admin.exam_chapters.destroy', $examChapter->id) }}"
-                            style="display: inline-block;">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i>
-                                @lang('site.delete')</button>
-                        </form>
-                    </div>
-                </div>
 
+                <div class="form-group">
+                    <a href="{{ route('admin.exam_chapters.edit', $examChapter->id) }}" class="btn btn-warning"><i
+                            class="fa fa-edit"></i> @lang('site.edit')</a>
+                    <form action="{{ route('admin.exam_chapters.destroy', $examChapter->id) }}" method="post"
+                        style="display: inline-block">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger delete"><i class="fa fa-trash"></i>
+                            @lang('site.delete')</button>
+                    </form>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
@@ -61,8 +59,7 @@
                                     @foreach ($examChapter->answerChapter as $answer)
                                         <tr>
                                             <td>{{ $answer->answer }}</td>
-                                            <td>{{ $answer->is_right ? __('exams.true') : __('exams.false') }}
-                                            </td>
+                                            <td>{{ $answer->is_right ? __('exams.true') : __('exams.false') }}</td>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -71,6 +68,10 @@
                         </div>
                     </div>
                 </div>
+
+
+
+
             </div>
         </div>
     </div>

@@ -18,23 +18,38 @@ class ExamChapterController extends Controller
     }
 
 
-    public function create()
+    public function create($chapterId)
     {
-        return view('admin.exam_chapters.create');
+        $chapter = Chapter::findOrFail($chapterId);
+        return view('admin.exam_chapters.create', compact('chapter'));
     }
+
+
+
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'question' => 'required|string',
             'chapter_id' => 'required|exists:chapters,id',
+            'answers' => 'required|array',
+            'answers.*' => 'required|string',
+            'is_right' => 'array',
         ]);
 
-        // Create a new exam chapter
-        $examChapter = ExamChapter::create($validatedData);
+        $examChapter = ExamChapter::create([
+            'question' => $request->question,
+            'chapter_id' => $request->chapter_id,
+        ]);
 
-        // Redirect to the index page with a success message
-        return redirect()->route('admin.exam_chapters.index')->with('success', 'Exam chapter created successfully.');
+        foreach ($request->answers as $index => $answer) {
+            $examChapter->answerChapter()->create([
+                'answer' => $answer,
+                'is_right' => in_array($index, $request->is_right ?? []),
+            ]);
+        }
+
+        return redirect()->route('admin.exam_chapters.index', $examChapter->chapter_id)->with('success', 'Exam chapter created successfully.');
     }
 
 
@@ -47,32 +62,43 @@ class ExamChapterController extends Controller
     public function edit($id)
     {
         $examChapter = ExamChapter::findOrFail($id);
-        return view('admin.exam_chapters.edit', compact('examChapter'));
+        $answerChapter = $examChapter->answerChapter;
+        return view('admin.exam_chapters.edit', compact('examChapter', 'answerChapter'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        // Validate the request data
         $validatedData = $request->validate([
-            'question' => 'required|string',
-            'chapter_id' => 'required|exists:chapters,id',
+            'question' => 'sometimes|required|string',
+            'answers' => 'sometimes|required|array',
+            'answers.*' => 'sometimes|required|string',
+            'is_right' => 'array',
         ]);
 
-        // Find the exam chapter by ID
-        $examChapter = ExamChapter::findOrFail($id);
+        $examChapter = ExamChapter::findOrFail($request->id);
+        $examChapter->update([
+            'question' => $request->question,
+        ]);
 
-        // Update the exam chapter with the validated data
-        $examChapter->update($validatedData);
-
-        // Redirect to the index page with a success message
-        return redirect()->route('admin.exam_chapters.index')->with('success', 'Exam chapter updated successfully.');
+        foreach ($request->answers as $index => $answer) {
+            $examChapter->answerChapter()->update(
+                [
+                    'answer' => $answer,
+                    'is_right' => $request->is_right,
+                ]
+            );
+        }
+        return redirect()->route('admin.exam_chapters.index', $examChapter->chapter_id)->with('success', 'Exam chapter updated successfully.');
     }
+
 
     public function destroy($id)
     {
         $examChapter = ExamChapter::findOrFail($id);
+        $chapterId = $examChapter->chapter_id;
         $examChapter->delete();
-        return redirect()->route('admin.exam_chapters.index');
+
+        return redirect()->route('admin.exam_chapters.index', $chapterId)->with('success', __('site.deleted_successfully'));
     }
 
     public function bulkDelete(Request $request)

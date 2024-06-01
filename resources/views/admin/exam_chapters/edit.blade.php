@@ -2,12 +2,12 @@
 
 @section('content')
     <div>
-        <h2>@lang('teachers.teachers')</h2>
+        <h2>@lang('exams.questions')</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.teachers.index') }}">@lang('teachers.teachers')</a></li>
+        {{-- <li class="breadcrumb-item"><a href="{{ route('admin.questions.index') }}">@lang('questions.questions')</a></li> --}}
         <li class="breadcrumb-item">@lang('site.edit')</li>
     </ul>
 
@@ -17,23 +17,37 @@
 
             <div class="tile shadow">
 
-                <form method="post" action="{{ route('admin.teachers.update', $teacher) }}">
+                <form method="post" action="{{ route('admin.exam_chapters.update', $examChapter) }}">
                     @csrf
-                    @method('put')
+                    @method('post')
 
                     @include('admin.partials._errors')
 
-                    {{-- teacher --}}
+                    {{-- question --}}
                     <div class="form-group">
-                        <label>@lang('teachers.teacher') <span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control"
-                            value="{{ old('teacher', $teacher->teacher) }}" required>
+                        <label>@lang('exams.question') <span class="text-danger">*</span></label>
+                        <input type="text" name="question" class="form-control"
+                            value="{{ old('question', $examChapter->question) }}" required>
                     </div>
-                    <div class="form-group">
-                        <label>@lang('teachers.details') <span class="text-danger">*</span></label>
-                        <input type="text" name="details" class="form-control"
-                            value="{{ old('details', $teacher->teacher) }}" required>
+
+                    {{-- answers --}}
+                    <div class="form-group" id="answers-container">
+                        <label>@lang('questions.answer')<span class="text-danger">*</span></label>
+                        @foreach ($answerChapter as $answer)
+                            <div class="answer-group mb-3">
+                                <input type="text" name="answers[]" class="form-control" placeholder="@lang('questions.answer')"
+                                    value="{{ old('answers[]', $answer->answer) }}" required>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="is_right[]"
+                                        value="{{ $answer->id }}" @if ($answer->is_right) checked @endif>
+                                    <label class="form-check-label">
+                                        @lang('questions.true')
+                                    </label>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
+
 
                     {{-- Button --}}
                     <div class="form-group">
@@ -46,5 +60,5 @@
 
         </div><!-- end of col -->
 
-    </div><!-- end of row -->
+    </div>
 @endsection

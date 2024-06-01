@@ -59,8 +59,11 @@ Route::middleware([
             //examchapter
             Route::get('exam_chapters_with_chapters/{chapterId?}', [ExamChapterController::class, 'index'])->name('exam_chapters.index');
             Route::get('exam_chapters/{id}', [ExamChapterController::class, 'show'])->name('exam_chapters.show');
-            Route::put('exam_chapters/{id}', [ExamChapterController::class, 'edit'])->name('exam_chapters.edit');
-            Route::post('exam_chapters', [ExamChapterController::class, 'create'])->name('exam_chapters.create');
+            Route::get('exam_chapters_edit/{id}', [ExamChapterController::class, 'edit'])->name('exam_chapters.edit');
+            Route::post('exam_chapters/{id}', [ExamChapterController::class, 'update'])->name('exam_chapters.update');
+            Route::get('exam_chapters_with_chapters_create/{chapterId}', [ExamChapterController::class, 'create'])->name('exam_chapters.create');
+
+            Route::post('exam_chapters', [ExamChapterController::class, 'store'])->name('exam_chapters.store');
             Route::delete('exam_chapters/{id}', [ExamChapterController::class, 'destroy'])->name('exam_chapters.destroy');
             Route::delete('exam_chapters/bulk_delete', [ExamChapterController::class, 'bulkDelete'])->name('exam_chapters.bulk_delete');
 

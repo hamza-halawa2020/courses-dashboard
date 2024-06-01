@@ -15,7 +15,7 @@
             <div class="tile shadow">
                 <div class="row mb-2">
                     <div class="col-md-12">
-                        <a href="{{ route('admin.exam_chapters.create') }}" class="btn btn-primary">
+                        <a href="{{ route('admin.exam_chapters.create', $chapterId) }}" class="btn btn-primary">
                             <i class="fa fa-plus"></i> @lang('site.create')
                         </a>
 
