@@ -63,7 +63,7 @@
                                                 class="btn btn-info btn-sm">
                                                 @lang('lectures.exam_lecture')
                                             </a>
-                                            <a href="{{ route('admin.exam_lectures.index', ['lectureId' => $lecture->id]) }}
+                                            <a href="{{ route('admin.question_home_works.index', ['lectureId' => $lecture->id]) }}
                                                 "
                                                 class="btn btn-primary btn-sm">
                                                 @lang('lectures.question_home_work')

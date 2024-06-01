@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ExamChapterController;
 use App\Http\Controllers\Admin\ExamLectureController;
+use App\Http\Controllers\Admin\QuestionHomeWorkController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([
@@ -82,6 +83,16 @@ Route::middleware([
             Route::delete('exam_lectures/bulk_delete', [ExamLectureController::class, 'bulkDelete'])->name('exam_lectures.bulk_delete');
 
 
+
+            //question_home_works
+            Route::get('question_home_works_with_lectures/{lectureId?}', [QuestionHomeWorkController::class, 'index'])->name('question_home_works.index');
+            Route::get('question_home_works/{id}', [QuestionHomeWorkController::class, 'show'])->name('question_home_works.show');
+            Route::get('question_home_works_edit/{id}', [QuestionHomeWorkController::class, 'edit'])->name('question_home_works.edit');
+            Route::post('question_home_works/{id}', [QuestionHomeWorkController::class, 'update'])->name('question_home_works.update');
+            Route::get('question_home_works_with_lectures_create/{lectureId}', [QuestionHomeWorkController::class, 'create'])->name('question_home_works.create');
+            Route::post('question_home_works', [QuestionHomeWorkController::class, 'store'])->name('question_home_works.store');
+            Route::delete('question_home_works/{id}', [QuestionHomeWorkController::class, 'destroy'])->name('question_home_works.destroy');
+            Route::delete('question_home_works/bulk_delete', [QuestionHomeWorkController::class, 'bulkDelete'])->name('question_home_works.bulk_delete');
 
 
 
