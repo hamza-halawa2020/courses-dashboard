@@ -49,11 +49,9 @@
                                             </a>
                                             <a href="{{ route('admin.exam_chapters.index', ['chapterId' => $chapter->id]) }}
                                                 "
-                                                class="btn btn-info btn-sm">
+                                                class="btn btn-primary btn-sm">
                                                 @lang('questions.exams_chapter')
                                             </a>
-
-
                                         </td>
                                     </tr>
                                 @endforeach

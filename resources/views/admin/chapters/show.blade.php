@@ -42,6 +42,7 @@
                                     <th>@lang('lectures.start')</th>
                                     <th>@lang('lectures.end')</th>
                                     <th>@lang('lectures.status')</th>
+                                    <th>@lang('site.action')</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,6 +57,18 @@
                                         <td>{{ $lecture->start }}</td>
                                         <td>{{ $lecture->end }}</td>
                                         <td>{{ $lecture->status }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.exam_lectures.index', ['lectureId' => $lecture->id]) }}
+                                                "
+                                                class="btn btn-info btn-sm">
+                                                @lang('lectures.exam_lecture')
+                                            </a>
+                                            <a href="{{ route('admin.exam_lectures.index', ['lectureId' => $lecture->id]) }}
+                                                "
+                                                class="btn btn-primary btn-sm">
+                                                @lang('lectures.question_home_work')
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

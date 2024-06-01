@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ExamChapterController;
+use App\Http\Controllers\Admin\ExamLectureController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([
@@ -62,10 +63,31 @@ Route::middleware([
             Route::get('exam_chapters_edit/{id}', [ExamChapterController::class, 'edit'])->name('exam_chapters.edit');
             Route::post('exam_chapters/{id}', [ExamChapterController::class, 'update'])->name('exam_chapters.update');
             Route::get('exam_chapters_with_chapters_create/{chapterId}', [ExamChapterController::class, 'create'])->name('exam_chapters.create');
-
             Route::post('exam_chapters', [ExamChapterController::class, 'store'])->name('exam_chapters.store');
             Route::delete('exam_chapters/{id}', [ExamChapterController::class, 'destroy'])->name('exam_chapters.destroy');
             Route::delete('exam_chapters/bulk_delete', [ExamChapterController::class, 'bulkDelete'])->name('exam_chapters.bulk_delete');
+
+
+
+
+
+            //exam_lectures
+            Route::get('exam_lectures_with_lectures/{lectureId?}', [ExamLectureController::class, 'index'])->name('exam_lectures.index');
+            Route::get('exam_lectures/{id}', [ExamLectureController::class, 'show'])->name('exam_lectures.show');
+            Route::get('exam_lectures_edit/{id}', [ExamLectureController::class, 'edit'])->name('exam_lectures.edit');
+            Route::post('exam_lectures/{id}', [ExamLectureController::class, 'update'])->name('exam_lectures.update');
+            Route::get('exam_lectures_with_lectures_create/{lectureId}', [ExamLectureController::class, 'create'])->name('exam_lectures.create');
+            Route::post('exam_lectures', [ExamLectureController::class, 'store'])->name('exam_lectures.store');
+            Route::delete('exam_lectures/{id}', [ExamLectureController::class, 'destroy'])->name('exam_lectures.destroy');
+            Route::delete('exam_lectures/bulk_delete', [ExamLectureController::class, 'bulkDelete'])->name('exam_lectures.bulk_delete');
+
+
+
+
+
+
+
+
 
 
             //lecture routes

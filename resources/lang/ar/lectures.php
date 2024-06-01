@@ -5,6 +5,8 @@ return [
     'lecture' => 'درس',
     'lecture_withal' => 'lecture_withal',
     'title' => 'العنوان',
+    'exam_lecture' => 'اختبارات الدروس',
+    'question_home_work' => 'اسئلة الدروس',
     'price' => 'السعر',
     'status' => 'حالة المحاضرة',
     'video_url' => 'عنوان الفيديو',

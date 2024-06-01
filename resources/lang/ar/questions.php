@@ -14,6 +14,7 @@ return [
     'exam' => 'اختبار',
     'exams' => 'اختبارات',
     'exams_chapter' => 'اختبارات الباب',
+    'questions_chapter' => 'اسئلة الباب',
 
 
 ];
