@@ -2,62 +2,75 @@
 
 @section('content')
     <div>
-        <h2>@lang('teachers.teacher')</h2>
+        <h2>{{ $examChapter->question }}</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item">@lang('teachers.teachers')</li>
-        <li class="breadcrumb-item">@lang('teachers.teacher') {{ $teacher->name }}</li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.exam_chapters.index') }}">@lang('exams.examChapters')</a></li>
+        <li class="breadcrumb-item">{{ $examChapter->question }}</li>
 
     </ul>
 
-    <div class="tile shadow">
-        <div class="row">
-            <div class="col-md-12 mb-4">
-                <h1>@lang('teachers.teacher'): {{ $teacher->name }}</h1>
-                <p class="h5">{{ $teacher->details }}</p>
-            </div>
-
-            <div class="col-md-12 mb-4">
-                <a href="{{ route('admin.courses.index') }}" class="btn btn-primary">
-                    @lang('courses.courses')
-                </a>
-            </div>
-
-            <div class="col-md-12">
-                @if ($teacher->courses->isEmpty())
-                    <div class="alert alert-info text-center h3">@lang('teachers.No_courses_available_for_this_teacher')</div>
-                @else
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>@lang('courses.title')</th>
-                                    <th>@lang('stages.stage_withal')</th>
-                                    <th>@lang('site.action')</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($teacher->courses as $course)
-                                    <tr>
-                                        <td>
-                                            <a
-                                                href="{{ route('admin.courses.show', $course->id) }}">{{ $course->title }}</a>
-                                        </td>
-                                        <td>{{ $course->stage->name }}</td>
-                                        <td>
-                                            <a href="{{ route('admin.courses.show', $course->id) }}"
-                                                class="btn btn-info btn-sm">
-                                                @lang('chapters.chapters')
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile shadow">
+                <div class="row mb-2">
+                    <div class="col-md-12">
+                        <a href="{{ route('admin.exam_chapters.edit', $examChapter->id) }}" class="btn btn-warning"><i
+                                class="fa fa-edit"></i> @lang('site.edit')</a>
+                        <form method="post" action="{{ route('admin.exam_chapters.destroy', $examChapter->id) }}"
+                            style="display: inline-block;">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i>
+                                @lang('site.delete')</button>
+                        </form>
                     </div>
-                @endif
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>@lang('exams.question')</th>
+                                    <td>{{ $examChapter->question }}</td>
+                                </tr>
+                                <tr>
+                                    <th>@lang('site.created_at')</th>
+                                    <td>{{ $examChapter->created_at }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h3>@lang('exams.answers')</h3>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>@lang('exams.answers')</th>
+                                        <th>@lang('exams.is_right')</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($examChapter->answerChapter as $answer)
+                                        <tr>
+                                            <td>{{ $answer->answer }}</td>
+                                            <td>{{ $answer->is_right ? __('exams.true') : __('exams.false') }}
+                                            </td>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

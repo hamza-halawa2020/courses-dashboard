@@ -2,12 +2,12 @@
 
 @section('content')
     <div>
-        <h2>@lang('exam_chapters.exam_chapters')</h2>
+        <h2>@lang('exams.exams_chapters')</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item">@lang('exam_chapters.exam_chapters')</li>
+        <li class="breadcrumb-item">@lang('exams.exams_chapters')</li>
     </ul>
 
     <div class="row">
@@ -66,9 +66,11 @@
                                             <td>{{ $examChapter->details }}</td>
                                             <td>
                                                 <a href="{{ route('admin.exam_chapters.show', $examChapter->id) }}"
-                                                    class="btn btn-sm btn-primary">@lang('exams.exams')</a>
+                                                    class="btn btn-sm btn-primary"><i
+                                                        class="fa fa-eye"></i>@lang('site.show')</a>
                                                 <a href="{{ route('admin.exam_chapters.edit', $examChapter->id) }}"
-                                                    class="btn btn-sm btn-warning">@lang('site.edit')</a>
+                                                    class="btn btn-sm btn-warning"><i
+                                                        class="fa fa-edit"></i>@lang('site.edit')</a>
                                                 <form action="{{ route('admin.exam_chapters.destroy', $examChapter->id) }}"
                                                     method="POST" class="d-inline">
                                                     @csrf

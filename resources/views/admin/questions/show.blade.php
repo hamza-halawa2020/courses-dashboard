@@ -2,13 +2,14 @@
 
 @section('content')
     <div>
-        <h2>@lang('questions.question_details')</h2>
+        <h2>{{ $question->question }}</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
         <li class="breadcrumb-item"><a href="{{ route('admin.questions.index') }}">@lang('questions.questions')</a></li>
-        <li class="breadcrumb-item">@lang('questions.question_details')</li>
+        <li class="breadcrumb-item">{{ $question->question }}</li>
+
     </ul>
 
     <div class="row">
@@ -26,7 +27,7 @@
                                 @lang('site.delete')</button>
                         </form>
                     </div>
-                </div><!-- end of row -->
+                </div>
 
                 <div class="row">
                     <div class="col-md-12">
@@ -45,9 +46,9 @@
                                     <td>{{ $question->created_at }}</td>
                                 </tr>
                             </table>
-                        </div><!-- end of table responsive -->
-                    </div><!-- end of col -->
-                </div><!-- end of row -->
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row mt-4">
                     <div class="col-md-12">
@@ -70,11 +71,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div><!-- end of table responsive -->
-                    </div><!-- end of col -->
-                </div><!-- end of row -->
-
-            </div><!-- end of tile -->
-        </div><!-- end of col -->
-    </div><!-- end of row -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

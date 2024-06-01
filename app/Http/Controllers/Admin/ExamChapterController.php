@@ -40,7 +40,7 @@ class ExamChapterController extends Controller
 
     public function show($id)
     {
-        $examChapter = ExamChapter::findOrFail($id);
+        $examChapter = ExamChapter::with('answerChapter')->findOrFail($id);
         return view('admin.exam_chapters.show', compact('examChapter'));
     }
 
