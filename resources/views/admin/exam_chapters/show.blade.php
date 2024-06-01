@@ -19,13 +19,6 @@
                 <div class="form-group">
                     <a href="{{ route('admin.exam_chapters.edit', $examChapter->id) }}" class="btn btn-warning"><i
                             class="fa fa-edit"></i> @lang('site.edit')</a>
-                    <form action="{{ route('admin.exam_chapters.destroy', $examChapter->id) }}" method="post"
-                        style="display: inline-block">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-danger delete"><i class="fa fa-trash"></i>
-                            @lang('site.delete')</button>
-                    </form>
                 </div>
                 <div class="row">
                     <div class="col-md-12">

@@ -25,7 +25,7 @@
                             @method('delete')
                             <input type="hidden" name="record_ids" id="record-ids">
                             <button type="submit" class="btn btn-danger" id="bulk-delete" disabled="true">
-                                <i class="fa fa-trash"></i> @lang('site.bulk_delete')
+                                <i class="fa fa-trash"></i>@lang('site.bulk_delete')
                             </button>
                         </form>
                     </div>

@@ -80,13 +80,14 @@ class ExamChapterController extends Controller
             'question' => $request->question,
         ]);
 
-        foreach ($request->answers as $index => $answer) {
-            $examChapter->answerChapter()->update(
-                [
-                    'answer' => $answer,
-                    'is_right' => $request->is_right,
-                ]
-            );
+        $answersData = $request->input('answers');
+        $isRightData = $request->input('is_right', []);
+
+        foreach ($examChapter->answerChapter as $index => $answer) {
+            $answer->update([
+                'answer' => $answersData[$index],
+                'is_right' => in_array($answer->id, $isRightData),
+            ]);
         }
         return redirect()->route('admin.exam_chapters.index', $examChapter->chapter_id)->with('success', 'Exam chapter updated successfully.');
     }

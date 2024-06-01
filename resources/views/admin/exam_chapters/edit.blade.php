@@ -2,12 +2,11 @@
 
 @section('content')
     <div>
-        <h2>@lang('exams.questions')</h2>
+        <h2>@lang('exams.exams_chapters') {{ $examChapter->question }}</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-        {{-- <li class="breadcrumb-item"><a href="{{ route('admin.questions.index') }}">@lang('questions.questions')</a></li> --}}
         <li class="breadcrumb-item">@lang('site.edit')</li>
     </ul>
 
