@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\NewNotification;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CourseRequest;
 use App\Models\Chapter;
@@ -10,6 +11,7 @@ use App\Models\Stage;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Yajra\DataTables\DataTables;
 
 class CourseController extends Controller
@@ -79,13 +81,36 @@ class CourseController extends Controller
     }
 
 
+
+    // public function store(CourseRequest $request)
+    // {
+    //     Course::create($request->only(['title', 'stage_id', 'teacher_id']));
+    //     session()->flash('success', __('site.added_successfully'));
+    //     return redirect()->route('admin.courses.index');
+
+    // }// end of store
+
     public function store(CourseRequest $request)
     {
-        Course::create($request->only(['title', 'stage_id', 'teacher_id']));
+        $course = Course::create($request->only(['title', 'stage_id', 'teacher_id']));
+
+        // Get users with the same stage_id
+        $users = User::where('stage_id', $course->stage_id)->get();
+
+
+
+        // Create a new notification entry in the database
+        $data = \App\Models\Notification::create([
+            'stage_id' => $request->stage_id,
+            'title' => 'new course added',
+            'description' => 'the name of the new course is : ' . $request->title,
+        ]);
+        event(new NewNotification($data));
+
+
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.courses.index');
-
-    }// end of store
+    }
 
     public function edit(Course $course)
     {

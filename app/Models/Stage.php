@@ -13,4 +13,9 @@ class Stage extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function notifiactions()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }
