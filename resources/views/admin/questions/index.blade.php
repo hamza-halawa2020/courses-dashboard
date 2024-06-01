@@ -116,13 +116,7 @@
                     data: 'question',
                     name: 'question'
                 },
-                // {
-                //     data: 'answer_id',
-                //     name: 'answer_id',
-                //     searchable: false
-                // },
                 {
-
                     data: 'stage_withal',
                     name: 'stage_withal',
                     searchable: false
@@ -137,7 +131,7 @@
                     name: 'actions',
                     searchable: false,
                     sortable: false,
-                    width: '20%'
+                    width: '20%',
                 },
             ],
             order: [

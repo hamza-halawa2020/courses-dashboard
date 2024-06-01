@@ -29,7 +29,7 @@ Route::middleware([
             Route::delete('/questions/bulk_delete', 'QuestionController@bulkDelete')->name('questions.bulk_delete');
             Route::resource('questions', 'QuestionController');
 
-            //question routes
+            //teacher routes
             Route::get('/teachers/data', 'TeacherController@data')->name('teachers.data');
             Route::delete('/teachers/bulk_delete', 'TeacherController@bulkDelete')->name('teachers.bulk_delete');
             Route::resource('teachers', 'TeacherController');

@@ -25,26 +25,9 @@ class QuestionController extends Controller
         return view('admin.questions.index');
     }
 
-    // public function data()
-    // {
-    //     $questions = Question::all();
 
-
-    //     return DataTables::of($questions)
-    //         ->addColumn('record_select', 'admin.questions.data_table.record_select')
-    //         ->editColumn('id', function (Question $question) {
-    //             return $question;
-    //         })
-    //         ->addColumn('stage_withal', function (Question $question) {
-    //             return $question->stage->name;
-    //         })
-    //         ->addColumn('actions', 'admin.questions.data_table.actions')
-    //         ->rawColumns(['record_select', 'stage_withal', 'actions'])
-    //         ->toJson();
-    // }
     public function data()
     {
-        // Use eager loading to fetch questions with their stages
         $questions = Question::with('stage')->get();
 
         return DataTables::of($questions)
@@ -53,7 +36,6 @@ class QuestionController extends Controller
                 return $question;
             })
             ->addColumn('stage_withal', function (Question $question) {
-                // Check if the stage exists
                 return $question->stage ? $question->stage->name : 'N/A';
             })
             ->addColumn('actions', 'admin.questions.data_table.actions')
@@ -62,9 +44,10 @@ class QuestionController extends Controller
     }
 
 
-    public function show(Question $question)
+    public function show($id)
     {
-        return $question;
+        $question = Question::with('answers')->findOrFail($id);
+        return view('admin.questions.show', compact('question'));
     }
 
 
@@ -105,7 +88,9 @@ class QuestionController extends Controller
 
         return view('admin.questions.edit', compact('question', 'stages', 'answer'));
     }
-    // public function update(Request $request, $id)
+
+
+    // public function update($id, Request $request)
     // {
     //     $question = Question::findOrFail($id);
     //     $question->update([
@@ -113,15 +98,17 @@ class QuestionController extends Controller
     //         'stage_id' => $request->input('stage_id'),
     //     ]);
 
-    //     $answersData = $request->input('answers');
-    //     $isRightData = $request->input('is_right');
+    //     $answers = $question->answers;
 
-    //     // foreach ($answersData as $index => $answer) {
-    //     $answer = Answer::update([
-    //         'answer' => $answersData,
-    //         'is_right' => $isRightData
-    //     ]);
-    //     // }
+
+    //     foreach ($answers as $answer) {
+    //         $answersData = $request->input('answers');
+    //         $isRightData = $request->input('is_right');
+    //         $answer->update([
+    //             'answer' => $answersData,
+    //             'is_right' => $isRightData
+    //         ]);
+    //     }
 
     //     session()->flash('success', __('site.updated_successfully'));
     //     return redirect()->route('admin.questions.index');
@@ -136,21 +123,22 @@ class QuestionController extends Controller
             'stage_id' => $request->input('stage_id'),
         ]);
 
-        $answers = $question->answers;
+        $answersData = $request->input('answers');
+        $isRightData = $request->input('is_right', []);
 
-
-        foreach ($answers as $answer) {
-            $answersData = $request->input('answers');
-            $isRightData = $request->input('is_right');
+        foreach ($question->answers as $index => $answer) {
             $answer->update([
-                'answer' => $answersData,
-                'is_right' => $isRightData
+                'answer' => $answersData[$index],
+                'is_right' => in_array($answer->id, $isRightData),
             ]);
         }
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.questions.index');
     }
+
+
+
 
     public function destroy(Question $question)
     {

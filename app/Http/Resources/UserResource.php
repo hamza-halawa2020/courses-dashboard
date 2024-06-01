@@ -18,6 +18,8 @@ class UserResource extends JsonResource
             'parent_name' => $this->parent_name,
             'image' => $this->image_path,
             'type' => $this->type,
+            'stage_id' => $this->stage_id,
+            'stage_name' => $this->stage ? $this->stage->name : null,
         ];
 
     }//end of to array

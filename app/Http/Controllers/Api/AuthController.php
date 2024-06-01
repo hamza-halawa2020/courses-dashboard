@@ -93,47 +93,32 @@ class AuthController extends Controller
         $user = auth()->user();
 
         $validator = Validator::make($request->all(), [
-            'name' => 'sometimes|required',
+            'name' => 'sometimes|required|string',
             'phone' => 'sometimes|required|unique:users,phone,' . $user->id . '|max:11|string',
             'parent_phone' => 'sometimes|required|max:11|string',
-            'parent_name' => 'sometimes|required',
-            'place_id' => 'sometimes|required',
-            'stage_id' => 'sometimes|required'
+            'parent_name' => 'sometimes|required|string',
+            'place_id' => 'sometimes|required|integer',
+            'stage_id' => 'sometimes|required|integer',
+            'password' => 'sometimes|required|string|min:8'
         ], $this->message());
-        $validator->sometimes('name', 'required', function ($input) {
-            return $input->filled('name');
-        });
-
-        $validator->sometimes('phone', 'required|unique:users,phone,' . $user->id . '|max:11|string', function ($input) {
-            return $input->filled('phone');
-        });
-
-        $validator->sometimes('parent_phone', 'required|max:11|string', function ($input) {
-            return $input->filled('parent_phone');
-        });
-
-        $validator->sometimes('parent_name', 'required', function ($input) {
-            return $input->filled('parent_name');
-        });
-
-        $validator->sometimes('place_id', 'required', function ($input) {
-            return $input->filled('place_id');
-        });
-
-        $validator->sometimes('stage_id', 'required', function ($input) {
-            return $input->filled('stage_id');
-        });
 
         if ($validator->fails()) {
             return response()->api([], 1, $validator->errors()->first());
         }
 
-        $user->update($request->all());
+        $user->update($request->only([
+            'name',
+            'phone',
+            'parent_phone',
+            'parent_name',
+            'place_id',
+            'stage_id',
+            'password'
+        ]));
 
         $data['user'] = new UserResource($user);
         return response()->api($data, 0, 'User data updated successfully');
     }
-
 
 
     public function changePassword(Request $request)
