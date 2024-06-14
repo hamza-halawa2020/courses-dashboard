@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\PlaceController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\StageController;
 use App\Http\Controllers\Api\TeacherController;
+use App\Http\Controllers\Api\TestingQuestionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,7 +34,7 @@ Route::get('/stages', [StageController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
 
-    ////=================== user ============================
+    ////=================== uTestingQuestionControllerser ============================
 
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/change_password', [AuthController::class, 'changePassword']);
@@ -68,7 +69,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/balances/{id}', [BalanceController::class, 'show']);
     Route::post('/balances', [BalanceController::class, 'addBalanceByQrCode']);
 
+    ////=================== testing questions ============================
+    // Route::apiResource('/testing_questions', TestingQuestionController::class);
 
+    Route::get('/testing_questions', [TestingQuestionController::class, 'index']);
 
 
 

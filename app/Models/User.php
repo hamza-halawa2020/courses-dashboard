@@ -41,6 +41,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Balance::class);
     }
+    public function testingQuestion()
+    {
+        return $this->hasMany(TestingQuestion::class);
+    }
     public function userCanAccess()
     {
         return $this->hasMany(UserCanAccess::class);
