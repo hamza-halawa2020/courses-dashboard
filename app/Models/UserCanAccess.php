@@ -22,7 +22,7 @@ class UserCanAccess extends Model
     }
     public function lecture()
     {
-        return $this->belongsTo(lecture::class);
+        return $this->belongsTo(Lecture::class);
     }
     public function chapter()
     {

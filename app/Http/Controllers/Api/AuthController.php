@@ -13,6 +13,37 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    // public function login(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'phone' => 'required',
+    //         'password' => 'required',
+    //     ], $this->message());
+
+    //     if ($validator->fails()) {
+    //         return response()->api([], 1, $validator->errors()->first());
+    //     }
+
+    //     $credentials = $request->only('phone', 'password');
+
+    //     if (Auth::attempt($credentials)) {
+    //         $user = Auth::user();
+
+    //         if ($user->status == 0) {
+    //             Auth::logout();
+    //             return response()->api([], 1, 'Your account is inactive. Please contact support.');
+    //         }
+
+    //         $data['user'] = new UserResource($user);
+    //         $data['token'] = $user->createToken('my-app-token')->plainTextToken;
+
+    //         return response()->api($data, 0, 'تم تسجيل الدخول بنجاح');
+    //     } else {
+    //         return response()->api([], 1, __('auth.failed'));
+    //     }
+    // }
+
+
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -39,9 +70,16 @@ class AuthController extends Controller
 
             return response()->api($data, 0, 'تم تسجيل الدخول بنجاح');
         } else {
-            return response()->api([], 1, __('auth.failed'));
+            $existingUser = User::where('phone', $request->phone)->first();
+
+            if ($existingUser) {
+                return response()->api([], 1, 'Incorrect password.');
+            } else {
+                return response()->api([], 1, 'User not found with this phone number.');
+            }
         }
     }
+
 
 
     public function register(Request $request)
@@ -139,6 +177,18 @@ class AuthController extends Controller
 
         return response()->api([], 0, 'Your password has been changed successfully.');
     }
+
+    public function logout(Request $request)
+    {
+        // Get the currently authenticated user
+        $user = $request->user();
+
+        // Revoke the token that was used to authenticate the current request
+        $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
+
+        return response()->json(['message' => 'تم تسجيل الخروج بنجاح'], 200);
+    }
+
 
     function message()
     {

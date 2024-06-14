@@ -126,7 +126,7 @@ class UserController extends Controller
             if ($balance) {
                 $balanceDetails = $balance->balanceDetails()->create(['amount' => $request->balance]);
                 if ($balanceDetails) {
-                    $user->adminAddedBalances()->create(['balance_details_id' => $balanceDetails->id]);
+                    $user->adminAddedBalances()->create(['balance_detail_id' => $balanceDetails->id]);
                 } else {
                     // Handle error if balance details creation fails
                     $balance->delete(); // Rollback balance creation
@@ -229,7 +229,7 @@ class UserController extends Controller
                 $balance->total += $request->balance;
                 $balance->save();
 
-                $selectedUser->adminAddedBalances()->create(['balance_details_id' => $balanceDetail->id]);
+                $selectedUser->adminAddedBalances()->create(['balance_detail_id' => $balanceDetail->id]);
             } else {
                 return back()->with('error', __('site.error_message'));
             }

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BalanceResource;
 use App\Models\Balance;
 use App\Models\BalanceDetail;
 use App\Models\QR;
@@ -17,7 +18,8 @@ class BalanceController extends Controller
     {
         $user = Auth::user();
         $balances = Balance::where('user_id', $user->id)->with('balanceDetails')->get();
-        return response()->json(['balances' => $balances], 200);
+        return response()->api(BalanceResource::collection($balances));
+
     }
 
 
@@ -54,7 +56,7 @@ class BalanceController extends Controller
         $balance->save();
 
         $qrAddedBalance = new QRAddedBalance();
-        $qrAddedBalance->balance_details_id = $balanceDetail->id;
+        $qrAddedBalance->balance_detail_id = $balanceDetail->id;
         $qrAddedBalance->qr_id = $qrCode->id;
         $qrAddedBalance->save();
 

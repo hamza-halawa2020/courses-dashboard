@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AdminAddedBalance extends Model
 {
     use HasFactory;
-    protected $fillable = ['balance_details_id', 'user_id'];
+    protected $fillable = ['balance_detail_id', 'user_id'];
 
     public function user()
     {

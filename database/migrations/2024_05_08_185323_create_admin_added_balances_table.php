@@ -16,7 +16,7 @@ class CreateAdminAddedBalancesTable extends Migration
         Schema::create('admin_added_balances', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('balance_details_id')->references('id')->on('balance_details')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('balance_detail_id')->references('id')->on('balance_details')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
 

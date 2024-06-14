@@ -16,7 +16,7 @@ class CreateQrAddedBalancesTable extends Migration
         Schema::create('qr_added_balances', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('balance_details_id')->references('id')->on('balance_details')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('balance_detail_id')->references('id')->on('balance_details')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('qr_id')->unique()->references('id')->on('q_r_s')->onUpdate('cascade')->onDelete('cascade');
 
         });

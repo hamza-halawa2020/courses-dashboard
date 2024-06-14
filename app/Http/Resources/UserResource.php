@@ -20,6 +20,8 @@ class UserResource extends JsonResource
             'type' => $this->type,
             'stage_id' => $this->stage_id,
             'stage_name' => $this->stage ? $this->stage->name : null,
+            'place_id' => $this->place_id,
+            'place_name' => $this->place ? $this->place->name : null,
         ];
 
     }//end of to array

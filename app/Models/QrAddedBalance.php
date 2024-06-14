@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class QrAddedBalance extends Model
 {
     use HasFactory;
-    protected $fillable = ['balance_details_id', 'qr_id'];
+    protected $fillable = ['balance_detail_id', 'qr_id'];
 
     public function qr()
     {

@@ -68,7 +68,7 @@ class ChapterController extends Controller
         ]);
 
         BuyCourseBalance::create([
-            'balance_details_id' => $balanceDetail->id,
+            'balance_detail_id' => $balanceDetail->id,
             'user_can_access_id' => $userCanAccess->id,
             'user_id' => $user->id,
         ]);

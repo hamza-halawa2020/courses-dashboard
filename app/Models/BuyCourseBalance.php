@@ -10,7 +10,7 @@ class BuyCourseBalance extends Model
     use HasFactory;
     protected $fillable =
         [
-            'balance_details_id',
+            'balance_detail_id',
             'user_can_access_id',
             'user_id'
         ];

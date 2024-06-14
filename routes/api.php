@@ -13,6 +13,8 @@ use App\Http\Controllers\Api\StageController;
 use App\Http\Controllers\Api\TeacherController;
 use Illuminate\Support\Facades\Route;
 
+
+////=================== user ============================
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
@@ -20,15 +22,23 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/banners', [BannerController::class, 'index']);
 Route::get('/banners/{id}', [BannerController::class, 'show']);
 
+////=================== Places ============================
+Route::get('/places', [PlaceController::class, 'index']);
+
+////=================== Stages ============================
+Route::get('/stages', [StageController::class, 'index']);
+
+
+////=================== sanctum ============================
+
 Route::middleware('auth:sanctum')->group(function () {
 
+    ////=================== user ============================
 
-
-
-    //user route
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/change_password', [AuthController::class, 'changePassword']);
     Route::post('/profile', [AuthController::class, 'updateUser']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 
 
     ////=================== questions ============================
@@ -51,6 +61,7 @@ Route::middleware('auth:sanctum')->group(function () {
     ////=================== lectures ============================
     Route::get('/lectures', [LectureController::class, 'index']);
     Route::get('/lectures/{id}', [LectureController::class, 'show']);
+    Route::post('/lectures/{id}/buy', [LectureController::class, 'buyLecture']);
 
     ////=================== balance ============================
     Route::get('/balances', [BalanceController::class, 'index']);
@@ -63,8 +74,3 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
-////=================== Places ============================
-Route::get('/places', [PlaceController::class, 'index']);
-
-////=================== Stages ============================
-Route::get('/stages', [StageController::class, 'index']);
