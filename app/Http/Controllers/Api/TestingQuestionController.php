@@ -7,6 +7,7 @@ use App\Http\Resources\TestingQuestionResource;
 use App\Models\TestingQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class TestingQuestionController extends Controller
 {
@@ -32,7 +33,22 @@ class TestingQuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user()->id;
+        $validator = Validator::make($request->all(), [
+            // 'user_id' => 'required',
+            'answer_id' => 'required',
+            'is_right' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
+
+        $testing = TestingQuestion::create([
+            'user_id' => $user,
+            'answer_id' => $request->answer_id,
+            'is_right' => $request->is_right,
+        ]);
+        return response()->api($testing);
     }
 
     /**
@@ -43,7 +59,9 @@ class TestingQuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = Auth::user();
+        $testingQuestion = TestingQuestion::where('user_id', $user->id)->with('answer')->findOrFail($id);
+        return new TestingQuestionResource($testingQuestion);
     }
 
     /**

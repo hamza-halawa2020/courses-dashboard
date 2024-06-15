@@ -15,11 +15,11 @@ use App\Http\Controllers\Api\TestingQuestionController;
 use Illuminate\Support\Facades\Route;
 
 
-////=================== user ============================
+////=================== users ============================
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
-////=================== banner ============================
+////=================== banners ============================
 Route::get('/banners', [BannerController::class, 'index']);
 Route::get('/banners/{id}', [BannerController::class, 'show']);
 
@@ -34,8 +34,7 @@ Route::get('/stages', [StageController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
 
-    ////=================== uTestingQuestionControllerser ============================
-
+    ////=================== users ============================
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/change_password', [AuthController::class, 'changePassword']);
     Route::post('/profile', [AuthController::class, 'updateUser']);
@@ -70,9 +69,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/balances', [BalanceController::class, 'addBalanceByQrCode']);
 
     ////=================== testing questions ============================
-    // Route::apiResource('/testing_questions', TestingQuestionController::class);
-
     Route::get('/testing_questions', [TestingQuestionController::class, 'index']);
+    Route::get('/testing_questions/{id}', [TestingQuestionController::class, 'show']);
+    Route::post('/testing_questions', [TestingQuestionController::class, 'store']);
 
 
 
