@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TestingQuestionResource;
+use App\Models\AddPointFromQuestion;
+use App\Models\Answer;
+use App\Models\Point;
+use App\Models\PointDetail;
 use App\Models\TestingQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,11 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class TestingQuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $user = Auth::user();
@@ -25,17 +25,10 @@ class TestingQuestionController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $user = Auth::user()->id;
+        $user = Auth::user();
         $validator = Validator::make($request->all(), [
-            // 'user_id' => 'required',
             'answer_id' => 'required',
             'is_right' => 'required',
         ]);
@@ -44,19 +37,51 @@ class TestingQuestionController extends Controller
         }
 
         $testing = TestingQuestion::create([
-            'user_id' => $user,
+            'user_id' => $user->id,
             'answer_id' => $request->answer_id,
             'is_right' => $request->is_right,
         ]);
+
+        $correctAnswer = Answer::where('id', $request->answer_id)->value('is_right');
+        if ($request->is_right == $correctAnswer) {
+
+            $point = $this->getOrCreateUserPoint($user);
+
+            $pointDetail = new PointDetail();
+            $pointDetail->amount = 10;
+            $pointDetail->point_id = $point->id;
+            $pointDetail->save();
+
+            $point->total += $pointDetail->amount;
+            $point->save();
+
+            $addPointFromQuestion = new AddPointFromQuestion();
+            $addPointFromQuestion->point_detail_id = $pointDetail->id;
+            $addPointFromQuestion->testing_question_id = $testing->id;
+            $addPointFromQuestion->save();
+
+
+
+        } else {
+            return response()->json('wrong answer best of luck next time');
+        }
         return response()->api($testing);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    protected function getOrCreateUserPoint($user)
+    {
+        if ($user->points->isEmpty()) {
+            $point = new Point();
+            $point->total = 0;
+            $point->user_id = $user->id;
+            $point->save();
+        } else {
+            $point = $user->points->first();
+        }
+        return $point;
+    }
+
+
     public function show($id)
     {
         $user = Auth::user();
@@ -64,24 +89,13 @@ class TestingQuestionController extends Controller
         return new TestingQuestionResource($testingQuestion);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //

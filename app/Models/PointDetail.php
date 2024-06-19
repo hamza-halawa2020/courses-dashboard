@@ -5,19 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TestingQuestion extends Model
+class PointDetail extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'answer_id', 'is_right'];
+    protected $fillable = ['amount', 'point_id'];
 
-
-    public function user()
+    public function point()
     {
-        return $this->belongsTo(User::class);
-    }
-    public function answer()
-    {
-        return $this->belongsTo(Answer::class);
+        return $this->belongsTo(Point::class);
     }
     public function addPointFromQueston()
     {
