@@ -18,6 +18,10 @@ class BalanceDetail extends Model
     {
         return $this->hasMany(QrAddedBalance::class);
     }
+    public function convertPointsToBalance()
+    {
+        return $this->hasMany(ConvertPointToBalance::class);
+    }
     public function adminAddedBalances()
     {
         return $this->hasMany(AdminAddedBalance::class);

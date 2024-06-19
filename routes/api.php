@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BalanceController;
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\ChapterController;
+use App\Http\Controllers\Api\ConvertPointToBalanceController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\LectureController;
 use App\Http\Controllers\Api\PlaceController;
@@ -73,7 +74,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/testing_questions/{id}', [TestingQuestionController::class, 'show']);
     Route::post('/testing_questions', [TestingQuestionController::class, 'store']);
 
+    ////=================== convert points ==============================
 
+    Route::post('/convert-points', [ConvertPointToBalanceController::class, 'convert']);
 
 });
 

@@ -60,8 +60,6 @@ class TestingQuestionController extends Controller
             $addPointFromQuestion->testing_question_id = $testing->id;
             $addPointFromQuestion->save();
 
-
-
         } else {
             return response()->json('wrong answer best of luck next time');
         }

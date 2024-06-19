@@ -18,5 +18,9 @@ class PointDetail extends Model
     {
         return $this->hasMany(AddPointFromQuestion::class);
     }
+    public function convertPointsToBalance()
+    {
+        return $this->hasMany(ConvertPointToBalance::class);
+    }
 
 }
