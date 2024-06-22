@@ -29,6 +29,9 @@ class BalanceDetailResource extends JsonResource
         if ($this->buyCourseBalance->isNotEmpty()) {
             $response['buyCourseBalance'] = BuyCourseBalanceResource::collection($this->buyCourseBalance);
         }
+        if ($this->convertPointsToBalance->isNotEmpty()) {
+            $response['convertPointsToBalance'] = ConvertPointToBalanceResource::collection($this->convertPointsToBalance);
+        }
 
         return $response;
     }

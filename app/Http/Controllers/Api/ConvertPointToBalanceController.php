@@ -25,13 +25,12 @@ class ConvertPointToBalanceController extends Controller
     {
         $user = Auth::user();
         $validator = Validator::make($request->all(), [
-            'amount' => 'required|numeric|min:1',
+            'amount' => 'required|numeric|min:10',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
         }
-
 
         $point = Point::where('user_id', $user->id)->first();
 
@@ -39,34 +38,42 @@ class ConvertPointToBalanceController extends Controller
             return response()->json(['error' => 'Not enough points'], 400);
         }
 
+        // Define conversion rate
+        $conversionRate = 10;
+        $balanceAmount = $request->amount / $conversionRate;
+
+        // Create PointDetail and deduct points
         $pointDetail = new PointDetail();
-        $pointDetail->amount -= $request->amount;
+        $pointDetail->amount = -$request->amount;
         $pointDetail->point_id = $point->id;
         $pointDetail->save();
 
+        // Update Point total
         $point->total += $pointDetail->amount;
         $point->save();
 
+        // Create BalanceDetail and add balance
         $balance = Balance::where('user_id', $user->id)->first();
 
         $balanceDetail = new BalanceDetail();
-        $balanceDetail->amount = $request->amount;
+        $balanceDetail->amount = $balanceAmount;
         $balanceDetail->balance_id = $balance->id;
         $balanceDetail->save();
 
+        // Update Balance total
         $balance->total += $balanceDetail->amount;
         $balance->save();
 
-
+        // Create conversion record
         ConvertPointToBalance::create([
             'balance_detail_id' => $balanceDetail->id,
             'point_detail_id' => $pointDetail->id,
             'amount' => $request->amount,
         ]);
 
-
         return response()->json(['success' => 'Points converted to balance successfully'], 200);
     }
+
 
     public function store(Request $request)
     {
