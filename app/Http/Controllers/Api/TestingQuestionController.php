@@ -36,14 +36,18 @@ class TestingQuestionController extends Controller
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $testing = TestingQuestion::create([
-            'user_id' => $user->id,
-            'answer_id' => $request->answer_id,
-            'is_right' => $request->is_right,
-        ]);
 
         $correctAnswer = Answer::where('id', $request->answer_id)->value('is_right');
-        if ($request->is_right == $correctAnswer) {
+        if ($request->is_right != $correctAnswer) {
+            return response()->json('wrong answer best of luck next time');
+
+        } else {
+
+            $testing = TestingQuestion::create([
+                'user_id' => $user->id,
+                'answer_id' => $request->answer_id,
+                'is_right' => $request->is_right,
+            ]);
 
             $point = $this->getOrCreateUserPoint($user);
 
@@ -59,9 +63,6 @@ class TestingQuestionController extends Controller
             $addPointFromQuestion->point_detail_id = $pointDetail->id;
             $addPointFromQuestion->testing_question_id = $testing->id;
             $addPointFromQuestion->save();
-
-        } else {
-            return response()->json('wrong answer best of luck next time');
         }
         return response()->api($testing);
     }
