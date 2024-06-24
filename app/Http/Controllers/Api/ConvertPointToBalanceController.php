@@ -25,7 +25,7 @@ class ConvertPointToBalanceController extends Controller
     {
         $user = Auth::user();
         $validator = Validator::make($request->all(), [
-            'amount' => 'required|numeric|min:10',
+            'amount' => 'required|numeric|min:10000',
         ]);
 
         if ($validator->fails()) {
@@ -39,7 +39,7 @@ class ConvertPointToBalanceController extends Controller
         }
 
         // Define conversion rate
-        $conversionRate = 10;
+        $conversionRate = 200;
         $balanceAmount = $request->amount / $conversionRate;
 
         // Create PointDetail and deduct points
