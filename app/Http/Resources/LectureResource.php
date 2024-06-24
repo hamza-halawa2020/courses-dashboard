@@ -29,7 +29,6 @@ class LectureResource extends JsonResource
             'title' => $this->title,
             'price' => $this->price,
             'video_url' => $this->video_url,
-            'note_book_url' => $this->note_book_url,
             'des' => $this->des,
             'start' => $this->start,
             'end' => $this->end,
@@ -38,6 +37,8 @@ class LectureResource extends JsonResource
             'question_home_works' => QuestionHomeWorkResource::collection($this->questionHomeWorks),
             'exam_lectures' => ExamLectureResource::collection($this->examLectures),
             'isPururchased' => 'true',
+            'note_book_url' => $this->note_book_url,
+
         ];
     }
 
@@ -52,6 +53,9 @@ class LectureResource extends JsonResource
             'start' => $this->start,
             'end' => $this->end,
             'status' => $this->status,
+            'created_at' => $this->created_at,
+            'question_home_works' => QuestionHomeWorkResource::collection($this->questionHomeWorks),
+            'exam_lectures' => ExamLectureResource::collection($this->examLectures),
             'isPururchased' => 'true',
         ];
     }
