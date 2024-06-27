@@ -30,7 +30,7 @@ class BalanceController extends Controller
         $balances = Balance::where('user_id', $user->id)
             ->with([
                 'balanceDetails' => function ($query) {
-                    $query->orderBy('created_at', 'desc')->paginate(5);
+                    $query->orderBy('created_at', 'desc')->paginate(10);
                 }
             ])
             ->get();
