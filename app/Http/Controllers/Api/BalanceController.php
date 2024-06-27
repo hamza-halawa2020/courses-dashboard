@@ -14,16 +14,6 @@ use Illuminate\Support\Facades\Validator;
 class BalanceController extends Controller
 {
 
-    // public function index()
-    // {
-    //     $user = Auth::user();
-    //     $balances = Balance::where('user_id', $user->id)->with('balanceDetails')->paginate(2);
-    //     return response()->api(BalanceResource::collection($balances));
-
-    // }
-
-
-
     public function index()
     {
         $user = Auth::user();
