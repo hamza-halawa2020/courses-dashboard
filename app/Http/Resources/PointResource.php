@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BalanceResource extends JsonResource
+class PointResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +18,8 @@ class BalanceResource extends JsonResource
         return [
             'id' => $this->id,
             'created_at' => $this->created_at,
-            'total_balance' => $this->total,
-            'total_point' => $this->points->sum('total'),
-            'balance_details' => BalanceDetailResource::collection($this->balanceDetails),
+            'total_point' => $this->total,
+
         ];
     }
 }

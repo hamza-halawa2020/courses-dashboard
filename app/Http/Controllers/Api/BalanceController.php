@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\BalanceResource;
 use App\Models\Balance;
 use App\Models\BalanceDetail;
+use App\Models\Point;
 use App\Models\QR;
 use App\Models\QrAddedBalance;
 use Illuminate\Http\Request;
@@ -13,7 +14,6 @@ use Illuminate\Support\Facades\Validator;
 
 class BalanceController extends Controller
 {
-
     public function index()
     {
         $user = Auth::user();
@@ -24,10 +24,16 @@ class BalanceController extends Controller
                 }
             ])
             ->get();
+        $points = Point::where('user_id', $user->id)->get();
 
-        // return response()->api($balances);
-        return response()->api(BalanceResource::collection($balances));
+        $combined = $balances->map(function ($balance) use ($points) {
+            $balance->points = $points;
+            return $balance;
+        });
+
+        return response()->api(BalanceResource::collection($combined));
     }
+
 
 
 
