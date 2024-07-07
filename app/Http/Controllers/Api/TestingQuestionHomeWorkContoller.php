@@ -3,25 +3,25 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\TestingQuestionResource;
-use App\Models\AddPointFromQuestion;
-use App\Models\Answer;
-use App\Models\Point;
-use App\Models\PointDetail;
-use App\Models\TestingQuestion;
+use App\Http\Resources\TestingQuestionHomeWorkResource;
+use App\Models\AddPointFromQuestionHomeWork;
+use App\Models\AnswerHomeWork;
+use App\Models\TestingQuestionHomeWork;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Models\PointDetail;
+use App\Models\Point;
 
-class TestingQuestionController extends Controller
+class TestingQuestionHomeWorkContoller extends Controller
 {
 
     public function index()
     {
         $user = Auth::user();
-        $testings = TestingQuestion::where('user_id', $user->id)->with('answer')->get();
+        $testings = TestingQuestionHomeWork::where('user_id', $user->id)->with('answerHomeWork')->get();
         // return response()->json($testings);
-        return response()->api(TestingQuestionResource::collection($testings));
+        return response()->api(TestingQuestionHomeWorkResource::collection($testings));
 
     }
 
@@ -29,7 +29,7 @@ class TestingQuestionController extends Controller
     {
         $user = Auth::user();
         $validator = Validator::make($request->all(), [
-            'answer_id' => 'required',
+            'answer_hw_id' => 'required',
             'is_right' => 'required',
         ]);
         if ($validator->fails()) {
@@ -37,15 +37,15 @@ class TestingQuestionController extends Controller
         }
 
 
-        $correctAnswer = Answer::where('id', $request->answer_id)->value('is_right');
+        $correctAnswer = AnswerHomeWork::where('id', $request->answer_hw_id)->value('is_right');
         if ($request->is_right != $correctAnswer) {
             return response()->json('wrong answer best of luck next time');
 
         } else {
 
-            $testing = TestingQuestion::create([
+            $testing = TestingQuestionHomeWork::create([
                 'user_id' => $user->id,
-                'answer_id' => $request->answer_id,
+                'answer_hw_id' => $request->answer_hw_id,
                 'is_right' => $request->is_right,
             ]);
 
@@ -59,9 +59,9 @@ class TestingQuestionController extends Controller
             $point->total += $pointDetail->amount;
             $point->save();
 
-            $addPointFromQuestion = new AddPointFromQuestion();
+            $addPointFromQuestion = new AddPointFromQuestionHomeWork();
             $addPointFromQuestion->point_detail_id = $pointDetail->id;
-            $addPointFromQuestion->testing_question_id = $testing->id;
+            $addPointFromQuestion->testing_q_h_w_id = $testing->id;
             $addPointFromQuestion->save();
         }
         return response()->api($testing);
@@ -84,8 +84,10 @@ class TestingQuestionController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        $testingQuestion = TestingQuestion::where('user_id', $user->id)->with('answer')->findOrFail($id);
-        return new TestingQuestionResource($testingQuestion);
+        $testingQuestion = TestingQuestionHomeWork::where('user_id', $user->id)->with('answerHomeWork')->findOrFail($id);
+        // return response()->json($testings);
+        return new TestingQuestionHomeWorkResource($testingQuestion);
     }
 
 }
+

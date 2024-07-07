@@ -18,6 +18,14 @@ class PointDetail extends Model
     {
         return $this->hasMany(AddPointFromQuestion::class);
     }
+    public function addPointFromExamLecture()
+    {
+        return $this->hasMany(AddPointFromExamLecture::class);
+    }
+    public function addPointFromQuestionHomeWork()
+    {
+        return $this->hasMany(AddPointFromQuestionHomeWork::class);
+    }
     public function convertPointsToBalance()
     {
         return $this->hasMany(ConvertPointToBalance::class);

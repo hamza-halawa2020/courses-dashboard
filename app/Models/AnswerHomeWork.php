@@ -14,4 +14,8 @@ class AnswerHomeWork extends Model
     {
         return $this->belongsTo(QuestionHomeWork::class);
     }
+    public function testingQuestionHomeWork()
+    {
+        return $this->hasMany(TestingQuestionHomeWork::class);
+    }
 }

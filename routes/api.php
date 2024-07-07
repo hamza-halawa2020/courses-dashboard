@@ -12,7 +12,9 @@ use App\Http\Controllers\Api\PlaceController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\StageController;
 use App\Http\Controllers\Api\TeacherController;
+use App\Http\Controllers\Api\TestingExamLectureContoller;
 use App\Http\Controllers\Api\TestingQuestionController;
+use App\Http\Controllers\Api\TestingQuestionHomeWorkContoller;
 use Illuminate\Support\Facades\Route;
 
 
@@ -74,6 +76,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/testing_questions/{id}', [TestingQuestionController::class, 'show']);
     Route::post('/testing_questions', [TestingQuestionController::class, 'store']);
 
+    ////=================== testing questions_home_work ============================
+    Route::get('/testing_questions_home_work', [TestingQuestionHomeWorkContoller::class, 'index']);
+    Route::get('/testing_questions_home_work/{id}', [TestingQuestionHomeWorkContoller::class, 'show']);
+    Route::post('/testing_questions_home_work', [TestingQuestionHomeWorkContoller::class, 'store']);
+    ////=================== testing exam_lecture ============================
+    Route::get('/testing_exam_lecture', [TestingExamLectureContoller::class, 'index']);
+    Route::get('/testing_exam_lecture/{id}', [TestingExamLectureContoller::class, 'show']);
+    Route::post('/testing_exam_lecture', [TestingExamLectureContoller::class, 'store']);
     ////=================== convert points ==============================
 
     Route::post('/convert-points', [ConvertPointToBalanceController::class, 'convert']);
