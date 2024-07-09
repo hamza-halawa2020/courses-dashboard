@@ -2,13 +2,14 @@
 
 @section('content')
     <div>
-        <h2>{{ $examlecture->question }}</h2>
+        <h2>{{ $questionHomeWrok->question }}</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
         <li class="breadcrumb-item"><a
-                href="{{ route('admin.exam_lectures.index', $examlecture->lecture_id) }}">@lang('exams.exams_lectures')</a></li>
+                href="{{ route('admin.question_home_works.index', $questionHomeWrok->lecture_id) }}">@lang('questions.questions_lectures')</a>
+        </li>
         <li class="breadcrumb-item">@lang('site.show')</li>
     </ul>
 
@@ -17,20 +18,20 @@
             <div class="tile shadow">
 
                 <div class="form-group">
-                    <a href="{{ route('admin.exam_lectures.edit', $examlecture->id) }}" class="btn btn-warning"><i
-                            class="fa fa-edit"></i> @lang('site.edit')</a>
+                    <a href="{{ route('admin.question_home_works.edit', $questionHomeWrok->id) }}"
+                        class="btn btn-warning"><i class="fa fa-edit"></i> @lang('site.edit')</a>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <tr>
-                                    <th>@lang('exams.question')</th>
-                                    <td>{{ $examlecture->question }}</td>
+                                    <th>@lang('questions.question')</th>
+                                    <td>{{ $questionHomeWrok->question }}</td>
                                 </tr>
                                 <tr>
                                     <th>@lang('site.created_at')</th>
-                                    <td>{{ $examlecture->created_at }}</td>
+                                    <td>{{ $questionHomeWrok->created_at }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -39,20 +40,20 @@
 
                 <div class="row mt-4">
                     <div class="col-md-12">
-                        <h3>@lang('exams.answers')</h3>
+                        <h3>@lang('questions.answers')</h3>
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>@lang('exams.answers')</th>
-                                        <th>@lang('exams.is_right')</th>
+                                        <th>@lang('questions.answers')</th>
+                                        <th>@lang('questions.is_right')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($examlecture->answerlecture as $answer)
+                                    @foreach ($questionHomeWrok->answerHomeWork as $answer)
                                         <tr>
                                             <td>{{ $answer->answer }}</td>
-                                            <td>{{ $answer->is_right ? __('exams.true') : __('exams.false') }}</td>
+                                            <td>{{ $answer->is_right ? __('questions.true') : __('questions.false') }}</td>
                                             </td>
                                         </tr>
                                     @endforeach

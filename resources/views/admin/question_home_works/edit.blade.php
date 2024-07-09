@@ -2,7 +2,7 @@
 
 @section('content')
     <div>
-        <h2>@lang('exams.exams_lectures') {{ $examlecture->question }}</h2>
+        <h2>@lang('questions.question_home_works') {{ $questionHomeWrok->question }}</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
@@ -16,7 +16,7 @@
 
             <div class="tile shadow">
 
-                <form method="post" action="{{ route('admin.exam_lectures.update', $examlecture) }}">
+                <form method="post" action="{{ route('admin.question_home_works.update', $questionHomeWrok) }}">
                     @csrf
                     @method('post')
 
@@ -24,15 +24,15 @@
 
                     {{-- question --}}
                     <div class="form-group">
-                        <label>@lang('exams.question') <span class="text-danger">*</span></label>
+                        <label>@lang('questions.question') <span class="text-danger">*</span></label>
                         <input type="text" name="question" class="form-control"
-                            value="{{ old('question', $examlecture->question) }}" required>
+                            value="{{ old('question', $questionHomeWrok->question) }}" required>
                     </div>
 
                     {{-- answers --}}
                     <div class="form-group" id="answers-container">
                         <label>@lang('questions.answer')<span class="text-danger">*</span></label>
-                        @foreach ($answerlecture as $answer)
+                        @foreach ($answerHomeWork as $answer)
                             <div class="answer-group mb-3">
                                 <input type="text" name="answers[]" class="form-control" placeholder="@lang('questions.answer')"
                                     value="{{ old('answers[]', $answer->answer) }}" required>

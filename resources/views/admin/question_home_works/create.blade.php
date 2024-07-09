@@ -2,19 +2,19 @@
 
 @section('content')
     <div>
-        <h2>@lang('exams.exams_lectures')</h2>
+        <h2>@lang('lectures.question_home_work')</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item">@lang('exams.exams_lectures')</li>
+        <li class="breadcrumb-item">@lang('lectures.question_home_work')</li>
         <li class="breadcrumb-item">@lang('site.create')</li>
     </ul>
 
     <div class="row">
         <div class="col-md-12">
             <div class="tile shadow">
-                <form method="post" action="{{ route('admin.exam_lectures.store') }}">
+                <form method="post" action="{{ route('admin.question_home_works.store') }}">
                     @csrf
                     @method('post')
 
@@ -22,7 +22,7 @@
 
                     {{-- question --}}
                     <div class="form-group">
-                        <label>@lang('exams.question')<span class="text-danger">*</span></label>
+                        <label>@lang('questions.question')<span class="text-danger">*</span></label>
                         <input type="text" name="question" class="form-control" value="{{ old('question') }}" required
                             autofocus>
                     </div>
@@ -32,13 +32,13 @@
 
                     {{-- answers --}}
                     <div class="form-group" id="answers-container">
-                        <label>@lang('exams.answer')<span class="text-danger">*</span></label>
+                        <label>@lang('questions.answer')<span class="text-danger">*</span></label>
                         <div class="answer-group mb-3">
-                            <input type="text" name="answers[]" class="form-control" placeholder="@lang('exams.answer')"
+                            <input type="text" name="answers[]" class="form-control" placeholder="@lang('lectures.answer')"
                                 required>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="is_right[]" value="1">
-                                <label class="form-check-label">@lang('exams.true')</label>
+                                <label class="form-check-label">@lang('questions.true')</label>
                             </div>
                         </div>
                     </div>

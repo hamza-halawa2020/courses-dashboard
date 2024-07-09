@@ -2,12 +2,12 @@
 
 @section('content')
     <div>
-        <h2>@lang('exams.exams_lectures')</h2>
+        <h2>@lang('lectures.question_home_work')</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item">@lang('exams.exams_lectures')</li>
+        <li class="breadcrumb-item">@lang('lectures.question_home_work')</li>
     </ul>
 
     <div class="row">
@@ -15,11 +15,11 @@
             <div class="tile shadow">
                 <div class="row mb-2">
                     <div class="col-md-12">
-                        <a href="{{ route('admin.exam_lectures.create', $lectureId) }}" class="btn btn-primary">
+                        <a href="{{ route('admin.question_home_works.create', $lectureId) }}" class="btn btn-primary">
                             <i class="fa fa-plus"></i> @lang('site.create')
                         </a>
 
-                        <form method="post" action="{{ route('admin.exam_lectures.bulk_delete') }}"
+                        <form method="post" action="{{ route('admin.question_home_works.bulk_delete') }}"
                             style="display: inline-block;">
                             @csrf
                             @method('delete')
@@ -34,7 +34,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table datatable" id="exam_lectures-table" style="width: 100%;">
+                            <table class="table datatable" id="question_home_works-table" style="width: 100%;">
                                 <thead>
                                     <tr>
                                         <th>
@@ -45,33 +45,34 @@
                                                 </label>
                                             </div>
                                         </th>
-                                        <th>@lang('exam_lectures.question')</th>
-                                        <th>@lang('exam_lectures.details')</th>
+                                        <th>@lang('questions.question')</th>
+                                        <th>@lang('questions.details')</th>
                                         <th>@lang('site.action')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($questionHomeWrok as $examlecture)
+                                    @foreach ($questionHomeWrok as $questionHomeWrok)
                                         <tr>
                                             <td>
                                                 <div class="animated-checkbox">
                                                     <label class="m-0">
                                                         <input type="checkbox" name="record_ids[]"
-                                                            value="{{ $examlecture->id }}">
+                                                            value="{{ $questionHomeWrok->id }}">
                                                         <span class="label-text"></span>
                                                     </label>
                                                 </div>
                                             </td>
-                                            <td>{{ $examlecture->question }}</td>
-                                            <td>{{ $examlecture->details }}</td>
+                                            <td>{{ $questionHomeWrok->question }}</td>
+                                            <td>{{ $questionHomeWrok->details }}</td>
                                             <td>
-                                                <a href="{{ route('admin.exam_lectures.show', $examlecture->id) }}"
+                                                <a href="{{ route('admin.question_home_works.show', $questionHomeWrok->id) }}"
                                                     class="btn btn-sm btn-primary"><i
                                                         class="fa fa-eye"></i>@lang('site.show')</a>
-                                                <a href="{{ route('admin.exam_lectures.edit', $examlecture->id) }}"
+                                                <a href="{{ route('admin.question_home_works.edit', $questionHomeWrok->id) }}"
                                                     class="btn btn-sm btn-warning"><i
                                                         class="fa fa-edit"></i>@lang('site.edit')</a>
-                                                <form action="{{ route('admin.exam_lectures.destroy', $examlecture->id) }}"
+                                                <form
+                                                    action="{{ route('admin.question_home_works.destroy', $questionHomeWrok->id) }}"
                                                     method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')

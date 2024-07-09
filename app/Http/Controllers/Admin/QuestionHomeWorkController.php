@@ -42,7 +42,7 @@ class QuestionHomeWorkController extends Controller
         ]);
 
         foreach ($request->answers as $index => $answer) {
-            $questionHomeWrok->answerLecture()->create([
+            $questionHomeWrok->answerHomeWork()->create([
                 'answer' => $answer,
                 'is_right' => in_array($index, $request->is_right ?? []),
             ]);
@@ -54,15 +54,15 @@ class QuestionHomeWorkController extends Controller
 
     public function show($id)
     {
-        $questionHomeWrok = QuestionHomeWork::with('answerlecture')->findOrFail($id);
+        $questionHomeWrok = QuestionHomeWork::with('answerHomeWork')->findOrFail($id);
         return view('admin.question_home_works.show', compact('questionHomeWrok'));
     }
 
     public function edit($id)
     {
         $questionHomeWrok = QuestionHomeWork::findOrFail($id);
-        $answerlecture = $questionHomeWrok->answerlecture;
-        return view('admin.question_home_works.edit', compact('questionHomeWrok', 'answerlecture'));
+        $answerHomeWork = $questionHomeWrok->answerHomeWork;
+        return view('admin.question_home_works.edit', compact('questionHomeWrok', 'answerHomeWork'));
     }
 
     public function update(Request $request)
@@ -82,7 +82,7 @@ class QuestionHomeWorkController extends Controller
         $answersData = $request->input('answers');
         $isRightData = $request->input('is_right', []);
 
-        foreach ($questionHomeWrok->answerlecture as $index => $answer) {
+        foreach ($questionHomeWrok->answerHomeWork as $index => $answer) {
             $answer->update([
                 'answer' => $answersData[$index],
                 'is_right' => in_array($answer->id, $isRightData),
