@@ -39,7 +39,7 @@ class TestingQuestionHomeWorkContoller extends Controller
 
         $correctAnswer = AnswerHomeWork::where('id', $request->answer_hw_id)->value('is_right');
         if ($request->is_right != $correctAnswer) {
-            return response()->json('wrong answer best of luck next time');
+            return response()->json(['message' => 'Wrong answer, best of luck next time', 'error' => '1']);
 
         } else {
 
