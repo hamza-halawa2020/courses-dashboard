@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Models\Balance;
 use App\Models\User;
 use App\Rules\CheckOldPassword;
 use Illuminate\Http\Request;
@@ -110,6 +111,13 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
 
         ]);
+
+        Balance::create(
+            [
+                'total' => 0,
+                'user_id' => $user->id,
+            ]
+        );
 
         $data['user'] = new UserResource($user);
         $data['token'] = $user->createToken('my-app-token')->plainTextToken;

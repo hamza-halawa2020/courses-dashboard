@@ -37,20 +37,20 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             QRvaluesTableSeeder::class,
         ]);
-        Question::factory(5)->create();
-        Answer::factory(5)->create();
-        Teacher::factory(5)->create();
-        Course::factory(5)->create();
-        Chapter::factory(5)->create();
-        Lecture::factory(5)->create();
-        QuestionHomeWork::factory(5)->create();
-        AnswerHomeWork::factory(5)->create();
-        ExamChapter::factory(5)->create();
-        AnswerChapter::factory(5)->create();
-        ExamLecture::factory(5)->create();
-        AnswerLecture::factory(5)->create();
-        Banner::factory(5)->create();
+        // Question::factory(5)->create();
+        // Answer::factory(5)->create();
+        // Teacher::factory(5)->create();
+        // Course::factory(5)->create();
+        // Chapter::factory(5)->create();
+        // Lecture::factory(5)->create();
+        // QuestionHomeWork::factory(5)->create();
+        // AnswerHomeWork::factory(5)->create();
+        // ExamChapter::factory(5)->create();
+        // AnswerChapter::factory(5)->create();
+        // ExamLecture::factory(5)->create();
+        // AnswerLecture::factory(5)->create();
+        // Banner::factory(5)->create();
 
-        User::factory(5)->create();
+        // User::factory(5)->create();
     }
 }
