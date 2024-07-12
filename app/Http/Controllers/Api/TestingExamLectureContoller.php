@@ -41,12 +41,11 @@ class TestingExamLectureContoller extends Controller
 
         if ($existingAnswer) {
             return response()->json([
-                'message' => 'You have already answered this question.',
-                'answer' => $existingAnswer,
-                'error' => '1'
+                'data' => $existingAnswer,
+                'error' => '0',
+                'message' => '',
             ]);
         }
-
 
         $correctAnswer = AnswerLecture::where('id', $request->answer_lecture_id)->value('is_right');
         if ($request->is_right != $correctAnswer) {

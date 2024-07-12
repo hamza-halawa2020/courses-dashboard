@@ -40,13 +40,13 @@ class TestingQuestionController extends Controller
             ->where('answer_id', $request->answer_id)
             ->first();
 
-        if ($existingAnswer) {
-            return response()->json([
-                'message' => 'You have already answered this question.',
-                'answer' => $existingAnswer,
-                'error' => '1'
-            ]);
-        }
+            if ($existingAnswer) {
+                return response()->json([
+                    'data' => $existingAnswer,
+                    'error' => '0',
+                    'message' => '',
+                ]);
+            }
 
 
 
