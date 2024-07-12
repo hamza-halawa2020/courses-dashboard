@@ -36,6 +36,19 @@ class TestingQuestionHomeWorkContoller extends Controller
             return response()->json(['error' => $validator->errors()], 400);
         }
 
+        $existingAnswer = TestingQuestionHomeWork::where('user_id', $user->id)
+            ->where('answer_hw_id', $request->answer_hw_id)
+            ->first();
+
+        if ($existingAnswer) {
+            return response()->json([
+                'message' => 'You have already answered this question.',
+                'answer' => $existingAnswer,
+                'error' => '1'
+            ]);
+        }
+
+
 
         $correctAnswer = AnswerHomeWork::where('id', $request->answer_hw_id)->value('is_right');
         if ($request->is_right != $correctAnswer) {

@@ -36,6 +36,19 @@ class TestingQuestionController extends Controller
             return response()->json(['error' => $validator->errors()], 400);
         }
 
+        $existingAnswer = TestingQuestion::where('user_id', $user->id)
+            ->where('answer_id', $request->answer_id)
+            ->first();
+
+        if ($existingAnswer) {
+            return response()->json([
+                'message' => 'You have already answered this question.',
+                'answer' => $existingAnswer,
+                'error' => '1'
+            ]);
+        }
+
+
 
         $correctAnswer = Answer::where('id', $request->answer_id)->value('is_right');
         if ($request->is_right != $correctAnswer) {
