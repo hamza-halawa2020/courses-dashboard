@@ -83,17 +83,73 @@ class AuthController extends Controller
 
 
 
+    // public function register(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'name' => 'required',
+    //         'phone' => 'required|unique:users,phone|max:11|string',
+    //         'password' => 'required|min:6',
+    //         'parent_phone' => 'required|unique:users,phone|max:11|string',
+    //         'parent_name' => 'required',
+    //         'place_id' => 'required',
+    //         'stage_id' => 'required'
+    //     ], $this->message());
+
+    //     if ($validator->fails()) {
+    //         return response()->api([], 1, $validator->errors()->first());
+    //     }
+
+    //     $user = User::create([
+    //         'name' => $request->name,
+    //         'type' => 'user',
+    //         'status' => '1',
+    //         'phone' => $request->phone,
+    //         'parent_phone' => $request->parent_phone,
+    //         'parent_name' => $request->parent_name,
+    //         'place_id' => $request->place_id,
+    //         'stage_id' => $request->stage_id,
+    //         'password' => bcrypt($request->password),
+
+    //     ]);
+
+    //     Balance::create(
+    //         [
+    //             'total' => 0,
+    //             'user_id' => $user->id,
+    //         ]
+    //     );
+
+    //     $data['user'] = new UserResource($user);
+    //     $data['token'] = $user->createToken('my-app-token')->plainTextToken;
+
+    //     return response()->api($data, 0, 'تم تسجيل الدخول بنجاح');
+
+    // }//end of register
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'phone' => 'required|unique:users,phone|max:11|string',
             'password' => 'required|min:6',
-            'parent_phone' => 'required|max:11|string',
+            'parent_phone' => 'required|unique:users,parent_phone|max:11|string',
             'parent_name' => 'required',
             'place_id' => 'required',
             'stage_id' => 'required'
-        ], $this->message());
+        ], [
+            'name.required' => 'الاسم مطلوب',
+            'password.min' => 'كلمة السر قصيرة',
+            'password.required' => 'كلمة السر مطلوبة',
+            'phone.required' => 'رقم المحمول مطلوب',
+            'phone.unique' => 'رقم المحمول مستخدم مسبقا',
+            'phone.max' => 'رقم المحمول مستخدم غير صالح',
+            'parent_phone.required' => 'رقم محمول الوالد مطلوب',
+            'parent_phone.unique' => 'رقم محمول الوالد مستخدم مسبقا',
+            'phone.numeric' => 'رقم المحمول مستخدم غير صالح',
+            'parent_name.required' => 'اسم الوالد مطلوب',
+            'place_id.required' => 'المكان مطلوب',
+            'stage_id.required' => 'المرحلة مطلوبة'
+        ]);
 
         if ($validator->fails()) {
             return response()->api([], 1, $validator->errors()->first());
@@ -109,22 +165,19 @@ class AuthController extends Controller
             'place_id' => $request->place_id,
             'stage_id' => $request->stage_id,
             'password' => bcrypt($request->password),
-
         ]);
 
-        Balance::create(
-            [
-                'total' => 0,
-                'user_id' => $user->id,
-            ]
-        );
+        Balance::create([
+            'total' => 0,
+            'user_id' => $user->id,
+        ]);
 
         $data['user'] = new UserResource($user);
         $data['token'] = $user->createToken('my-app-token')->plainTextToken;
 
         return response()->api($data, 0, 'تم تسجيل الدخول بنجاح');
+    }
 
-    }//end of register
 
     public function user()
     {
@@ -205,9 +258,11 @@ class AuthController extends Controller
             'password.min' => 'كلمة السر قصيرة',
             'password.required' => 'كلمة السر مطلوبة',
             'phone.required' => 'رقم المحمول مطلوب',
+            'parent_phone.required' => 'رقم محمول الوالد مطلوب',
             'type.required' => 'نوع المستخدم مطلوب',
+            'parent_phone.unique' => 'مسبقا رقم محمول الوالد مستخدم',
             'phone.unique' => 'رقم المحمول مستخدم مسبقا',
-            'phone.max' => 'رقم المحمول مستخدم غير صالج',
+            'phone.max' => 'رقم المحمول مستخدم غير صالح',
             'phone.numeric' => 'رقم المحمول مستخدم غير صالج',
         ];
     }
