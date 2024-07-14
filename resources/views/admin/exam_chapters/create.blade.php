@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="tile shadow">
-                <form method="post" action="{{ route('admin.exam_chapters.store') }}">
+                <form method="post" action="{{ route('admin.total_exams.store') }}">
                     @csrf
                     @method('post')
 

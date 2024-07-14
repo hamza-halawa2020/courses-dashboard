@@ -14,14 +14,14 @@ class ExamChapterController extends Controller
     public function index($chapterId)
     {
         $examChapters = ExamChapter::where('chapter_id', $chapterId)->get();
-        return view('admin.exam_chapters.index', compact('examChapters', 'chapterId'));
+        return view('admin.total_exams.index', compact('examChapters', 'chapterId'));
     }
 
 
     public function create($chapterId)
     {
         $chapter = Chapter::findOrFail($chapterId);
-        return view('admin.exam_chapters.create', compact('chapter'));
+        return view('admin.total_exams.create', compact('chapter'));
     }
 
 
@@ -49,21 +49,21 @@ class ExamChapterController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.exam_chapters.index', $examChapter->chapter_id)->with('success', 'Exam chapter created successfully.');
+        return redirect()->route('admin.total_exams.index', $examChapter->chapter_id)->with('success', 'Exam chapter created successfully.');
     }
 
 
     public function show($id)
     {
         $examChapter = ExamChapter::with('answerChapter')->findOrFail($id);
-        return view('admin.exam_chapters.show', compact('examChapter'));
+        return view('admin.total_exams.show', compact('examChapter'));
     }
 
     public function edit($id)
     {
         $examChapter = ExamChapter::findOrFail($id);
         $answerChapter = $examChapter->answerChapter;
-        return view('admin.exam_chapters.edit', compact('examChapter', 'answerChapter'));
+        return view('admin.total_exams.edit', compact('examChapter', 'answerChapter'));
     }
 
     public function update(Request $request)
@@ -89,7 +89,7 @@ class ExamChapterController extends Controller
                 'is_right' => in_array($answer->id, $isRightData),
             ]);
         }
-        return redirect()->route('admin.exam_chapters.index', $examChapter->chapter_id)->with('success', 'Exam chapter updated successfully.');
+        return redirect()->route('admin.total_exams.index', $examChapter->chapter_id)->with('success', 'Exam chapter updated successfully.');
     }
 
 
@@ -99,13 +99,13 @@ class ExamChapterController extends Controller
         $chapterId = $examChapter->chapter_id;
         $examChapter->delete();
 
-        return redirect()->route('admin.exam_chapters.index', $chapterId)->with('success', __('site.deleted_successfully'));
+        return redirect()->route('admin.total_exams.index', $chapterId)->with('success', __('site.deleted_successfully'));
     }
 
     public function bulkDelete(Request $request)
     {
         $ids = $request->record_ids;
         ExamChapter::whereIn('id', explode(',', $ids))->delete();
-        return redirect()->route('admin.exam_chapters.index');
+        return redirect()->route('admin.total_exams.index');
     }
 }

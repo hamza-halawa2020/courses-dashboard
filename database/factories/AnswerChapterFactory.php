@@ -16,7 +16,7 @@ class AnswerChapterFactory extends Factory
     {
         return [
             'answer' => $this->faker->name(),
-            'exam_chapter_id' => ExamChapter::factory(),
+            'total_exam_id' => ExamChapter::factory(),
             'is_right' => $this->faker->boolean(),
         ];
     }

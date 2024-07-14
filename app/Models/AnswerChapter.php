@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AnswerChapter extends Model
 {
     use HasFactory;
-    protected $fillable = ['answer', 'exam_chapter_id', 'is_right'];
+    protected $fillable = ['answer', 'total_exam_id', 'is_right'];
 
     public function examChapter()
     {

@@ -17,7 +17,7 @@ class CreateAnswerChaptersTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('answer');
-            $table->foreignId('exam_chapter_id')->references('id')->on('exam_chapters')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('total_exam_id')->references('id')->on('total_exams')->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('is_right')->default(false);
 
         });
