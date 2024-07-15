@@ -64,6 +64,14 @@
                                             <td>{{ $teacher->name }}</td>
                                             <td>{{ $teacher->details }}</td>
                                             <td>
+
+                                                <a href="{{ route('admin.total_exams.index', ['teacherId' => $teacher->id]) }}
+                                                "
+                                                    class="btn btn-primary btn-sm">
+                                                    @lang('questions.total_exam')
+                                                </a>
+
+
                                                 <a href="{{ route('admin.teachers.show', $teacher->id) }}"
                                                     class="btn btn-sm btn-primary">@lang('courses.courses')</a>
                                                 <a href="{{ route('admin.teachers.edit', $teacher->id) }}"

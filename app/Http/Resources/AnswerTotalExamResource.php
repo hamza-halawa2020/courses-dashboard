@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Models\AnswerChapter;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ExamChapterResource extends JsonResource
+class AnswerTotalExamResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +17,8 @@ class ExamChapterResource extends JsonResource
         // return parent::toArray($request);
         return [
             'id' => $this->id,
-            'question' => $this->question,
+            'answer' => $this->answer,
             'created_at' => $this->created_at,
-            'answerChapter' => AnswerChapterResource::collection($this->answerChapter),
         ];
     }
 }

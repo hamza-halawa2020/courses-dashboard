@@ -2,7 +2,7 @@
 
 @section('content')
     <div>
-        <h2>@lang('exams.exams_chapters') {{ $examChapter->question }}</h2>
+        <h2>@lang('exams.total_exams') {{ $totalExam->question }}</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
@@ -16,7 +16,7 @@
 
             <div class="tile shadow">
 
-                <form method="post" action="{{ route('admin.exam_chapters.update', $examChapter) }}">
+                <form method="post" action="{{ route('admin.total_exams.update', $totalExam) }}">
                     @csrf
                     @method('post')
 
@@ -26,13 +26,13 @@
                     <div class="form-group">
                         <label>@lang('exams.question') <span class="text-danger">*</span></label>
                         <input type="text" name="question" class="form-control"
-                            value="{{ old('question', $examChapter->question) }}" required>
+                            value="{{ old('question', $totalExam->question) }}" required>
                     </div>
 
                     {{-- answers --}}
                     <div class="form-group" id="answers-container">
                         <label>@lang('questions.answer')<span class="text-danger">*</span></label>
-                        @foreach ($answerChapter as $answer)
+                        @foreach ($answerTotalExam as $answer)
                             <div class="answer-group mb-3">
                                 <input type="text" name="answers[]" class="form-control" placeholder="@lang('questions.answer')"
                                     value="{{ old('answers[]', $answer->answer) }}" required>

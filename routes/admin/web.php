@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ExamChapterController;
 use App\Http\Controllers\Admin\ExamLectureController;
 use App\Http\Controllers\Admin\QuestionHomeWorkController;
+use App\Http\Controllers\Admin\TotalExamController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([
@@ -58,15 +59,15 @@ Route::middleware([
             Route::delete('/chapters/bulk_delete', 'ChapterController@bulkDelete')->name('chapters.bulk_delete');
             Route::resource('chapters', 'ChapterController');
 
-            //examchapter
-            Route::get('exam_chapters_with_chapters/{chapterId?}', [ExamChapterController::class, 'index'])->name('exam_chapters.index');
-            Route::get('exam_chapters/{id}', [ExamChapterController::class, 'show'])->name('exam_chapters.show');
-            Route::get('exam_chapters_edit/{id}', [ExamChapterController::class, 'edit'])->name('exam_chapters.edit');
-            Route::post('exam_chapters/{id}', [ExamChapterController::class, 'update'])->name('exam_chapters.update');
-            Route::get('exam_chapters_with_chapters_create/{chapterId}', [ExamChapterController::class, 'create'])->name('exam_chapters.create');
-            Route::post('exam_chapters', [ExamChapterController::class, 'store'])->name('exam_chapters.store');
-            Route::delete('exam_chapters/{id}', [ExamChapterController::class, 'destroy'])->name('exam_chapters.destroy');
-            Route::delete('exam_chapters/bulk_delete', [ExamChapterController::class, 'bulkDelete'])->name('exam_chapters.bulk_delete');
+            //totalExam
+            Route::get('total_exams_with_teachers/{teacherId?}', [TotalExamController::class, 'index'])->name('total_exams.index');
+            Route::get('total_exams/{id}', [TotalExamController::class, 'show'])->name('total_exams.show');
+            Route::get('total_exams_edit/{id}', [TotalExamController::class, 'edit'])->name('total_exams.edit');
+            Route::post('total_exams/{id}', [TotalExamController::class, 'update'])->name('total_exams.update');
+            Route::get('total_exams_with_teachers_create/{teacherId}', [TotalExamController::class, 'create'])->name('total_exams.create');
+            Route::post('total_exams', [TotalExamController::class, 'store'])->name('total_exams.store');
+            Route::delete('total_exams/{id}', [TotalExamController::class, 'destroy'])->name('total_exams.destroy');
+            Route::delete('total_exams/bulk_delete', [TotalExamController::class, 'bulkDelete'])->name('total_exams.bulk_delete');
 
 
 

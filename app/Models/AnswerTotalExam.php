@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AnswerChapter extends Model
+class AnswerTotalExam extends Model
 {
     use HasFactory;
     protected $fillable = ['answer', 'total_exam_id', 'is_right'];
 
-    public function examChapter()
+    public function totalExam()
     {
-        return $this->belongsTo(ExamChapter::class);
+        return $this->belongsTo(TotalExam::class);
     }
 }

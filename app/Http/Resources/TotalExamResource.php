@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AnswerChapterResource extends JsonResource
+class TotalExamResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +17,9 @@ class AnswerChapterResource extends JsonResource
         // return parent::toArray($request);
         return [
             'id' => $this->id,
-            'answer' => $this->answer,
+            'question' => $this->question,
             'created_at' => $this->created_at,
+            'answerTotalExam' => AnswerTotalExamResource::collection($this->answerTotalExam),
         ];
     }
 }

@@ -2,12 +2,12 @@
 
 @section('content')
     <div>
-        <h2>@lang('exams.exams_chapters')</h2>
+        <h2>@lang('exams.total_exams')</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item">@lang('exams.exams_chapters')</li>
+        <li class="breadcrumb-item">@lang('exams.total_exams')</li>
         <li class="breadcrumb-item">@lang('site.create')</li>
     </ul>
 
@@ -27,8 +27,8 @@
                             autofocus>
                     </div>
 
-                    {{-- hidden chapter ID --}}
-                    <input type="hidden" name="chapter_id" value="{{ $chapter->id }}">
+                    {{-- hidden teacher ID --}}
+                    <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
 
                     {{-- answers --}}
                     <div class="form-group" id="answers-container">

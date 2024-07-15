@@ -15,6 +15,7 @@ return [
     'exams' => 'اختبارات',
     'exams_chapter' => 'اختبارات الباب',
     'questions_chapter' => 'اسئلة الباب',
+    'total_exam' => 'الامتحان الشامل',
 
 
 ];

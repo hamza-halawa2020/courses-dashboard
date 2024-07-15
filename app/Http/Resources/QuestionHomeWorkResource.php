@@ -19,7 +19,7 @@ class QuestionHomeWorkResource extends JsonResource
             'id' => $this->id,
             'question' => $this->question,
             'created_at' => $this->created_at,
-            'answerLecture' => AnswerHomeWorkResource::collection($this->answerHomeWork),
+            'answers' => AnswerHomeWorkResource::collection($this->answerHomeWork),
 
         ];
     }

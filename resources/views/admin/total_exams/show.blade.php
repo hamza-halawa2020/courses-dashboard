@@ -2,13 +2,13 @@
 
 @section('content')
     <div>
-        <h2>{{ $examChapter->question }}</h2>
+        <h2>{{ $totalExam->question }}</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
         <li class="breadcrumb-item"><a
-                href="{{ route('admin.exam_chapters.index', $examChapter->chapter_id) }}">@lang('exams.exams_chapters')</a></li>
+                href="{{ route('admin.total_exams.index', $totalExam->teacher_id) }}">@lang('questions.total_exam')</a></li>
         <li class="breadcrumb-item">@lang('site.show')</li>
     </ul>
 
@@ -17,7 +17,7 @@
             <div class="tile shadow">
 
                 <div class="form-group">
-                    <a href="{{ route('admin.exam_chapters.edit', $examChapter->id) }}" class="btn btn-warning"><i
+                    <a href="{{ route('admin.total_exams.edit', $totalExam->id) }}" class="btn btn-warning"><i
                             class="fa fa-edit"></i> @lang('site.edit')</a>
                 </div>
                 <div class="row">
@@ -26,11 +26,11 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th>@lang('exams.question')</th>
-                                    <td>{{ $examChapter->question }}</td>
+                                    <td>{{ $totalExam->question }}</td>
                                 </tr>
                                 <tr>
                                     <th>@lang('site.created_at')</th>
-                                    <td>{{ $examChapter->created_at }}</td>
+                                    <td>{{ $totalExam->created_at }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -49,7 +49,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($examChapter->answerChapter as $answer)
+                                    @foreach ($totalExam->answerTotalExam as $answer)
                                         <tr>
                                             <td>{{ $answer->answer }}</td>
                                             <td>{{ $answer->is_right ? __('exams.true') : __('exams.false') }}</td>

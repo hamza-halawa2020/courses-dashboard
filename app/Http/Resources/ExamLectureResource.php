@@ -19,7 +19,7 @@ class ExamLectureResource extends JsonResource
             'id' => $this->id,
             'question' => $this->question,
             'created_at' => $this->created_at,
-            'answerLecture' => AnswerLectureResource::collection($this->answerLecture),
+            'answers' => AnswerLectureResource::collection($this->answerLecture),
         ];
     }
 }

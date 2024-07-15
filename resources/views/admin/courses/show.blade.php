@@ -47,11 +47,7 @@
                                                 class="btn btn-info btn-sm">
                                                 @lang('lectures.lectures')
                                             </a>
-                                            <a href="{{ route('admin.total_exams.index', ['chapterId' => $chapter->id]) }}
-                                                "
-                                                class="btn btn-primary btn-sm">
-                                                @lang('questions.exams_chapter')
-                                            </a>
+
                                         </td>
                                     </tr>
                                 @endforeach

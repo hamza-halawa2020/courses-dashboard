@@ -16,4 +16,8 @@ class Teacher extends Model
     {
         return $this->hasMany(Course::class);
     }
+    public function totalExam()
+    {
+        return $this->hasMany(TotalExam::class);
+    }
 }
