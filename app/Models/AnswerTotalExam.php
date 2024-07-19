@@ -14,4 +14,8 @@ class AnswerTotalExam extends Model
     {
         return $this->belongsTo(TotalExam::class);
     }
+    public function testingTotalExam()
+    {
+        return $this->hasMany(TestingTotalExam::class);
+    }
 }

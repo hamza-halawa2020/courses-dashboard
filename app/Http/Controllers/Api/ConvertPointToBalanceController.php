@@ -30,12 +30,13 @@ class ConvertPointToBalanceController extends Controller
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
+
         }
 
         $point = Point::where('user_id', $user->id)->first();
 
         if ($point->total < $request->amount) {
-            return response()->json(['error' => 'Not enough points'], 400);
+            return response()->json(['error' => 1, 'message' => 'Not enough points'], 200);
         }
 
         // Define conversion rate

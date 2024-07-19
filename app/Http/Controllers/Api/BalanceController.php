@@ -56,7 +56,7 @@ class BalanceController extends Controller
 
         $existingQR = QRAddedBalance::where('qr_id', $qrCode->id)->first();
         if ($existingQR) {
-            return response()->json(['error' => 'Duplicate QR code'], 400);
+            return response()->json(['error' => 1, 'message' => 'Duplicate QR code'], 200);
         }
 
         $balance = $this->getOrCreateUserBalance($user);

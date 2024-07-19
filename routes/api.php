@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\TeacherController;
 use App\Http\Controllers\Api\TestingExamLectureContoller;
 use App\Http\Controllers\Api\TestingQuestionController;
 use App\Http\Controllers\Api\TestingQuestionHomeWorkContoller;
+use App\Http\Controllers\Api\TestingTotalExamController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -75,6 +76,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/testing_questions', [TestingQuestionController::class, 'index']);
     Route::get('/testing_questions/{id}', [TestingQuestionController::class, 'show']);
     Route::post('/testing_questions', [TestingQuestionController::class, 'store']);
+    ////=================== testing exam_lecture ============================
+    Route::get('/testing_total_exam', [TestingTotalExamController::class, 'index']);
+    Route::get('/testing_total_exam/{id}', [TestingTotalExamController::class, 'show']);
+    Route::post('/testing_total_exam', [TestingTotalExamController::class, 'store']);
 
     ////=================== testing questions_home_work ============================
     Route::get('/testing_questions_home_work', [TestingQuestionHomeWorkContoller::class, 'index']);
