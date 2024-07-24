@@ -18,6 +18,8 @@ class CreateTotalExamsTable extends Migration
             $table->timestamps();
             $table->string('question');
             $table->foreignId('teacher_id')->references('id')->on('teachers')->onUpdate('cascade')->onDelete('cascade');
+            $table->datetime('start_at');
+            $table->datetime('end_at');
 
         });
     }

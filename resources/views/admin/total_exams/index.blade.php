@@ -46,6 +46,8 @@
                                             </div>
                                         </th>
                                         <th>@lang('questions.total_exam')</th>
+                                        <th>@lang('lectures.start')</th>
+                                        <th>@lang('lectures.end')</th>
                                         <th>@lang('site.details')</th>
                                         <th>@lang('site.action')</th>
                                     </tr>
@@ -63,6 +65,8 @@
                                                 </div>
                                             </td>
                                             <td>{{ $total->question }}</td>
+                                            <td>{{ $total->start_at }}</td>
+                                            <td>{{ $total->end_at }}</td>
                                             <td>{{ $total->details }}</td>
                                             <td>
                                                 <a href="{{ route('admin.total_exams.show', $total->id) }}"

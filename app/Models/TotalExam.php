@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TotalExam extends Model
 {
     use HasFactory;
-    protected $fillable = ['question', 'teacher_id'];
+    protected $fillable = ['question', 'teacher_id', 'start_at', 'end_at'];
 
     public function teacher()
     {

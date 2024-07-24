@@ -31,6 +31,8 @@ class TotalExamController extends Controller
     {
         $validatedData = $request->validate([
             'question' => 'required|string',
+            'start_at' => 'required',
+            'end_at' => 'required',
             'teacher_id' => 'required|exists:teachers,id',
             'answers' => 'required|array',
             'answers.*' => 'required|string',
@@ -40,6 +42,8 @@ class TotalExamController extends Controller
         $totalExam = TotalExam::create([
             'question' => $request->question,
             'teacher_id' => $request->teacher_id,
+            'start_at' => $request->start_at,
+            'end_at' => $request->end_at,
         ]);
 
         foreach ($request->answers as $index => $answer) {

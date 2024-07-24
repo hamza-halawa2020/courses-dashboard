@@ -21,6 +21,7 @@ class TeacherResource extends JsonResource
             'details' => $this->details,
             'created_at' => $this->created_at,
             'courses' => CourseResource::collection($this->courses),
+            'totalExam' => TotalExamResource::collection($this->totalExam),
         ];
     }
 }

@@ -34,26 +34,25 @@ class ConvertPointToBalanceController extends Controller
         }
 
         $point = Point::where('user_id', $user->id)->first();
+        if (!$point) {
+            return response()->json(['error' => 1, 'message' => 'No points record found for the user'], 200);
+        }
 
         if ($point->total < $request->amount) {
             return response()->json(['error' => 1, 'message' => 'Not enough points'], 200);
         }
 
-        // Define conversion rate
         $conversionRate = 200;
         $balanceAmount = $request->amount / $conversionRate;
 
-        // Create PointDetail and deduct points
         $pointDetail = new PointDetail();
         $pointDetail->amount = -$request->amount;
         $pointDetail->point_id = $point->id;
         $pointDetail->save();
 
-        // Update Point total
         $point->total += $pointDetail->amount;
         $point->save();
 
-        // Create BalanceDetail and add balance
         $balance = Balance::where('user_id', $user->id)->first();
 
         $balanceDetail = new BalanceDetail();
@@ -61,11 +60,9 @@ class ConvertPointToBalanceController extends Controller
         $balanceDetail->balance_id = $balance->id;
         $balanceDetail->save();
 
-        // Update Balance total
         $balance->total += $balanceDetail->amount;
         $balance->save();
 
-        // Create conversion record
         ConvertPointToBalance::create([
             'balance_detail_id' => $balanceDetail->id,
             'point_detail_id' => $pointDetail->id,

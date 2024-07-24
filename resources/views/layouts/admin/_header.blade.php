@@ -21,7 +21,7 @@
         {{-- </li> --}}
 
         {{-- notification --}}
-        <li class="dropdown" id="notifications">
+        {{-- <li class="dropdown" id="notifications">
             <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"
                 style="position:relative;">
                 <i class="fa fa-bell-o fa-lg"></i>
@@ -53,7 +53,7 @@
 
                 <li class="app-notification__footer"><a href="#">@lang('site.all') @lang('notifications.notifications')</a></li>
             </ul>
-        </li>
+        </li> --}}
 
         {{-- languages
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-flag fa-lg"></i></a>

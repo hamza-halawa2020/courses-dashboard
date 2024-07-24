@@ -65,6 +65,7 @@ class AuthController extends Controller
                 Auth::logout();
                 return response()->api([], 1, 'Your account is inactive. Please contact support.');
             }
+            $user->tokens()->delete();
 
             $data['user'] = new UserResource($user);
             $data['token'] = $user->createToken('my-app-token')->plainTextToken;

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class TotalExamResource extends JsonResource
 {
@@ -14,12 +15,26 @@ class TotalExamResource extends JsonResource
      */
     public function toArray($request)
     {
-        // return parent::toArray($request);
-        return [
-            'id' => $this->id,
-            'question' => $this->question,
-            'created_at' => $this->created_at,
-            'answerTotalExam' => AnswerTotalExamResource::collection($this->answerTotalExam),
-        ];
+        $currentTime = Carbon::now();
+
+        $startAt = Carbon::parse($this->start_at);
+        $endAt = Carbon::parse($this->end_at);
+
+        if ($startAt->greaterThan($endAt)) {
+            $startAt = $endAt->copy()->subDay();
+        }
+
+        if ($currentTime->between($startAt, $endAt)) {
+            return [
+                'id' => $this->id,
+                'question' => $this->question,
+                'created_at' => $this->created_at,
+                'start_at' => $startAt,
+                'end_at' => $endAt,
+                'answerTotalExam' => AnswerTotalExamResource::collection($this->answerTotalExam),
+            ];
+        } else {
+            return [];
+        }
     }
 }

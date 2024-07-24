@@ -26,6 +26,19 @@
                         <input type="text" name="question" class="form-control" value="{{ old('question') }}" required
                             autofocus>
                     </div>
+                    <div class="form-group">
+                        <label>@lang('lectures.start')<span class="text-danger">*</span></label>
+                        <input type="datetime-local" name="start_at" class="form-control" value="{{ old('start_at') }}"
+                            required autofocus>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label>@lang('lectures.end')<span class="text-danger">*</span></label>
+                        <input type="datetime-local" name="end_at" class="form-control" value="{{ old('end_at') }}"
+                            required autofocus>
+                    </div>
 
                     {{-- hidden teacher ID --}}
                     <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">

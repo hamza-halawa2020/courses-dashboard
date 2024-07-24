@@ -31,7 +31,6 @@ class ChapterResource extends JsonResource
             'title' => $this->title,
             'created_at' => $this->created_at,
             'price' => $this->price,
-            'examChapters' => ExamChapterResource::collection($this->examChapters),
             'lectures' => LectureResource::collection($this->lectures),
             'isPururchased' => 'true',
 
