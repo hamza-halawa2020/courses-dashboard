@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ExamChapterController;
 use App\Http\Controllers\Admin\ExamLectureController;
+use App\Http\Controllers\Admin\QRController;
 use App\Http\Controllers\Admin\QuestionHomeWorkController;
 use App\Http\Controllers\Admin\TotalExamController;
 use Illuminate\Support\Facades\Route;
@@ -119,6 +120,7 @@ Route::middleware([
             Route::get('/QR/data', 'QRController@data')->name('QR.data');
             Route::delete('/QR/bulk_delete', 'QRController@bulkDelete')->name('QR.bulk_delete');
             Route::resource('QR', 'QRController');
+
 
 
 

@@ -64,4 +64,11 @@ class QRController extends Controller
         //return  $qRs;
         return view('admin.qRs.show', compact('qRs'));
     }
+    public function destroy($id)
+    {
+        $qr = QR::findOrFail($id);
+        $qr->delete();
+        session()->flash('success', __('site.deleted_successfully'));
+    }
+
 }

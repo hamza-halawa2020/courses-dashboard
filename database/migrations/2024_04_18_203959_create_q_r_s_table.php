@@ -20,6 +20,7 @@ class CreateQRSTable extends Migration
             $table->bigInteger('q_rvalue_id')->unsigned();
             $table->foreign('q_rvalue_id')->references('id')->on('q_rvalues');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

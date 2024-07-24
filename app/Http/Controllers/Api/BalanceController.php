@@ -48,7 +48,8 @@ class BalanceController extends Controller
         }
 
         $user = Auth::user();
-        $qrCode = QR::where('code', $request->code)->first();
+        $qrCode = QR::withTrashed()->where('code', $request->code)->first();
+        // $qrCode = QR::where('code', $request->code)->first();
 
         if (!$qrCode) {
             return response()->json(['error' => 'Invalid QR code'], 400);
