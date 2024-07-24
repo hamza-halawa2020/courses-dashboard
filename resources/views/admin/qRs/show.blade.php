@@ -20,18 +20,21 @@
                 <div class="row" id="printDiv">
                     @foreach ($qRs as $qr)
                         <div class="col-md-2 mt-4 p-2">
-                            <div class="card">
+                            <div class="card text-center">
                                 <div class="card-body">
-                                    <strong>ID:</strong> {{ $qr->id }}<br>
-                                    <strong>CODE:</strong> {{ $qr->code }}<br>
-                                    <p class="card-text">
+                                    <div class="bg-dark text-white p-2 mb-2 rounded ">
+                                        <strong>ID:</strong> {{ $qr->id }}
+                                    </div>
+                                    <div class="bg-warning p-1 mb-2 rounded"><strong>CODE:</strong>
+                                        {{ $qr->code }}</div>
+                                    <div class="bg-success p-1 mb-3 rounded card-text">
                                         <strong>Created At:</strong> {{ $qr->created_at }}
-                                    </p>
+                                    </div>
                                     <img class="img" width="100" height="100" src="{{ asset($qr->image) }}"
                                         alt="QR Image">
 
                                     <!-- Delete Button -->
-                                    <div class="mt-2">
+                                    <div class="mt-4">
                                         <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $qr->id }}">
                                             Delete
                                         </button>
