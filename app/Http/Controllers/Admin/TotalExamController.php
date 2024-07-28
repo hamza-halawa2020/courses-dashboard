@@ -35,8 +35,8 @@ class TotalExamController extends Controller
             'end_at' => 'required',
             'teacher_id' => 'required|exists:teachers,id',
             'answers' => 'required|array',
-            'answers.*' => 'required|string',
-            'is_right' => 'array',
+            'answers.*.text' => 'required|string|max:255',
+            'answers.*.is_right' => 'nullable|boolean',
         ]);
 
         $totalExam = TotalExam::create([
@@ -46,10 +46,10 @@ class TotalExamController extends Controller
             'end_at' => $request->end_at,
         ]);
 
-        foreach ($request->answers as $index => $answer) {
+        foreach ($request->input('answers') as $answer) {
             $totalExam->answerTotalExam()->create([
-                'answer' => $answer,
-                'is_right' => in_array($index, $request->is_right ?? []),
+                'answer' => $answer['text'],
+                'is_right' => isset($answer['is_right']) ? 1 : 0,
             ]);
         }
 

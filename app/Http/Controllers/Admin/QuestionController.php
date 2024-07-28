@@ -58,28 +58,31 @@ class QuestionController extends Controller
         return view('admin.questions.create', compact('stages'));
     }
 
-
     public function store(Request $request)
     {
+        $request->validate([
+            'question' => 'required|string|max:255',
+            'stage_id' => 'required|integer|exists:stages,id',
+            'answers' => 'required|array|min:1',
+            'answers.*.text' => 'required|string|max:255',
+            'answers.*.is_right' => 'nullable|boolean',
+        ]);
+
         $question = Question::create([
             'question' => $request->input('question'),
             'stage_id' => $request->input('stage_id'),
         ]);
-        $answers = $request->input('answers');
-        $is_right = $request->input('is_right');
 
-        foreach ($answers as $index => $answer) {
+        foreach ($request->input('answers') as $answer) {
             $question->answers()->create([
-                'answer' => $answer,
-                'is_right' => isset($is_right[$index]),
-                'question_id' => $question->id
+                'answer' => $answer['text'],
+                'is_right' => isset($answer['is_right']) ? 1 : 0,
             ]);
         }
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.questions.index');
     }
-
 
     public function edit(Question $question)
     {

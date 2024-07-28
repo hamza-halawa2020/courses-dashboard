@@ -32,8 +32,8 @@ class ExamLectureController extends Controller
             'question' => 'required|string',
             'lecture_id' => 'required|exists:lectures,id',
             'answers' => 'required|array',
-            'answers.*' => 'required|string',
-            'is_right' => 'array',
+            'answers.*.text' => 'required|string|max:255',
+            'answers.*.is_right' => 'nullable|boolean',
         ]);
 
         $examlecture = ExamLecture::create([
@@ -41,10 +41,11 @@ class ExamLectureController extends Controller
             'lecture_id' => $request->lecture_id,
         ]);
 
-        foreach ($request->answers as $index => $answer) {
+
+        foreach ($request->input('answers') as $answer) {
             $examlecture->answerLecture()->create([
-                'answer' => $answer,
-                'is_right' => in_array($index, $request->is_right ?? []),
+                'answer' => $answer['text'],
+                'is_right' => isset($answer['is_right']) ? 1 : 0,
             ]);
         }
 

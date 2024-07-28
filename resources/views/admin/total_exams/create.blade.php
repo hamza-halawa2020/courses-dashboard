@@ -47,10 +47,10 @@
                     <div class="form-group" id="answers-container">
                         <label>@lang('exams.answer')<span class="text-danger">*</span></label>
                         <div class="answer-group mb-3">
-                            <input type="text" name="answers[]" class="form-control" placeholder="@lang('exams.answer')"
-                                required>
+                            <input type="text" name="answers[0][text]" class="form-control"
+                                placeholder="@lang('exams.answer')" required>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="is_right[]" value="1">
+                                <input class="form-check-input" type="checkbox" name="answers[0][is_right]" value="1">
                                 <label class="form-check-label">@lang('exams.true')</label>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
 
                 const answerInput = document.createElement('input');
                 answerInput.setAttribute('type', 'text');
-                answerInput.setAttribute('name', 'answers[]');
+                answerInput.setAttribute('name', `answers[${answerCount}][text]`);
                 answerInput.setAttribute('class', 'form-control');
                 answerInput.setAttribute('placeholder', '@lang('questions.answer')');
                 answerInput.setAttribute('required', true);
@@ -95,7 +95,7 @@
 
                 const checkboxInput = document.createElement('input');
                 checkboxInput.setAttribute('type', 'checkbox');
-                checkboxInput.setAttribute('name', 'is_right[]');
+                checkboxInput.setAttribute('name', `answers[${answerCount}][is_right]`);
                 checkboxInput.setAttribute('class', 'form-check-input');
                 checkboxInput.setAttribute('value', '1');
 
@@ -110,6 +110,8 @@
                 answerGroup.appendChild(checkboxDiv);
 
                 answersContainer.appendChild(answerGroup);
+                answerCount++;
+
             });
         });
     </script>
