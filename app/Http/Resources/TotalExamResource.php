@@ -31,10 +31,10 @@ class TotalExamResource extends JsonResource
                 'created_at' => $this->created_at,
                 'start_at' => $startAt,
                 'end_at' => $endAt,
-                'answerTotalExam' => AnswerTotalExamResource::collection($this->answerTotalExam),
+                'answers' => AnswerTotalExamResource::collection($this->answerTotalExam),
             ];
         } else {
-            return [];
+
         }
     }
 }

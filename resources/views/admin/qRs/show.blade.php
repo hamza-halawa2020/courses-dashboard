@@ -25,8 +25,8 @@
                                     <div class="bg-dark text-white p-2 mb-2 rounded ">
                                         <strong>ID:</strong> {{ $qr->id }}
                                     </div>
-                                    <div class="bg-warning p-1 mb-2 rounded"><strong>CODE:</strong>
-                                        {{ $qr->code }}</div>
+                                    {{-- <div class="bg-warning p-1 mb-2 rounded"><strong>CODE:</strong>
+                                        {{ $qr->code }}</div> --}}
                                     <div class="bg-success p-1 mb-3 rounded card-text">
                                         <strong>Created At:</strong> {{ $qr->created_at }}
                                     </div>
