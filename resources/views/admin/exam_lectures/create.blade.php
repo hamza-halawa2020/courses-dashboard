@@ -65,6 +65,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             const addAnswerButton = document.getElementById('add-answer');
             const answersContainer = document.getElementById('answers-container');
+            let answerCount = 1;
 
             addAnswerButton.addEventListener('click', function() {
                 const answerGroup = document.createElement('div');
