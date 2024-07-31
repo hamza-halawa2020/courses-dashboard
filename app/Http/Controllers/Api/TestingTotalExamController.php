@@ -43,7 +43,7 @@ class TestingTotalExamController extends Controller
         if ($existingAnswer) {
             return response()->json([
                 'data' => $existingAnswer,
-                'error' => '0',
+                'error' => 0,
                 'message' => '',
             ]);
         }
@@ -52,7 +52,7 @@ class TestingTotalExamController extends Controller
 
         $correctAnswer = AnswerTotalExam::where('id', $request->answer_id)->value('is_right');
         if ($request->is_right != $correctAnswer) {
-            return response()->json(['message' => 'Wrong answer, best of luck next time', 'error' => '1']);
+            return response()->json(['message' => 'Wrong answer, best of luck next time', 'error' => 1]);
         } else {
 
             $testing = TestingTotalExam::create([
