@@ -10,9 +10,9 @@ class PlaceController extends Controller
 {
     public function index()
     {
-        $places = Place::all();
-
+        // $places = Place::all();
+        $places = Place::where('id', '!=', 1)->get();
         return response()->api(PlaceResource::collection($places));
-
     }
+
 }//end of controller

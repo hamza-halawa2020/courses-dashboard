@@ -16,10 +16,7 @@ class StageController extends Controller
     public function index()
     {
         $stages = Stage::all();
-
+        $stages = Stage::where('id', '!=', 1)->get();
         return response()->api(StageResource::collection($stages));
-
     }
-
-
 }
