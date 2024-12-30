@@ -18,6 +18,7 @@ class CreateConvertPointToBalancesTable extends Migration
             $table->timestamps();
             $table->foreignId('balance_detail_id')->references('id')->on('balance_details')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('point_detail_id')->references('id')->on('point_details')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('amount');
         });
     }

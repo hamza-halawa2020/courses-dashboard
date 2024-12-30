@@ -61,7 +61,11 @@
                                     @foreach ($teachers as $teacher)
                                         <tr>
                                             <td>{{ $teacher->id }}</td>
-                                            <td>{{ $teacher->name }}</td>
+                                            <td>
+                                                <a href="{{ route('admin.teachers.show', $teacher->id) }}">
+                                                    {{ $teacher->name }}
+                                                </a>
+                                            </td>
                                             <td>{{ $teacher->details }}</td>
                                             <td>
 

@@ -297,7 +297,10 @@
                 },
                 {
                     data: 'name',
-                    name: 'name'
+                    name: 'name',
+                    render: function(data, type, row) {
+                        return `<a href="{{ url('admin/users/') }}/${row.id}" class="user-link">${data}</a>`;
+                    }
                 },
                 {
                     data: 'phone',

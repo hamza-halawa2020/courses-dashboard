@@ -8,6 +8,7 @@ use App\Models\Balance;
 use App\Models\BalanceDetail;
 use App\Models\BuyCourseBalance;
 use App\Models\Chapter;
+use App\Models\Lecture;
 use App\Models\UserCanAccess;
 use Illuminate\Http\Request;
 
@@ -62,16 +63,22 @@ class ChapterController extends Controller
             'balance_id' => $userBalance->id,
         ]);
 
-        $userCanAccess = UserCanAccess::create([
-            'user_id' => $user->id,
-            'chapter_id' => $chapterId,
-        ]);
+        $lectureIds = Lecture::where('chapter_id', $chapterId)->pluck('id');
+
+        foreach ($lectureIds as $lectureId) {
+            $userCanAccess = UserCanAccess::create([
+                'user_id' => $user->id,
+                'lecture_id' => $lectureId,
+            ]);
+        }
 
         BuyCourseBalance::create([
             'balance_detail_id' => $balanceDetail->id,
             'user_can_access_id' => $userCanAccess->id,
             'user_id' => $user->id,
         ]);
+
+
 
         return response()->api(new ChapterResource($chapter), 0, 'Chapter purchased successfully.');
     }

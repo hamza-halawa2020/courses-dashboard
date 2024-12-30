@@ -48,6 +48,20 @@
                         @endforeach
                     </div>
 
+                    {{-- teacher --}}
+                    <div class="form-group">
+                        <label>@lang('users.teacher_name')<span class="text-danger">*</span></label>
+                        <select class="form-select" name="teacher_id" id="floatingSelect"
+                            aria-label="Floating label select example">
+                            <option selected disabled>@lang('users.teacher_name')</option>
+                            @foreach ($teachers as $teacher)
+                                <option value="{{ $teacher->id }}" @if (old('teacher_id', $question->teacher_id) == $teacher->id) selected @endif>
+                                    {{ $teacher->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
 
                     {{-- stage --}}
                     <div class="form-group">

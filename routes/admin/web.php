@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ExamChapterController;
 use App\Http\Controllers\Admin\ExamLectureController;
 use App\Http\Controllers\Admin\QRController;
 use App\Http\Controllers\Admin\QuestionHomeWorkController;
+use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\TotalExamController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,6 @@ Route::middleware([
     ->group(function () {
 
         Route::name('admin.')->prefix('admin')->group(function () {
-
             //home
             Route::get('/home/top_statistics', 'HomeController@topStatistics')->name('home.top_statistics');
             Route::get('/home', 'HomeController@index')->name('home');
@@ -37,6 +37,8 @@ Route::middleware([
             Route::get('/teachers/data', 'TeacherController@data')->name('teachers.data');
             Route::delete('/teachers/bulk_delete', 'TeacherController@bulkDelete')->name('teachers.bulk_delete');
             Route::resource('teachers', 'TeacherController');
+            Route::get('/export/{id}', [TeacherController::class, 'export'])->name('export');
+            Route::get('/question-export/{id}', [TeacherController::class, 'questionExport'])->name('question-export');
 
 
             //user routes

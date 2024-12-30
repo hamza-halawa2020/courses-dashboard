@@ -20,4 +20,10 @@ class Teacher extends Model
     {
         return $this->hasMany(TotalExam::class);
     }
+
+    public function question()
+    {
+        return $this->hasMany(Question::class);
+    }
 }
+

@@ -48,7 +48,7 @@ Route::middleware('auth:sanctum')->group(function () {
     ////=================== questions ============================
     Route::get('/questions', [QuestionController::class, 'index']);
     Route::get('/questions/{id}', [QuestionController::class, 'show']);
-    Route::get('/random-question', [QuestionController::class, 'randomQuestion']);
+    Route::get('/random-question/{teacherId}', [QuestionController::class, 'randomQuestion']);
 
     ////=================== teachers ============================
     Route::get('/teachers', [TeacherController::class, 'index']);

@@ -18,6 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->timestamps();
             $table->string('question');
             $table->foreignId('stage_id')->references('id')->on('stages')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('teacher_id')->references('id')->on('teachers')->onUpdate('cascade')->onDelete('cascade');
 
 
         });

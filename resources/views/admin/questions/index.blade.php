@@ -71,6 +71,7 @@
                                         <th>@lang('questions.question')</th>
                                         {{-- <th>@lang('questions.answer')</th> --}}
                                         <th>@lang('questions.stage_withal')</th>
+                                        <th>@lang('users.teacher_name')</th>
                                         <th>@lang('site.created_at')</th>
                                         {{-- @if (auth()->user()->hasPermission('update_questions') || auth()->user()->hasPermission('delete_questions')) --}}
                                         <th>@lang('site.action')</th>
@@ -119,6 +120,11 @@
                 {
                     data: 'stage_withal',
                     name: 'stage_withal',
+                    searchable: false
+                },
+                {
+                    data: 'teacher',
+                    name: 'teacher',
                     searchable: false
                 },
                 {

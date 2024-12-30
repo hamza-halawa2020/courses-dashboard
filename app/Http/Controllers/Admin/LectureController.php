@@ -9,6 +9,8 @@ use App\Models\Lecture;
 use App\Models\Course;
 use App\Models\Stage;
 use App\Models\User;
+use App\Models\UserCanAccess;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -135,6 +137,12 @@ class LectureController extends Controller
                 return 'لقد حدث حضأ ما !!!';
 
         } else {
+
+            if (Carbon::parse($lecture->end)->lt(Carbon::now())) {
+                UserCanAccess::where('lecture_id', $lecture->id)->delete();
+            }
+
+
 
             $lecture->update($request->validated());
             session()->flash('success', __('site.updated_successfully'));

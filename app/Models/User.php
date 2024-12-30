@@ -125,7 +125,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(BuyCourseBalance::class);
     }
-
+    public function qrAddedBalance()
+    {
+        return $this->hasMany(QrAddedBalance::class);
+    }
+    public function converPoinToBalance()
+    {
+        return $this->hasMany(ConvertPointToBalance::class);
+    }
 
 
     public function stage()

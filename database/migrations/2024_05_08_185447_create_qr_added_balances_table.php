@@ -18,6 +18,7 @@ class CreateQrAddedBalancesTable extends Migration
             $table->timestamps();
             $table->foreignId('balance_detail_id')->references('id')->on('balance_details')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('qr_id')->unique()->references('id')->on('q_r_s')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->unique()->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
         });
     }

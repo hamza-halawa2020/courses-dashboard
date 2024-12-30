@@ -43,10 +43,22 @@
                     {{-- Add more button --}}
                     <div class="form-group">
                         <button type="button" class="btn btn-success" id="add-answer">
-                            <i class="fa fa-plus"></i> @lang('questions.add_answer')
+                            <i class="fa fa-plus"></i> @lang('users.add_answer')
                         </button>
                     </div>
 
+
+                    {{-- teacher --}}
+                    <div class="form-group">
+                        <label>@lang('users.teacher_name')<span class="text-danger">*</span></label>
+                        <select class="form-select" name="teacher_id" id="floatingSelect"
+                            aria-label="Floating label select example">
+                            <option selected disabled>@lang('users.teacher_name')</option>
+                            @foreach ($teachers as $teacher)
+                                <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     {{-- stage --}}
                     <div class="form-group">
                         <label>@lang('questions.stage_withal')<span class="text-danger">*</span></label>

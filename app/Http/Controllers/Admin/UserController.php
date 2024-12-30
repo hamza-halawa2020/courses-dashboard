@@ -144,6 +144,23 @@ class UserController extends Controller
         return redirect()->route('admin.users.index');
     }
 
+
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+
+        $balances = $user->balances ?? 0;
+        $points = $user->points ?? 0;
+
+
+        $qrCode = $user->qr_code;
+
+        $userCanAccess = $user->userCanAccess()->get();
+
+        return view('admin.users.show', compact('user', 'balances', 'points', 'qrCode', 'userCanAccess'));
+    }
+
+
     public function edit(User $user)
     {
         $stages = Stage::whereNotIn('id', [1])->get();

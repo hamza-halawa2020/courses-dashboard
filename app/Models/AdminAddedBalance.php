@@ -12,11 +12,11 @@ class AdminAddedBalance extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function balanceDetails()
     {
-        return $this->belongsTo(BalanceDetail::class);
+        return $this->belongsTo(BalanceDetail::class, 'balance_detail_id');
     }
 }

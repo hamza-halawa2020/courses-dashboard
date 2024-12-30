@@ -55,7 +55,7 @@ class QuestionController extends Controller
     //     return response()->api(QuestionResource::collection($question));
     // }
 
-    public function randomQuestion()
+    public function randomQuestion($teacherId)
     {
         try {
             $userId = auth()->id();
@@ -66,9 +66,7 @@ class QuestionController extends Controller
             $viewCount = Cache::get($viewCountKey, 0);
             $lastViewedAt = Cache::get($lastViewedAtKey);
 
-            // if ($viewCount >= 2 && $lastViewedAt && Carbon::parse($lastViewedAt)->addHours(24)->isFuture()) {
-            //     return response()->api([], 1, 'You have already viewed the maximum number of questions within the last 24 hours.');
-            // }
+
 
             // Get the IDs of questions that the user has already answered
             $answeredQuestionIds = TestingQuestion::where('user_id', $userId)
@@ -78,6 +76,7 @@ class QuestionController extends Controller
             // Get a random question that the user hasn't answered yet
             $question = Question::with('answers')
                 ->where('stage_id', $userStageId)
+                ->where('teacher_id', $teacherId)
                 ->whereNotIn('id', function ($query) use ($answeredQuestionIds) {
                     $query->select('question_id')
                         ->from('answers')

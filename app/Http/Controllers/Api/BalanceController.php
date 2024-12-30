@@ -73,6 +73,7 @@ class BalanceController extends Controller
         $qrAddedBalance = new QRAddedBalance();
         $qrAddedBalance->balance_detail_id = $balanceDetail->id;
         $qrAddedBalance->qr_id = $qrCode->id;
+        $qrAddedBalance->user_id = $user->id;
         $qrAddedBalance->save();
 
         return response()->json(['message' => 'Balance added successfully'], 200);

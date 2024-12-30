@@ -2,12 +2,32 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\QuestionsExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Teacher;
-
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 class TeacherController extends Controller
 {
+
+    public function export(Request $request, $id)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $teacher = Teacher::findOrFail($id);
+        $fileName = $teacher->name . now()->format('Y_m_d') . '.xlsx';
+        return Excel::download(new UsersExport($id, $startDate, $endDate), $fileName);
+    }
+
+    public function questionExport(Request $request, $id)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $teacher = Teacher::findOrFail($id);
+        $fileName = $teacher->name . now()->format('Y_m_d') . '.xlsx';
+        return Excel::download(new QuestionsExport($id, $startDate, $endDate), $fileName);
+    }
 
     public function index()
     {
@@ -39,7 +59,7 @@ class TeacherController extends Controller
 
     public function show($id)
     {
-        $teacher = Teacher::with('courses.stage')->findOrFail($id);
+        $teacher = Teacher::findOrFail($id);
         return view('admin.teachers.show', compact('teacher'));
     }
     public function edit($id)

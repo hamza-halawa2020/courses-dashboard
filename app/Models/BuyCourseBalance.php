@@ -22,7 +22,7 @@ class BuyCourseBalance extends Model
 
     public function balanceDetails()
     {
-        return $this->belongsTo(BalanceDetail::class);
+        return $this->belongsTo(BalanceDetail::class, 'balance_detail_id');
     }
 
     public function userCanAccess()

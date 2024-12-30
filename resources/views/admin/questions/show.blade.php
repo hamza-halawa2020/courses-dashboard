@@ -38,6 +38,10 @@
                                     <td>{{ $question->question }}</td>
                                 </tr>
                                 <tr>
+                                    <th>@lang('users.teacher_name')</th>
+                                    <td>{{ $question->teacher->name }}</td>
+                                </tr>
+                                <tr>
                                     <th>@lang('questions.stage_withal')</th>
                                     <td>{{ $question->stage->name }}</td>
                                 </tr>

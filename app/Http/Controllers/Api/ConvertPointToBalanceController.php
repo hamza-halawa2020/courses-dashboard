@@ -67,6 +67,7 @@ class ConvertPointToBalanceController extends Controller
             'balance_detail_id' => $balanceDetail->id,
             'point_detail_id' => $pointDetail->id,
             'amount' => $request->amount,
+            'user_id' => $user->id,
         ]);
 
         return response()->json(['success' => 'Points converted to balance successfully'], 200);

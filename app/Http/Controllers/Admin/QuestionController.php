@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use App\Models\Question;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\User;
@@ -28,15 +29,18 @@ class QuestionController extends Controller
 
     public function data()
     {
-        $questions = Question::with('stage')->get();
+        $questions = Question::with(['stage', 'teacher'])->get();
 
         return DataTables::of($questions)
             ->addColumn('record_select', 'admin.questions.data_table.record_select')
             ->editColumn('id', function (Question $question) {
-                return $question;
+                return $question->id;
             })
             ->addColumn('stage_withal', function (Question $question) {
                 return $question->stage ? $question->stage->name : 'N/A';
+            })
+            ->addColumn('teacher', function (Question $question) {
+                return $question->teacher ? $question->teacher->name : 'N/A';
             })
             ->addColumn('actions', 'admin.questions.data_table.actions')
             ->rawColumns(['record_select', 'stage_withal', 'actions'])
@@ -54,8 +58,9 @@ class QuestionController extends Controller
     public function create()
     {
         $stages = Stage::all();
+        $teachers = Teacher::all();
 
-        return view('admin.questions.create', compact('stages'));
+        return view('admin.questions.create', compact('stages', 'teachers'));
     }
 
     public function store(Request $request)
@@ -63,6 +68,7 @@ class QuestionController extends Controller
         $request->validate([
             'question' => 'required|string|max:255',
             'stage_id' => 'required|integer|exists:stages,id',
+            'teacher_id' => 'required|integer|exists:teachers,id',
             'answers' => 'required|array|min:1',
             'answers.*.text' => 'required|string|max:255',
             'answers.*.is_right' => 'nullable|boolean',
@@ -71,6 +77,7 @@ class QuestionController extends Controller
         $question = Question::create([
             'question' => $request->input('question'),
             'stage_id' => $request->input('stage_id'),
+            'teacher_id' => $request->input('teacher_id'),
         ]);
 
         foreach ($request->input('answers') as $answer) {
@@ -88,34 +95,10 @@ class QuestionController extends Controller
     {
         $answer = Answer::where('question_id', $question->id)->get();
         $stages = Stage::all();
+        $teachers = Teacher::all();
 
-        return view('admin.questions.edit', compact('question', 'stages', 'answer'));
+        return view('admin.questions.edit', compact('question', 'stages', 'answer', 'teachers'));
     }
-
-
-    // public function update($id, Request $request)
-    // {
-    //     $question = Question::findOrFail($id);
-    //     $question->update([
-    //         'question' => $request->input('question'),
-    //         'stage_id' => $request->input('stage_id'),
-    //     ]);
-
-    //     $answers = $question->answers;
-
-
-    //     foreach ($answers as $answer) {
-    //         $answersData = $request->input('answers');
-    //         $isRightData = $request->input('is_right');
-    //         $answer->update([
-    //             'answer' => $answersData,
-    //             'is_right' => $isRightData
-    //         ]);
-    //     }
-
-    //     session()->flash('success', __('site.updated_successfully'));
-    //     return redirect()->route('admin.questions.index');
-    // }
 
 
     public function update($id, Request $request)
@@ -124,6 +107,7 @@ class QuestionController extends Controller
         $question->update([
             'question' => $request->input('question'),
             'stage_id' => $request->input('stage_id'),
+            'teacher_id' => $request->input('teacher_id'),
         ]);
 
         $answersData = $request->input('answers');
