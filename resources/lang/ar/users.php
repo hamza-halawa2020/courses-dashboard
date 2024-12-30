@@ -35,7 +35,7 @@ return [
     'balances_type' => 'نوع الرصيد',
     'balances_amount' => 'كمية الرصيد',
     'balances_details' => 'تفاصيل الرصيد',
-    'adminAddedBalances' => 'الرصيد المضاف من الادمن',
+    'adminAddedBalances' => 'الرصيد المضاف او المخصوم من خلال الادمن',
     'buyCourseBalance' => 'الرصيد المخصوم من شراء الدروس',
     'qrAddedBalance' => 'الرصيد المضاف من الباركود ',
     'converPoinToBalance' => 'الرصيد المضاف من تحويل النقاط ',
