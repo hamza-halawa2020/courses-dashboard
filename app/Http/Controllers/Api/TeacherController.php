@@ -17,13 +17,21 @@ class TeacherController extends Controller
     {
         $user = Auth::user();
         $stageId = $user->stage_id;
+        $now = now();
+
         $teachers = Teacher::whereHas('courses', function ($query) use ($stageId) {
             $query->where('stage_id', $stageId);
-        })->with([
-                    'courses' => function ($query) use ($stageId) {
-                        $query->where('stage_id', $stageId);
-                    }
-                ])->get();
+        })
+            ->with([
+                'courses' => function ($query) use ($stageId) {
+                    $query->where('stage_id', $stageId);
+                },
+                'courses.chapters.lectures' => function ($query) use ($now) {
+                    $query->where('end', '>', $now);
+                }
+            ])
+            ->get();
+
 
         return response()->api(TeacherResource::collection($teachers));
     }
@@ -33,16 +41,20 @@ class TeacherController extends Controller
     {
         $user = Auth::user();
         $stageId = $user->stage_id;
+        $now = now();
+
         $teacher = Teacher::whereHas('courses', function ($query) use ($stageId) {
             $query->where('stage_id', $stageId);
-        })->with([
-                    'courses' => function ($query) use ($stageId) {
-                        $query->where('stage_id', $stageId);
-                    }
-                ])->findOrFail($id);
+        })
+            ->with([
+                'courses.chapters.lectures' => function ($query) use ($now) {
+                    $query->where('end', '>', $now);
+                }
+            ])
+            ->findOrFail($id);
+
 
         return response()->api(new TeacherResource($teacher));
-
     }
 
 
