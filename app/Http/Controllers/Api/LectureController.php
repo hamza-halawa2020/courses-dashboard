@@ -23,7 +23,8 @@ class LectureController extends Controller
     {
         $user = Auth::user();
         $stageId = $user->stage_id;
-        $lectures = Lecture::with('chapter')
+        $now = now();
+        $lectures = Lecture::where('end', '>', $now)
             ->whereHas('chapter.course', function ($query) use ($stageId) {
                 $query->where('stage_id', $stageId);
             })->get();
@@ -31,6 +32,14 @@ class LectureController extends Controller
 
     }
 
+    public function videoWatched(Lecture $lecture)
+    {
+        $userId = Auth::id();
+        UserCanAccess::where('user_id', $userId)
+            ->where('lecture_id', $lecture->id)
+            ->update(['watched' => 1]);
+        return response()->api([], '', 'done.');
+    }
 
     public function buyLecture($lectureId)
     {

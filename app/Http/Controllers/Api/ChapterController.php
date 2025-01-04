@@ -22,12 +22,15 @@ class ChapterController extends Controller
     {
         $user = Auth::user();
         $stageId = $user->stage_id;
+        $now = now();
 
-        $chapters = Chapter::with('lectures')
-            ->whereHas('course', function ($query) use ($stageId) {
-                $query->where('stage_id', $stageId);
-            })->get();
-
+        $chapters = Chapter::whereHas('course', function ($query) use ($stageId) {
+            $query->where('stage_id', $stageId);
+        })->with([
+                    'lectures' => function ($query) use ($now) {
+                        $query->where('end', '>', $now);
+                    }
+                ])->get();
         return response()->api(ChapterResource::collection($chapters));
     }
 

@@ -12,6 +12,7 @@ class UserCanAccess extends Model
         'user_id',
         'lecture_id',
         'chapter_id',
+        'watched',
     ];
 
     protected $table = 'user_can_access';

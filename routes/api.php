@@ -66,6 +66,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/lectures', [LectureController::class, 'index']);
     Route::get('/lectures/{id}', [LectureController::class, 'show']);
     Route::post('/lectures/{id}/buy', [LectureController::class, 'buyLecture']);
+    Route::post('/lectures/{lecture}/watched', [LectureController::class, 'videoWatched']);
 
     ////=================== balance ============================
     Route::get('/balances', [BalanceController::class, 'index']);
