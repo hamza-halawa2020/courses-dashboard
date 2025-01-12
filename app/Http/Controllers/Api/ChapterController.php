@@ -24,15 +24,22 @@ class ChapterController extends Controller
         $stageId = $user->stage_id;
         $now = now();
 
-        $chapters = Chapter::whereHas('course', function ($query) use ($stageId) {
-            $query->where('stage_id', $stageId);
-        })->with([
-                    'lectures' => function ($query) use ($now) {
-                        $query->where('end', '>', $now);
-                    }
-                ])->get();
+        // $chapters = Chapter::whereHas('course', function ($query) use ($stageId) {
+        //     $query->where('stage_id', $stageId);
+        // })->with([
+        //             'lectures' => function ($query) use ($now) {
+        //                 $query->where('end', '>', $now);
+        //             }
+        //         ])->get();
+
+        $chapters = Chapter::with('lectures')
+            ->whereHas('course', function ($query) use ($stageId) {
+                $query->where('stage_id', $stageId);
+            })->get();
         return response()->api(ChapterResource::collection($chapters));
     }
+
+
 
 
     public function buyChapter($chapterId)

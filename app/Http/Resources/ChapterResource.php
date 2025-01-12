@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\UserCanAccess;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ChapterResource extends JsonResource
@@ -15,9 +16,27 @@ class ChapterResource extends JsonResource
     public function toArray($request)
     {
         $user = $request->user();
-        $hasAccess = $user && $this->userCanAccess && $this->userCanAccess->contains('user_id', $user->id);
+        $hasAccess = $user && $this->allLecturesAccessibleByUser($user->id);
 
-        return $hasAccess ? $this->fullDetails() : $this->limitedDetails();
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'created_at' => $this->created_at,
+            'price' => $this->price,
+            'lectures' => LectureResource::collection($this->lectures),
+            'isPurchased' => $hasAccess ? 'true' : 'false',
+        ];
+    }
+
+    private function allLecturesAccessibleByUser($userId)
+    {
+        $lectureIds = $this->lectures->pluck('id')->toArray();
+
+        $accessibleCount = UserCanAccess::where('user_id', $userId)
+            ->whereIn('lecture_id', $lectureIds)
+            ->count();
+
+        return $accessibleCount === count($lectureIds);
     }
 
 

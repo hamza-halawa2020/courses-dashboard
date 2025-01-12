@@ -27,7 +27,7 @@ class TeacherController extends Controller
                     $query->where('stage_id', $stageId);
                 },
                 'courses.chapters.lectures' => function ($query) use ($now) {
-                    $query->where('end', '>', $now);
+                    $query->where('end', '>', $now)->where('start', '<', $now);
                 }
             ])
             ->get();
@@ -47,8 +47,11 @@ class TeacherController extends Controller
             $query->where('stage_id', $stageId);
         })
             ->with([
+                'courses' => function ($query) use ($stageId) {
+                    $query->where('stage_id', $stageId);
+                },
                 'courses.chapters.lectures' => function ($query) use ($now) {
-                    $query->where('end', '>', $now);
+                    $query->where('end', '>', $now)->where('start', '<', $now);
                 }
             ])
             ->findOrFail($id);

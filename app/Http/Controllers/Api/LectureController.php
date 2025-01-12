@@ -38,7 +38,11 @@ class LectureController extends Controller
         UserCanAccess::where('user_id', $userId)
             ->where('lecture_id', $lecture->id)
             ->update(['watched' => 1]);
-        return response()->api([], '', 'done.');
+        // return response()->api([], '', 'done.','isWatched'=>true);
+         return response()->json([
+        'message' => 'done.',
+        'isWatched' => true
+    ]);
     }
 
     public function buyLecture($lectureId)

@@ -16,7 +16,7 @@ class LectureResource extends JsonResource
         $hasLectureAccess = $user && $this->userCanAccess && $this->userCanAccess->contains('user_id', $user->id);
 
         // Check if the user has access to the chapter that contains the lecture
-        $hasChapterAccess = $user && $this->chapter && $this->chapter->userCanAccess && $this->chapter->userCanAccess->contains('user_id', $user->id);
+        // $hasChapterAccess = $user && $this->chapter && $this->chapter->userCanAccess && $this->chapter->userCanAccess->contains('user_id', $user->id);
 
         // Check if the lecture has already been watched by the user
         $watched = $this->userCanAccess
@@ -27,7 +27,8 @@ class LectureResource extends JsonResource
         $isWithinTime = $this->isWithinTimeRange();
 
         // Case 1: User does not have access to the lecture or chapter
-        if (!$hasLectureAccess && !$hasChapterAccess) {
+        // if (!$hasLectureAccess && !$hasChapterAccess) {
+        if (!$hasLectureAccess) {
             return $this->limitedDetails();
         }
 
@@ -42,12 +43,20 @@ class LectureResource extends JsonResource
         }
 
         // Case 4: User has access and the time is within the allowed range
-        if ($hasChapterAccess) {
-            // User has chapter-level access
-            return $this->fullDetails();
-        } elseif ($hasLectureAccess) {
+        // if ($hasChapterAccess) {
+        //     // User has chapter-level access
+        //     return $this->fullDetails();
+        // } elseif ($hasLectureAccess) {
+        //     // User has lecture-level access
+        //     return $this->lectureDetails();
+        // } else {
+        //     // Fallback case, unlikely to occur
+        //     return $this->limitedDetails();
+        // }
+
+        if ($hasLectureAccess) {
             // User has lecture-level access
-            return $this->lectureDetails();
+            return $this->fullDetails();
         } else {
             // Fallback case, unlikely to occur
             return $this->limitedDetails();
@@ -75,7 +84,7 @@ class LectureResource extends JsonResource
             'end' => $this->end,
             'status' => $this->status,
             'created_at' => $this->created_at,
-            'isPururchased' => 'false',
+            'isPurchased' => 'false',
         ];
     }
 
@@ -94,7 +103,7 @@ class LectureResource extends JsonResource
             'created_at' => $this->created_at,
             'question_home_works' => QuestionHomeWorkResource::collection($this->questionHomeWorks),
             'exam_lectures' => ExamLectureResource::collection($this->examLectures),
-            'isPururchased' => 'true',
+            'isPurchased' => 'true',
             'note_book_url' => $this->note_book_url,
         ];
     }
@@ -115,7 +124,7 @@ class LectureResource extends JsonResource
             'question_home_works' => QuestionHomeWorkResource::collection($this->questionHomeWorks),
             'exam_lectures' => ExamLectureResource::collection($this->examLectures),
             'note_book_url' => $this->note_book_url,
-            'isPururchased' => 'true',
+            'isPurchased' => 'true',
         ];
     }
 
@@ -125,6 +134,17 @@ class LectureResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'price' => $this->price,
+            'video_url' => $this->video_url,
+            'des' => $this->des,
+            'start' => $this->start,
+            'end' => $this->end,
+            'status' => $this->status,
+            'created_at' => $this->created_at,
+            'question_home_works' => QuestionHomeWorkResource::collection($this->questionHomeWorks),
+            'exam_lectures' => ExamLectureResource::collection($this->examLectures),
+            'note_book_url' => $this->note_book_url,
+            'isPurchased' => 'true',
             'message' => "You've already watched this video, You can't watch it again.",
             'watched' => true,
         ];
@@ -138,7 +158,7 @@ class LectureResource extends JsonResource
             'title' => $this->title,
             'price' => $this->price,
             'des' => $this->des,
-            'isPururchased' => 'false',
+            'isPurchased' => 'false',
         ];
     }
 }
